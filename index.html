@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>em/sh — printed matter</title>
+    <meta name="description" content="Em's project index — Andela and Lacadia, two fan-made Pokédex regions, and Maintenance, an idle game still in production.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Shantell+Sans:ital,wght@0,500;0,700;1,500&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23f5efe1'/><circle cx='42' cy='50' r='26' fill='%232340ff'/><circle cx='58' cy='50' r='26' fill='%23ff4423' style='mix-blend-mode:multiply'/></svg>">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Rough-ink displacement filter: roughens the edges of printed type so it
+     reads as physically inked, not crisp vector. Never applied to fixed/sticky
+     elements (a filter creates a containing block and breaks their positioning). -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <filter id="rough" x="-6%" y="-6%" width="112%" height="112%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.012 0.018" numOctaves="2" seed="4" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+</svg>
+
+<div class="grain" aria-hidden="true"></div>
+
+<div class="crop crop-tl" aria-hidden="true"></div>
+<div class="crop crop-tr" aria-hidden="true"></div>
+<div class="crop crop-bl" aria-hidden="true"></div>
+<div class="crop crop-br" aria-hidden="true"></div>
+
+<div class="colorbar" aria-hidden="true">
+    <span style="background:var(--ink)"></span>
+    <span style="background:var(--blue)"></span>
+    <span style="background:var(--red)"></span>
+    <span style="background:var(--teal)"></span>
+    <span style="background:var(--pink)"></span>
+    <span style="background:var(--gold)"></span>
+</div>
+
+<p class="slug" aria-hidden="true">EM/SH — PROOF 003 — CMYK + 2 SPOT — DO NOT SCALE</p>
+
+<header class="masthead">
+    <a href="#top" class="wordmark" id="top">em/sh</a>
+    <p class="tagline">self&#8209;published &middot; ongoing series</p>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="blob blob-blue" aria-hidden="true"></div>
+        <div class="blob blob-red" aria-hidden="true"></div>
+
+        <p class="eyebrow">vol. 01</p>
+        <h1 class="headline">
+            <span class="layer layer-blue" aria-hidden="true">fake regions.<br>real spreadsheets.</span>
+            <span class="layer layer-red" aria-hidden="true">fake regions.<br>real spreadsheets.</span>
+            <span class="layer-main">fake regions.<br>real spreadsheets.</span>
+        </h1>
+        <p class="lede">I'm Em. I make up Pokémon regions nobody asked for, then build the whole Pokédex to
+            match. Two are below. A third is still wet.</p>
+        <div class="link-row">
+            <a href="#index" class="btn btn-ink"><span>SEE THE INDEX ↓</span></a>
+            <a href="https://github.com/EmSheshan" class="btn btn-outline" target="_blank" rel="noopener"><span>GITHUB ↗</span></a>
+        </div>
+        <p class="scrawl" style="color:var(--blue); transform:rotate(-2.5deg); margin:1.5rem 0 0 0.4rem;">no newsletter, i promise</p>
+    </section>
+
+    <section class="index" id="index">
+        <p class="eyebrow">index</p>
+        <h2>contents</h2>
+
+        <article class="spread" style="--duo:var(--teal); --duo2:var(--pink)">
+            <div class="spread-text">
+                <p class="tag">N&deg; 01</p>
+                <h3>Andela</h3>
+                <p class="spread-desc">Slate and verdigris, deep south, full of things that used to be
+                    something else. The one I'm actually proud of.</p>
+                <button class="btn btn-duo" data-target="andela" data-src="https://emsheshan.github.io/Andela/">
+                    <span>VIEW ANDELA</span>
+                </button>
+                <a class="open-link hidden" data-for="andela" href="https://emsheshan.github.io/Andela/" target="_blank" rel="noopener">open full site &#8599;</a>
+                <p class="scrawl" style="transform:rotate(-3deg); margin:1.1rem 0 0 0.6rem;">&#8593; start with this one</p>
+            </div>
+            <div class="viewer" id="viewer-andela">
+                <div class="cover" aria-hidden="true"></div>
+                <iframe title="Andela Pok&eacute;dex" loading="lazy"></iframe>
+            </div>
+        </article>
+
+        <article class="spread" style="--duo:var(--blue); --duo2:var(--red)">
+            <div class="spread-text">
+                <p class="tag">N&deg; 02</p>
+                <h3>Lacadia</h3>
+                <p class="scrawl" style="transform:rotate(2.5deg); margin:0 0 0.7rem 0.3rem;">the rough draft</p>
+                <p class="spread-desc">My first dex, and it shows. Was supposed to be Canada&#8209;coded
+                    before that idea quietly died somewhere in a sprite folder.</p>
+                <button class="btn btn-duo" data-target="lacadia" data-src="https://emsheshan.github.io/Lacadia/">
+                    <span>VIEW LACADIA</span>
+                </button>
+                <a class="open-link hidden" data-for="lacadia" href="https://emsheshan.github.io/Lacadia/" target="_blank" rel="noopener">open full site &#8599;</a>
+            </div>
+            <div class="viewer" id="viewer-lacadia">
+                <div class="cover" aria-hidden="true"></div>
+                <iframe title="Lacadia Pok&eacute;dex" loading="lazy"></iframe>
+            </div>
+        </article>
+
+        <article class="spread spread-proof">
+            <div class="spread-text">
+                <p class="tag">N&deg; 03</p>
+                <h3>Maintenance</h3>
+                <p class="spread-desc">An idle game about the unglamorous work of keeping things running.
+                    Shown here in black and white because it isn't finished.</p>
+                <p class="scrawl" style="color:var(--red); transform:rotate(-2deg); margin:0.6rem 0 0 0.2rem;">still drawing this one&hellip;</p>
+            </div>
+            <div class="viewer viewer-proof">
+                <span class="tape" aria-hidden="true"></span>
+                <span class="stamp">PROOF<br>NOT&nbsp;FOR&nbsp;PRINT</span>
+            </div>
+        </article>
+    </section>
+
+    <section class="about">
+        <p class="eyebrow">colophon</p>
+        <h2>the person to blame</h2>
+        <p>Mostly I'm just entering move data into a spreadsheet at 1am and calling it a hobby. Andela and
+            Lacadia are fan&#8209;made, unaffiliated with Nintendo, Game Freak, or The Pok&eacute;mon Company
+            &mdash; built because I couldn't stop, not because anyone asked.</p>
+        <p class="footnote">Held together with vanilla JS, too many service workers, and a canvas element
+            that generates way more card images than anyone requested.</p>
+    </section>
+
+    <section class="contact" id="contact">
+        <p class="eyebrow">contact</p>
+        <h2>drop a line</h2>
+        <p>Found a bug, have a region pitch, or just want to say hi &mdash; I'm on GitHub.</p>
+        <div class="link-row">
+            <a href="https://github.com/EmSheshan" class="btn btn-ink" target="_blank" rel="noopener"><span>GITHUB ↗</span></a>
+        </div>
+    </section>
+</main>
+
+<footer class="colophon-footer">
+    <p>Andela and Lacadia are fan&#8209;made, non&#8209;commercial Pok&eacute;mon projects. Not affiliated with
+        or endorsed by Nintendo, Game Freak, or The Pok&eacute;mon Company. Maintenance is an original idle
+        game, still in production.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

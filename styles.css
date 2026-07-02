@@ -1,0 +1,656 @@
+/* ================================================
+   EM/SH — PRINTED MATTER
+   Fonts: Bricolage Grotesque (display) · Work Sans (body)
+          Space Mono (labels)
+   Reference: riso-print / halftone poster design —
+   cream paper, flat duotone ink, grain, overprint
+   misregistration. Not a software UI.
+   ================================================ */
+
+:root {
+    --paper: #f5efe1;
+    --paper-2: #ece3cd;
+    --ink: #17130f;
+
+    --blue: #2340ff;
+    --red: #ff4423;
+    --gold: #f2b705;
+    --teal: #0d6b62;
+    --pink: #ff2f7e;
+
+    --line: rgba(23, 19, 15, 0.16);
+
+    --display: "Bricolage Grotesque", sans-serif;
+    --body-font: "Work Sans", sans-serif;
+    --mono: "Space Mono", ui-monospace, monospace;
+    --hand: "Shantell Sans", "Comic Sans MS", cursive;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    * {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
+}
+
+body {
+    margin: 0;
+    background-color: var(--paper);
+    background-image: radial-gradient(circle, rgba(23, 19, 15, 0.07) 1px, transparent 1.2px);
+    background-size: 13px 13px;
+    color: var(--ink);
+    font-family: var(--body-font);
+    line-height: 1.6;
+    position: relative;
+    padding-right: 22px;
+}
+
+::selection {
+    background: var(--ink);
+    color: var(--paper);
+}
+
+a {
+    color: var(--ink);
+}
+
+:focus-visible {
+    outline: 3px solid var(--blue);
+    outline-offset: 3px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ==========================
+   Grain — riso/paper texture over everything
+   ========================== */
+.grain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0.09;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.5;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='340' height='340'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.35' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ==========================
+   Overscan / proof-sheet marks
+   ========================== */
+.crop {
+    position: fixed;
+    z-index: 45;
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+    opacity: 0.55;
+}
+
+.crop-tl {
+    top: 10px;
+    left: 10px;
+    border-top: 1.5px solid var(--ink);
+    border-left: 1.5px solid var(--ink);
+}
+
+.crop-tr {
+    top: 10px;
+    right: 22px;
+    border-top: 1.5px solid var(--ink);
+    border-right: 1.5px solid var(--ink);
+}
+
+.crop-bl {
+    bottom: 10px;
+    left: 10px;
+    border-bottom: 1.5px solid var(--ink);
+    border-left: 1.5px solid var(--ink);
+}
+
+.crop-br {
+    bottom: 10px;
+    right: 22px;
+    border-bottom: 1.5px solid var(--ink);
+    border-right: 1.5px solid var(--ink);
+}
+
+.colorbar {
+    position: fixed;
+    top: 0;
+    right: 10px;
+    z-index: 44;
+    width: 12px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    pointer-events: none;
+}
+
+.colorbar span {
+    flex: 1;
+}
+
+.slug {
+    position: fixed;
+    z-index: 44;
+    bottom: 1.2rem;
+    left: 17px;
+    width: 12rem;
+    transform: rotate(-90deg);
+    transform-origin: left bottom;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    opacity: 0.4;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+@media (max-width: 46rem) {
+    .colorbar,
+    .slug,
+    .crop-tr,
+    .crop-br {
+        display: none;
+    }
+
+    body {
+        padding-right: 0;
+    }
+}
+
+/* ==========================
+   Masthead
+   ========================== */
+.masthead {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 1.15rem clamp(1.25rem, 5vw, 3rem);
+    background: var(--paper);
+    border-bottom: 3px solid var(--ink);
+}
+
+.wordmark {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 1.3rem;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-decoration: none;
+}
+
+.tagline {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+    color: var(--ink);
+    opacity: 0.6;
+    margin: 0;
+}
+
+/* ==========================
+   Shared rhythm
+   ========================== */
+main {
+    max-width: 74rem;
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 5vw, 3rem);
+    overflow-x: clip;
+}
+
+.eyebrow {
+    --rule: var(--red);
+    position: relative;
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    padding-bottom: 0.5rem;
+    margin: 0 0 1.25rem;
+}
+
+/* Hand-inked underline: a rough-displaced bar rather than a crisp border. */
+.eyebrow::after {
+    content: "";
+    position: absolute;
+    left: -2px;
+    right: -2px;
+    bottom: 0;
+    height: 4px;
+    background: var(--rule);
+    filter: url(#rough);
+}
+
+.index .eyebrow,
+.about .eyebrow {
+    --rule: var(--blue);
+}
+
+.contact .eyebrow {
+    --rule: var(--gold);
+}
+
+h2 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(1.9rem, 3.6vw, 2.7rem);
+    color: var(--ink);
+    margin: 0 0 1.25rem;
+    letter-spacing: -0.01em;
+    filter: url(#rough);
+}
+
+.about, .contact {
+    padding: clamp(3rem, 7vw, 5rem) 0;
+    border-top: 1px solid var(--line);
+}
+
+.about p, .contact p {
+    max-width: 40rem;
+}
+
+/* ==========================
+   Hero
+   ========================== */
+.hero {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(4rem, 10vw, 7rem) 0 clamp(3rem, 6vw, 4.5rem);
+}
+
+.blob {
+    position: absolute;
+    width: 22rem;
+    height: 22rem;
+    border-radius: 50%;
+    z-index: 0;
+    mix-blend-mode: multiply;
+    background-image: radial-gradient(circle, var(--ink) 1.6px, transparent 1.8px);
+    background-size: 11px 11px;
+    transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+    animation: drift 16s ease-in-out infinite alternate;
+    will-change: transform, filter;
+}
+
+.blob-blue {
+    background-color: var(--blue);
+    top: -6rem;
+    right: -4rem;
+}
+
+.blob-red {
+    background-color: var(--red);
+    top: 4rem;
+    right: 8rem;
+    width: 14rem;
+    height: 14rem;
+    opacity: 0.9;
+    animation-delay: -4s;
+}
+
+@keyframes drift {
+    from {
+        filter: hue-rotate(0deg);
+    }
+    to {
+        filter: hue-rotate(24deg);
+    }
+}
+
+.eyebrow, .headline, .lede, .link-row {
+    position: relative;
+    z-index: 1;
+}
+
+.headline {
+    position: relative;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(2.6rem, 7vw, 5rem);
+    line-height: 1.04;
+    letter-spacing: -0.01em;
+    margin: 0 0 1.4rem;
+}
+
+.layer {
+    position: absolute;
+    inset: 0;
+    white-space: nowrap;
+}
+
+.layer-blue {
+    color: var(--blue);
+    transform: translate(-5px, -4px);
+    mix-blend-mode: multiply;
+}
+
+.layer-red {
+    color: var(--red);
+    transform: translate(5px, 4px);
+    mix-blend-mode: multiply;
+}
+
+.layer-main {
+    position: relative;
+    color: var(--ink);
+    filter: url(#rough);
+}
+
+.lede {
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
+    max-width: 36rem;
+    color: var(--ink);
+}
+
+.link-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* ==========================
+   Buttons — flat ink-bordered print blocks
+   ========================== */
+.btn {
+    display: inline-block;
+    text-decoration: none;
+    background: var(--ink);
+    border: 3px solid var(--ink);
+    box-shadow: 4px 4px 0 var(--line);
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.btn span {
+    display: block;
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    color: var(--paper);
+    padding: 0.7rem 1.3rem;
+}
+
+.btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--line);
+}
+
+.btn:active {
+    transform: translate(1px, 1px);
+    box-shadow: 2px 2px 0 var(--line);
+}
+
+.btn-outline {
+    background: var(--paper);
+}
+
+.btn-outline span {
+    color: var(--ink);
+}
+
+.btn-duo {
+    background: var(--duo, var(--ink));
+    border-color: var(--ink);
+}
+
+.btn-duo span {
+    color: var(--paper);
+}
+
+/* ==========================
+   Index — the catalog spreads
+   ========================== */
+.index {
+    padding: clamp(3rem, 7vw, 5rem) 0 1rem;
+    border-top: 1px solid var(--line);
+}
+
+.spread {
+    position: relative;
+    display: grid;
+    grid-template-columns: 20rem 1fr;
+    gap: 2.5rem;
+    align-items: start;
+    padding: clamp(2.25rem, 5vw, 3.25rem) 0;
+    border-top: 3px solid var(--ink);
+}
+
+.spread:last-child {
+    border-bottom: 3px solid var(--ink);
+}
+
+/* Each spread sits at a slightly different angle — pasted in, not laid out. */
+.index article:nth-of-type(1) .viewer {
+    transform: rotate(-0.5deg);
+}
+
+.index article:nth-of-type(2) .viewer {
+    transform: rotate(0.6deg);
+}
+
+.index article:nth-of-type(3) .viewer {
+    transform: rotate(-0.4deg);
+}
+
+.tag {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    color: var(--duo, var(--ink));
+    margin: 0 0 0.4rem;
+}
+
+.spread h3 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(2rem, 4vw, 2.9rem);
+    margin: 0 0 0.75rem;
+    letter-spacing: -0.01em;
+    text-shadow: 3px 3px 0 var(--duo2, transparent);
+    filter: url(#rough);
+}
+
+.spread-desc {
+    color: var(--ink);
+    opacity: 0.8;
+    max-width: 22rem;
+    margin: 0 0 1.5rem;
+}
+
+.open-link {
+    display: block;
+    margin-top: 0.85rem;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--ink);
+    opacity: 0.65;
+    text-decoration: none;
+}
+
+.open-link:hover {
+    opacity: 1;
+}
+
+.viewer {
+    position: relative;
+    border: 3px solid var(--ink);
+    background: var(--paper-2);
+    min-height: 24rem;
+    overflow: hidden;
+}
+
+.cover {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background-image: radial-gradient(circle, var(--ink) 1.4px, transparent 1.6px);
+    background-size: 9px 9px;
+    background-color: var(--duo, var(--paper-2));
+    mix-blend-mode: multiply;
+    transition: opacity 0.3s ease;
+}
+
+.viewer.open .cover {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.viewer iframe {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 30rem;
+    max-height: 60vh;
+    border: 0;
+    display: block;
+    background: var(--paper);
+    filter: grayscale(1) contrast(1.05);
+    transition: filter 0.6s ease;
+}
+
+.viewer.developed iframe {
+    filter: none;
+}
+
+.viewer-proof {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 20rem;
+    background-image: radial-gradient(circle, var(--ink) 1.4px, transparent 1.6px);
+    background-size: 9px 9px;
+    background-color: var(--paper-2);
+}
+
+/* A strip of masking tape holding the proof to the board. */
+.tape {
+    position: absolute;
+    top: -13px;
+    left: 24px;
+    width: 108px;
+    height: 30px;
+    background: rgba(228, 205, 150, 0.55);
+    border-left: 1px solid rgba(23, 19, 15, 0.08);
+    border-right: 1px solid rgba(23, 19, 15, 0.08);
+    transform: rotate(-5deg);
+    box-shadow: 0 1px 2px rgba(23, 19, 15, 0.12);
+    z-index: 3;
+}
+
+.stamp {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 0.08em;
+    text-align: center;
+    color: var(--red);
+    border: 4px solid var(--red);
+    padding: 1rem 1.6rem;
+    transform: rotate(-8deg);
+    line-height: 1.4;
+    filter: url(#rough);
+}
+
+/* ==========================
+   Hand-scrawled margin notes
+   ========================== */
+.scrawl {
+    display: inline-block;
+    font-family: var(--hand);
+    font-weight: 500;
+    font-size: 1.15rem;
+    line-height: 1.25;
+    color: var(--duo, var(--ink));
+    margin: 0;
+}
+
+/* ==========================
+   About
+   ========================== */
+.footnote {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--ink);
+    opacity: 0.65;
+    margin: 1.5rem 0 0;
+    max-width: 34rem;
+}
+
+/* ==========================
+   Footer
+   ========================== */
+.colophon-footer {
+    max-width: 74rem;
+    margin: 0 auto;
+    padding: 1.75rem clamp(1.25rem, 5vw, 3rem) 3rem;
+    border-top: 3px solid var(--ink);
+}
+
+.colophon-footer p {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--ink);
+    opacity: 0.6;
+    max-width: none;
+    margin: 1.5rem 0 0;
+}
+
+/* ==========================
+   Responsive
+   ========================== */
+@media (max-width: 46rem) {
+    .spread {
+        grid-template-columns: 1fr;
+    }
+
+    .blob-blue {
+        width: 11rem;
+        height: 11rem;
+        top: -4rem;
+        right: -3rem;
+    }
+
+    .blob-red {
+        width: 7rem;
+        height: 7rem;
+        top: -1rem;
+        right: 4rem;
+    }
+
+    .viewer iframe {
+        height: 24rem;
+    }
+}

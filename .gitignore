@@ -1,0 +1,9 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+.vscode/
+
+# Dependencies (site is dependency-free; nothing to install)
+node_modules/
