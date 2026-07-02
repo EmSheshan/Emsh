@@ -23,7 +23,6 @@
     --display: "Bricolage Grotesque", sans-serif;
     --body-font: "Work Sans", sans-serif;
     --mono: "Space Mono", ui-monospace, monospace;
-    --hand: "Shantell Sans", "Comic Sans MS", cursive;
 }
 
 * {
@@ -48,8 +47,10 @@ html {
 body {
     margin: 0;
     background-color: var(--paper);
-    background-image: radial-gradient(circle, rgba(23, 19, 15, 0.07) 1px, transparent 1.2px);
-    background-size: 13px 13px;
+    background-image:
+        radial-gradient(120% 80% at 85% 0%, rgba(35, 64, 255, 0.06), transparent 55%),
+        radial-gradient(90% 70% at 0% 100%, rgba(255, 68, 35, 0.05), transparent 55%);
+    background-repeat: no-repeat;
     color: var(--ink);
     font-family: var(--body-font);
     line-height: 1.6;
@@ -76,6 +77,38 @@ a {
 }
 
 /* ==========================
+   Squiggle scrollbar — a wavy line for the track, a bold red wave for
+   the thumb that wriggles down as you scroll. WebKit only; Firefox gets
+   a themed thin bar as a graceful fallback.
+   ========================== */
+html {
+    scrollbar-color: var(--red) var(--paper-2);
+}
+
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--paper);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='26'%3E%3Cpath d='M7.5 0 Q13.5 6.5 7.5 13 Q1.5 19.5 7.5 26' fill='none' stroke='%23c3bba7' stroke-width='2.5'/%3E%3C/svg%3E");
+    background-repeat: repeat-y;
+    background-position: center top;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--paper);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='26'%3E%3Cpath d='M7.5 0 Q13.5 6.5 7.5 13 Q1.5 19.5 7.5 26' fill='none' stroke='%23ff4423' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: repeat-y;
+    background-position: center top;
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='26'%3E%3Cpath d='M7.5 0 Q13.5 6.5 7.5 13 Q1.5 19.5 7.5 26' fill='none' stroke='%232340ff' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* ==========================
    Grain — riso/paper texture over everything
    ========================== */
 .grain {
@@ -83,7 +116,7 @@ a {
     inset: 0;
     pointer-events: none;
     z-index: 50;
-    opacity: 0.09;
+    opacity: 0.14;
     mix-blend-mode: multiply;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
@@ -92,7 +125,7 @@ a {
     content: "";
     position: absolute;
     inset: 0;
-    opacity: 0.5;
+    opacity: 0.55;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='340' height='340'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.35' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -117,7 +150,7 @@ a {
 
 .crop-tr {
     top: 10px;
-    right: 22px;
+    right: 32px;
     border-top: 1.5px solid var(--ink);
     border-right: 1.5px solid var(--ink);
 }
@@ -131,7 +164,7 @@ a {
 
 .crop-br {
     bottom: 10px;
-    right: 22px;
+    right: 32px;
     border-bottom: 1.5px solid var(--ink);
     border-right: 1.5px solid var(--ink);
 }
@@ -169,7 +202,7 @@ a {
     white-space: nowrap;
 }
 
-@media (max-width: 46rem) {
+@media (max-width: 45rem) {
     .colorbar,
     .slug,
     .crop-tr,
@@ -247,7 +280,6 @@ main {
     bottom: 0;
     height: 4px;
     background: var(--rule);
-    filter: url(#rough);
 }
 
 .index .eyebrow,
@@ -266,7 +298,6 @@ h2 {
     color: var(--ink);
     margin: 0 0 1.25rem;
     letter-spacing: -0.01em;
-    filter: url(#rough);
 }
 
 .about, .contact {
@@ -287,34 +318,57 @@ h2 {
     padding: clamp(4rem, 10vw, 7rem) 0 clamp(3rem, 6vw, 4.5rem);
 }
 
+/* Gradient-halftone shapes: a solid colour gradient that dissolves into
+   riso dots toward one edge (--diss sets the direction), with a grain wash. */
 .blob {
     position: absolute;
-    width: 22rem;
-    height: 22rem;
     border-radius: 50%;
     z-index: 0;
-    mix-blend-mode: multiply;
-    background-image: radial-gradient(circle, var(--ink) 1.6px, transparent 1.8px);
-    background-size: 11px 11px;
+    overflow: hidden;
     transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
-    animation: drift 16s ease-in-out infinite alternate;
+    animation: drift 18s ease-in-out infinite alternate;
     will-change: transform, filter;
 }
 
+/* Grain baked into each shape. */
+.blob::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.55;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='b'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23b)'/%3E%3C/svg%3E");
+}
+
+/* Halftone dissolve: paper-coloured dots that fade in toward the --diss edge. */
+.blob::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, var(--paper) 30%, transparent 33%);
+    background-size: 9px 9px;
+    -webkit-mask-image: linear-gradient(var(--diss, 205deg), transparent 22%, #000 82%);
+    mask-image: linear-gradient(var(--diss, 205deg), transparent 22%, #000 82%);
+}
+
 .blob-blue {
-    background-color: var(--blue);
-    top: -6rem;
-    right: -4rem;
+    width: 27rem;
+    height: 27rem;
+    top: -9rem;
+    right: -7rem;
+    background: radial-gradient(circle at 32% 30%, #4a63ff, #101a6e 78%);
+    --diss: 210deg;
 }
 
 .blob-red {
-    background-color: var(--red);
-    top: 4rem;
-    right: 8rem;
-    width: 14rem;
-    height: 14rem;
-    opacity: 0.9;
-    animation-delay: -4s;
+    width: 15rem;
+    height: 15rem;
+    top: -3rem;
+    right: 4rem;
+    background: radial-gradient(circle at 38% 38%, #ff7a4d, #c21f12 80%);
+    mix-blend-mode: multiply;
+    --diss: 34deg;
+    animation-delay: -5s;
 }
 
 @keyframes drift {
@@ -322,8 +376,28 @@ h2 {
         filter: hue-rotate(0deg);
     }
     to {
-        filter: hue-rotate(24deg);
+        filter: hue-rotate(10deg);
     }
+}
+
+/* Japanese "spice": 図鑑 (zukan) — the actual word for an illustrated
+   encyclopedia / Pokédex. Set huge and faint as a background accent. */
+.kanji-accent {
+    position: absolute;
+    z-index: 0;
+    top: 52%;
+    right: 3%;
+    transform: translateY(-50%);
+    writing-mode: vertical-rl;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(12rem, 30vw, 24rem);
+    line-height: 0.82;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    opacity: 0.05;
+    pointer-events: none;
+    user-select: none;
 }
 
 .eyebrow, .headline, .lede, .link-row {
@@ -335,7 +409,7 @@ h2 {
     position: relative;
     font-family: var(--display);
     font-weight: 800;
-    font-size: clamp(2.6rem, 7vw, 5rem);
+    font-size: clamp(1.85rem, 8.5vw, 4.6rem);
     line-height: 1.04;
     letter-spacing: -0.01em;
     margin: 0 0 1.4rem;
@@ -361,8 +435,8 @@ h2 {
 
 .layer-main {
     position: relative;
+    white-space: nowrap;
     color: var(--ink);
-    filter: url(#rough);
 }
 
 .lede {
@@ -450,17 +524,13 @@ h2 {
     border-bottom: 3px solid var(--ink);
 }
 
-/* Each spread sits at a slightly different angle — pasted in, not laid out. */
-.index article:nth-of-type(1) .viewer {
-    transform: rotate(-0.5deg);
+/* Alternate the middle spread so the page zig-zags instead of marching down. */
+.index article:nth-of-type(2) {
+    grid-template-columns: 1fr 20rem;
 }
 
-.index article:nth-of-type(2) .viewer {
-    transform: rotate(0.6deg);
-}
-
-.index article:nth-of-type(3) .viewer {
-    transform: rotate(-0.4deg);
+.index article:nth-of-type(2) .spread-text {
+    order: 2;
 }
 
 .tag {
@@ -478,7 +548,6 @@ h2 {
     margin: 0 0 0.75rem;
     letter-spacing: -0.01em;
     text-shadow: 3px 3px 0 var(--duo2, transparent);
-    filter: url(#rough);
 }
 
 .spread-desc {
@@ -514,11 +583,22 @@ h2 {
     position: absolute;
     inset: 0;
     z-index: 2;
-    background-image: radial-gradient(circle, var(--ink) 1.4px, transparent 1.6px);
+    overflow: hidden;
+    background: linear-gradient(150deg,
+        var(--duo, var(--paper-2)),
+        color-mix(in srgb, var(--duo, var(--ink)) 45%, var(--ink)));
+    transition: opacity 0.35s ease;
+}
+
+/* Halftone dissolve toward the lower-left corner. */
+.cover::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, var(--paper) 30%, transparent 33%);
     background-size: 9px 9px;
-    background-color: var(--duo, var(--paper-2));
-    mix-blend-mode: multiply;
-    transition: opacity 0.3s ease;
+    -webkit-mask-image: linear-gradient(150deg, #000, transparent 72%);
+    mask-image: linear-gradient(150deg, #000, transparent 72%);
 }
 
 .viewer.open .cover {
@@ -549,27 +629,26 @@ h2 {
     align-items: center;
     justify-content: center;
     min-height: 20rem;
-    background-image: radial-gradient(circle, var(--ink) 1.4px, transparent 1.6px);
-    background-size: 9px 9px;
-    background-color: var(--paper-2);
+    overflow: hidden;
+    background: linear-gradient(150deg, var(--paper-2), #b9b19c);
 }
 
-/* A strip of masking tape holding the proof to the board. */
-.tape {
+/* Halftone dissolve — kept ink/neutral, since this one's unfinished. */
+.viewer-proof::after {
+    content: "";
     position: absolute;
-    top: -13px;
-    left: 24px;
-    width: 108px;
-    height: 30px;
-    background: rgba(228, 205, 150, 0.55);
-    border-left: 1px solid rgba(23, 19, 15, 0.08);
-    border-right: 1px solid rgba(23, 19, 15, 0.08);
-    transform: rotate(-5deg);
-    box-shadow: 0 1px 2px rgba(23, 19, 15, 0.12);
-    z-index: 3;
+    inset: 0;
+    background-image: radial-gradient(circle, var(--ink) 26%, transparent 29%);
+    background-size: 9px 9px;
+    -webkit-mask-image: linear-gradient(150deg, #000, transparent 72%);
+    mask-image: linear-gradient(150deg, #000, transparent 72%);
+    opacity: 0.5;
+    z-index: 1;
 }
 
 .stamp {
+    position: relative;
+    z-index: 2;
     font-family: var(--mono);
     font-weight: 700;
     font-size: 1.3rem;
@@ -584,16 +663,52 @@ h2 {
 }
 
 /* ==========================
-   Hand-scrawled margin notes
+   Margin notes — set as quiet italic-mono annotations, like an
+   editor's pencil in the gutter (not a novelty handwriting font).
    ========================== */
 .scrawl {
     display: inline-block;
-    font-family: var(--hand);
-    font-weight: 500;
-    font-size: 1.15rem;
-    line-height: 1.25;
+    font-family: var(--mono);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 0.82rem;
+    letter-spacing: 0.01em;
+    line-height: 1.35;
     color: var(--duo, var(--ink));
+    opacity: 0.85;
     margin: 0;
+}
+
+/* ==========================
+   Typewriter caret — for the hero title load animation
+   ========================== */
+.type-caret {
+    display: inline-block;
+    width: 0.5em;
+    height: 0.82em;
+    margin-left: 0.06em;
+    background: currentColor;
+    vertical-align: -0.04em;
+    animation: caret-blink 0.7s steps(1) infinite;
+}
+
+.type-caret.is-done {
+    animation: caret-fade 1.1s ease forwards;
+}
+
+@keyframes caret-blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+@keyframes caret-fade {
+    0%, 40% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 /* ==========================
@@ -631,23 +746,34 @@ h2 {
 /* ==========================
    Responsive
    ========================== */
-@media (max-width: 46rem) {
-    .spread {
+@media (max-width: 45rem) {
+    .spread,
+    .index article:nth-of-type(2) {
         grid-template-columns: 1fr;
     }
 
+    /* Text always leads on mobile, even for the alternated spread. */
+    .index article:nth-of-type(2) .spread-text {
+        order: 0;
+    }
+
     .blob-blue {
-        width: 11rem;
-        height: 11rem;
-        top: -4rem;
-        right: -3rem;
+        width: 17rem;
+        height: 17rem;
+        top: -5rem;
+        right: -5rem;
     }
 
     .blob-red {
-        width: 7rem;
-        height: 7rem;
+        width: 10rem;
+        height: 10rem;
         top: -1rem;
-        right: 4rem;
+        right: 3rem;
+    }
+
+    .kanji-accent {
+        font-size: 15rem;
+        opacity: 0.045;
     }
 
     .viewer iframe {

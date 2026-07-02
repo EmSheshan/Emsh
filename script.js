@@ -56,3 +56,44 @@ if (hero && blobs.length && !reduceMotion && hasFinePointer) {
         });
     });
 }
+
+// Hero title types itself out on load, like a typewriter banging out the line.
+// All three overprint layers are typed in lockstep so the misregistration
+// tracks the growing text; only the top layer carries the caret.
+const headline = document.querySelector('.headline');
+if (headline) {
+    const layerMain = headline.querySelector('.layer-main');
+    const offsetLayers = headline.querySelectorAll('.layer');
+    const lines = ['fake regions.', 'real spreadsheets.'];
+    const CARET = '<span class="type-caret" aria-hidden="true"></span>';
+
+    // Both lines are always present (empty until reached) so the headline
+    // reserves its full height and nothing below it reflows while typing.
+    const paint = (lineIdx, count) => {
+        const s0 = lineIdx === 0 ? lines[0].slice(0, count) : lines[0];
+        const s1 = lineIdx === 0 ? '' : lines[1].slice(0, count);
+        const base = `${s0}<br>${s1}`;
+        offsetLayers.forEach((el) => { el.innerHTML = base; });
+        layerMain.innerHTML = lineIdx === 0
+            ? `${s0}${CARET}<br>${s1}`
+            : `${s0}<br>${s1}${CARET}`;
+    };
+
+    if (!reduceMotion) {
+        paint(0, 0); // clear the pre-rendered text before first paint (no flash)
+
+        const type = (lineIdx, count) => {
+            paint(lineIdx, count);
+            if (count < lines[lineIdx].length) {
+                window.setTimeout(() => type(lineIdx, count + 1), 45 + Math.random() * 55);
+            } else if (lineIdx < lines.length - 1) {
+                window.setTimeout(() => type(lineIdx + 1, 0), 320); // beat at the line break
+            } else {
+                const caret = layerMain.querySelector('.type-caret');
+                if (caret) window.setTimeout(() => caret.classList.add('is-done'), 900);
+            }
+        };
+
+        window.setTimeout(() => type(0, 0), 250); // small beat before it starts
+    }
+}
