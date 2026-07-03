@@ -23,6 +23,11 @@
     --display: "Bricolage Grotesque", sans-serif;
     --body-font: "Work Sans", sans-serif;
     --mono: "Space Mono", ui-monospace, monospace;
+
+    /* One wave, reused everywhere a straight rule used to be — dividers,
+       heading accents, the scrollbar. Alpha-only, so it can be recoloured
+       per use with background-color + mask. */
+    --squiggle: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='12'%3E%3Cpath d='M0 6 Q6.5 -1 13 6 T26 6' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
 }
 
 * {
@@ -227,7 +232,22 @@ html {
     justify-content: space-between;
     padding: 1.15rem clamp(1.25rem, 5vw, 3rem);
     background: var(--paper);
-    border-bottom: 3px solid var(--ink);
+}
+
+.masthead::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 12px;
+    background-color: var(--ink);
+    -webkit-mask-image: var(--squiggle);
+    mask-image: var(--squiggle);
+    -webkit-mask-repeat: repeat-x;
+    mask-repeat: repeat-x;
+    -webkit-mask-size: 26px 12px;
+    mask-size: 26px 12px;
 }
 
 .wordmark {
@@ -258,8 +278,20 @@ main {
     overflow-x: clip;
 }
 
-.eyebrow {
+.hero {
     --rule: var(--red);
+}
+
+.index,
+.about {
+    --rule: var(--blue);
+}
+
+.contact {
+    --rule: var(--gold);
+}
+
+.eyebrow {
     position: relative;
     display: inline-block;
     font-family: var(--mono);
@@ -271,7 +303,6 @@ main {
     margin: 0 0 1.25rem;
 }
 
-/* Hand-inked underline: a rough-displaced bar rather than a crisp border. */
 .eyebrow::after {
     content: "";
     position: absolute;
@@ -279,25 +310,38 @@ main {
     right: -2px;
     bottom: 0;
     height: 4px;
-    background: var(--rule);
-}
-
-.index .eyebrow,
-.about .eyebrow {
-    --rule: var(--blue);
-}
-
-.contact .eyebrow {
-    --rule: var(--gold);
+    background: var(--rule, var(--red));
 }
 
 h2 {
+    position: relative;
+    display: inline-block;
     font-family: var(--display);
     font-weight: 800;
     font-size: clamp(1.9rem, 3.6vw, 2.7rem);
     color: var(--ink);
     margin: 0 0 1.25rem;
     letter-spacing: -0.01em;
+}
+
+/* A short highlighter-style squiggle tucked under part of the heading,
+   rather than a full-width underline — reads as a scribbled emphasis. */
+h2::after {
+    content: "";
+    position: absolute;
+    left: 0.15em;
+    bottom: -0.32em;
+    width: 4.4em;
+    max-width: 75%;
+    height: 0.32em;
+    background-color: var(--rule, var(--red));
+    -webkit-mask-image: var(--squiggle);
+    mask-image: var(--squiggle);
+    -webkit-mask-repeat: repeat-x;
+    mask-repeat: repeat-x;
+    -webkit-mask-size: 1.7em 0.32em;
+    mask-size: 1.7em 0.32em;
+    opacity: 0.85;
 }
 
 .about, .contact {
@@ -365,6 +409,9 @@ h2 {
     height: 15rem;
     top: -3rem;
     right: 4rem;
+    /* An organic blob, not a circle — so the two hero shapes read as a
+       hand-cut pair rather than two overlapping stock circles. */
+    border-radius: 42% 58% 65% 35% / 45% 40% 60% 55%;
     background: radial-gradient(circle at 38% 38%, #ff7a4d, #c21f12 80%);
     mix-blend-mode: multiply;
     --diss: 34deg;
@@ -460,6 +507,7 @@ h2 {
     text-decoration: none;
     background: var(--ink);
     border: 3px solid var(--ink);
+    border-radius: 3px 14px 4px 12px;
     box-shadow: 4px 4px 0 var(--line);
     cursor: pointer;
     transition: transform 0.12s ease, box-shadow 0.12s ease;
@@ -517,11 +565,38 @@ h2 {
     gap: 2.5rem;
     align-items: start;
     padding: clamp(2.25rem, 5vw, 3.25rem) 0;
-    border-top: 3px solid var(--ink);
 }
 
-.spread:last-child {
-    border-bottom: 3px solid var(--ink);
+.spread::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -6px;
+    height: 12px;
+    background-color: var(--ink);
+    -webkit-mask-image: var(--squiggle);
+    mask-image: var(--squiggle);
+    -webkit-mask-repeat: repeat-x;
+    mask-repeat: repeat-x;
+    -webkit-mask-size: 26px 12px;
+    mask-size: 26px 12px;
+}
+
+.spread:last-child::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 12px;
+    background-color: var(--ink);
+    -webkit-mask-image: var(--squiggle);
+    mask-image: var(--squiggle);
+    -webkit-mask-repeat: repeat-x;
+    mask-repeat: repeat-x;
+    -webkit-mask-size: 26px 12px;
+    mask-size: 26px 12px;
 }
 
 /* Alternate the middle spread so the page zig-zags instead of marching down. */
@@ -728,10 +803,26 @@ h2 {
    Footer
    ========================== */
 .colophon-footer {
+    position: relative;
     max-width: 74rem;
     margin: 0 auto;
     padding: 1.75rem clamp(1.25rem, 5vw, 3rem) 3rem;
-    border-top: 3px solid var(--ink);
+}
+
+.colophon-footer::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -6px;
+    height: 12px;
+    background-color: var(--ink);
+    -webkit-mask-image: var(--squiggle);
+    mask-image: var(--squiggle);
+    -webkit-mask-repeat: repeat-x;
+    mask-repeat: repeat-x;
+    -webkit-mask-size: 26px 12px;
+    mask-size: 26px 12px;
 }
 
 .colophon-footer p {
