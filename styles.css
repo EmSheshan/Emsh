@@ -62,16 +62,15 @@ body {
     position: relative;
     padding-right: 22px;
     /* The standard arrow shape, just recoloured — red fill, ink border.
-       Hoverable elements get a matching hand cursor, set further down. */
+       Hoverable elements fall back to the system pointer/hand: a hand-drawn
+       version at this size kept reading as a rude gesture, not a point. */
     cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M4 2 L4 20 L8.5 16 L11 22 L14 20.5 L11.5 14.5 L18 14.5 Z' fill='%23ff4423' stroke='%2317130f' stroke-width='1.4' stroke-linejoin='round'/%3E%3C/svg%3E") 4 2, auto;
 }
 
-/* Same red-fill/ink-border treatment on the hand cursor for anything
-   clickable, so the two feel like one custom cursor set, not a mismatch. */
 a,
 button,
 .btn {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M9 2 L13 2 L13 10 L17 10 L17 19 L15 21 L9 21 L7 19 L7 15 L3 13 L7 11 L9 10 Z' fill='%23ff4423' stroke='%2317130f' stroke-width='1.4' stroke-linejoin='round'/%3E%3C/svg%3E") 11 2, pointer;
+    cursor: pointer;
 }
 
 ::selection {
