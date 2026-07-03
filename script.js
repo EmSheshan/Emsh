@@ -97,3 +97,17 @@ if (headline) {
         window.setTimeout(() => type(0, 0), 250); // small beat before it starts
     }
 }
+
+// Retro view counter — local only, honestly labeled as such. No analytics,
+// no server; just localStorage counting how many times this browser has
+// loaded the page.
+const counterEl = document.getElementById('counterDigits');
+if (counterEl) {
+    try {
+        const count = Number(window.localStorage.getItem('emsh-views') || '0') + 1;
+        window.localStorage.setItem('emsh-views', String(count));
+        counterEl.textContent = String(count).padStart(6, '0');
+    } catch (err) {
+        // Private browsing / storage disabled — leave the placeholder digits.
+    }
+}
