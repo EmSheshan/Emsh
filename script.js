@@ -1,28 +1,159 @@
-// script.js — catalog viewer behavior
+// script.js — catalog behavior
 
-document.querySelectorAll('.btn-duo[data-target]').forEach((button) => {
-    button.addEventListener('click', () => {
-        const { target, src } = button.dataset;
-        const viewer = document.getElementById(`viewer-${target}`);
-        const frame = viewer.querySelector('iframe');
-        const openLink = document.querySelector(`.open-link[data-for="${target}"]`);
+// Real roster data pulled from each region's own pokedex.js (name, dex
+// number, and the image-file key, which matches pokemonArt/{key}.png on
+// the live site) — not invented, so the random spread only ever shows
+// mons that actually exist.
+const LACADIA_MONS = [
+    ["springbun", 2000, "Springbun"],
+    ["snapbun", 2001, "Snapbun"],
+    ["faestalk", 2002, "Faestalk"],
+    ["basilly", 2003, "Basilly"],
+    ["knaviper", 2004, "Knaviper"],
+    ["verkillion", 2005, "Verkillion"],
+    ["purluxe", 2006, "Purluxe"],
+    ["lyonite", 2007, "Lyonite"],
+    ["enkidros", 2008, "Enkidros"],
+    ["possolo", 2009, "Possolo"],
+    ["oposse", 2010, "Oposse"],
+    ["tirakitsu", 2011, "Tirakitsu"],
+    ["asterbat", 2012, "Asterbat"],
+    ["wittern", 2013, "Wittern"],
+    ["aerin", 2014, "Aerin"],
+    ["zephyrin", 2015, "Zephyrin"],
+    ["decaffin", 2016, "Decaffin"],
+    ["espressurge", 2017, "Espressurge"],
+    ["grubblo", 2018, "Grubblo"],
+    ["tentrilo", 2019, "Tentrilo"],
+    ["rocadocio", 2020, "Rocadocio"],
+    ["nokoi", 2021, "Nokoi"],
+    ["yakoyzatiger", 2022, "Yakoyza-Tiger"],
+    ["yakoyzaink", 2022, "Yakoyza-Ink"],
+    ["yakoyzaryujin", 2022, "Yakoyza-Ryujin"],
+    ["yakoyzaoni", 2022, "Yakoyza-Oni"],
+    ["ribbeat", 2023, "Ribbeat"],
+    ["ventribbit", 2024, "Ventribbit"],
+    ["mochu", 2025, "Mochu"],
+    ["snochu", 2026, "Snochu"],
+    ["murkitty", 2027, "Murkitty"],
+    ["tammalkin", 2028, "Tammalkin"],
+    ["velyger", 2029, "Velyger"],
+    ["lileef", 2030, "Lileef"],
+    ["citradily", 2031, "Citradily"],
+    ["krabuto", 2032, "Krabuto"],
+    ["krabutops", 2033, "Krabutops"],
+    ["filch", 2034, "Filch"],
+    ["dodon", 2035, "Dodon"],
+    ["dodonodon", 2036, "Dodonodon"],
+    ["tuatot", 2037, "Tuatot"],
+    ["tuatargon", 2038, "Tuatargon"],
+    ["balite", 2039, "Balite"],
+    ["baleet", 2040, "Baleet"],
+    ["balaast", 2041, "Balaast"],
+    ["cryocone", 2042, "Cryocone"],
+    ["cryoconda", 2043, "Cryoconda"],
+    ["cobblin", 2044, "Cobblin"],
+    ["grumblock", 2045, "Grumblock"],
+    ["ragnarock", 2046, "Ragnarock"],
+    ["battrey", 2047, "Battrey"],
+    ["vladibolt", 2048, "Vladibolt"],
+    ["phalankton", 2049, "Phalankton"],
+    ["shardling", 2050, "Shardling"],
+    ["crucigem", 2051, "Crucigem"],
+    ["scrithymn", 2052, "Scrithymn"],
+    ["blazephemy", 2053, "Blazephemy"],
+    ["ceraphinx", 2054, "Ceraphinx"],
+    ["censerpent", 2055, "Censerpent"],
+    ["roignon", 2056, "Roignon"],
+    ["scallahad", 2057, "Scallahad"],
+    ["moosenge", 2058, "Moosenge"],
+    ["bitbyte", 2059, "Bitbyte"],
+    ["cathogen", 2060, "Cathogen"],
+    ["ramnant", 2061, "Ramnant"],
+    ["logomorph", 2062, "Logomorph"],
+    ["ornidrone", 2063, "Ornidrone"],
+    ["velostrike", 2064, "Velostrike"],
+    ["gunraptor", 2065, "Gunraptor"],
+    ["jellien", 2066, "Jellien"],
+    ["encephid", 2067, "Encephid"],
+    ["monolithid", 2068, "Monolithid"],
+    ["marazcal", 2069, "Marazcal"],
+    ["iguavadon", 2070, "Iguavadon"],
+    ["tortarmasolar", 2071, "Tortarma-Solar"],
+    ["tortarmapolar", 2071, "Tortarma-Polar"],
+    ["tortality", 2072, "Tortality"],
+    ["kheprini", 2073, "Kheprini"],
+    ["servankh", 2074, "Servankh"],
+    ["pharomancy", 2075, "Pharomancy"],
+    ["furnawurm", 2076, "Furnawurm"],
+    ["selky", 2077, "Selky"],
+    ["lumajesty", 2078, "Lumajesty"],
+    ["shuckler", 2079, "Shuckler"],
+    ["smeltmor", 2080, "Smeltmor"],
+    ["pyrant", 2081, "Pyrant"],
+    ["patopod", 2082, "Patopod"],
+    ["nymphlora", 2083, "Nymphlora"],
+    ["idagon", 2084, "Idagon"],
+    ["libradon", 2085, "Libradon"],
+    ["suprion", 2086, "Suprion"],
+    ["larvos", 2087, "Larvos"],
+    ["syrinsect", 2088, "Syrinsect"],
+    ["stratoclysm", 2089, "Stratoclysm"],
+    ["paracabra", 2090, "Paracabra"],
+    ["saskrypt", 2091, "Saskrypt"],
+    ["devile", 2092, "Devile"],
+    ["azamoth", 2093, "Azamoth"],
+    ["albythos", 2094, "Albythos"],
+    ["xerasige", 2095, "Xerasige"],
+    ["jeneosis", 2096, "Jeneosis"],
+    ["xophis", 2097, "Xophis"],
+    ["ravenger", 2098, "Ravenger"],
+    ["sacrabellhymn", 2099, "Sacrabell-Hymn"],
+    ["sacrabelldirge", 2099, "Sacrabell-Dirge"]
+];
 
-        if (frame.src !== src) {
-            frame.src = src;
-        }
+const ANDELA_MONS = [
+    ["fawnna", 2000, "Fawnna"],
+    ["fawliage", 2001, "Fawliage"],
+    ["dynastag", 2002, "Dynastag"],
+    ["pumace", 2003, "Pumace"],
+    ["pyroncho", 2004, "Pyroncho"],
+    ["smoldero", 2005, "Smoldero"],
+    ["sealor", 2006, "Sealor"],
+    ["seagent", 2007, "Seagent"],
+    ["brigantide", 2008, "Brigantide"],
+    ["cackloon", 2021, "Cackloon"],
+    ["necrondor", 2022, "Necrondor"],
+    ["sedimentaldormant", 2036, "Sedimental-Dormant"],
+    ["sedimentalbloom", 2036, "Sedimental-Bloom"],
+    ["amistaphore", 2068, "Amistaphore"]
+];
 
-        viewer.classList.add('open');
-        openLink.classList.remove('hidden');
+function pickRandom(list, count) {
+    const pool = list.slice();
+    const picks = [];
+    while (picks.length < count && pool.length) {
+        const i = Math.floor(Math.random() * pool.length);
+        picks.push(pool.splice(i, 1)[0]);
+    }
+    return picks;
+}
 
-        // Briefly show the grayscale "developing" state before revealing color.
-        viewer.classList.remove('developed');
-        window.setTimeout(() => {
-            viewer.classList.add('developed');
-        }, 700);
+function renderMonSpread(containerId, mons) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    const base = container.dataset.base;
+    container.innerHTML = pickRandom(mons, 3).map(([key, num, name]) => `
+        <div class="mon-card">
+            <img src="${base}pokemonArt/${key}.png" alt="${name}" loading="lazy">
+            <span class="mon-num">N&deg; ${num}</span>
+            <span class="mon-name">${name}</span>
+        </div>
+    `).join('');
+}
 
-        button.querySelector('span').textContent = 'RELOAD';
-    });
-});
+renderMonSpread('mons-andela', ANDELA_MONS);
+renderMonSpread('mons-lacadia', LACADIA_MONS);
 
 // Hero blobs drift toward the cursor slightly — a light parallax, not a follow.
 const hero = document.querySelector('.hero');
