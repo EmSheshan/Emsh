@@ -153,8 +153,10 @@ function renderMonSpread(containerId, mons) {
             <div class="mon-media" style="--sprite:url('${src}')">
                 <img src="${src}" alt="${name}" loading="lazy">
             </div>
-            <span class="mon-num">N&deg; ${String(num - 1999).padStart(2, '0')}</span>
-            <span class="mon-name">${name}</span>
+            <div class="mon-caption">
+                <span class="mon-num">N&deg; ${String(num - 1999).padStart(2, '0')}</span>
+                <span class="mon-name">${name}</span>
+            </div>
         </div>
         `;
     }).join('');

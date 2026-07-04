@@ -658,18 +658,28 @@ h2::after {
    Mon spread — three random Pokémon from the region's own dex. No
    frame, no background box: the art itself fills the space, arranged
    in an overlapping cascade and sliding in from the outer edge (the
-   side away from the text column) once scrolled into view. A diagonal
-   ink-edged stripe in the region's own colour sits behind the three,
-   loosely tying them together as one group.
+   side away from the text column) once scrolled into view. Behind the
+   three sits the same soft gradient + dissolving-halftone treatment
+   the Maintenance proof panel uses, in the region's own colour,
+   loosely tying the group together without a hard-edged shape.
    ========================== */
 .mon-spread {
     position: relative;
     min-height: 28rem;
     overflow: hidden;
-    background:
-        linear-gradient(125deg, transparent 14%, var(--ink) 14% 15%, transparent 15%),
-        linear-gradient(125deg, transparent 15%, var(--duo, var(--teal)) 15% 60%, transparent 60%),
-        linear-gradient(125deg, transparent 60%, var(--ink) 60% 61%, transparent 61%);
+    background: linear-gradient(150deg,
+        var(--duo, var(--paper-2)),
+        color-mix(in srgb, var(--duo, var(--ink)) 45%, var(--ink)));
+}
+
+.mon-spread::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, var(--paper) 30%, transparent 33%);
+    background-size: 9px 9px;
+    -webkit-mask-image: linear-gradient(150deg, #000, transparent 72%);
+    mask-image: linear-gradient(150deg, #000, transparent 72%);
 }
 
 .mon-card {
@@ -760,6 +770,21 @@ h2::after {
     mask-size: contain;
     mask-repeat: no-repeat;
     mask-position: center;
+}
+
+/* A solid chip behind the caption — the gradient/halftone background
+   and the overlapping art behind it make any text colour drawn right
+   on top unreadable (mon-num was literally the same colour as the
+   background). Papering over a small area guarantees contrast no
+   matter what's underneath. */
+.mon-caption {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    padding: 0.3rem 0.6rem;
 }
 
 .mon-num {
