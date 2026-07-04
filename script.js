@@ -143,13 +143,21 @@ function renderMonSpread(containerId, mons) {
     const container = document.getElementById(containerId);
     if (!container) return;
     const base = container.dataset.base;
-    container.innerHTML = pickRandom(mons, 3).map(([key, num, name]) => `
+    // Internal dex numbers start at 2000 (to avoid colliding with the real
+    // National Dex); both regions display them starting from 1 on their
+    // own sites, so match that here rather than showing the raw offset.
+    container.innerHTML = pickRandom(mons, 3).map(([key, num, name]) => {
+        const src = `${base}pokemonArt/${key}.png`;
+        return `
         <div class="mon-card">
-            <img src="${base}pokemonArt/${key}.png" alt="${name}" loading="lazy">
-            <span class="mon-num">N&deg; ${num}</span>
+            <div class="mon-media" style="--sprite:url('${src}')">
+                <img src="${src}" alt="${name}" loading="lazy">
+            </div>
+            <span class="mon-num">N&deg; ${String(num - 1999).padStart(2, '0')}</span>
             <span class="mon-name">${name}</span>
         </div>
-    `).join('');
+        `;
+    }).join('');
 }
 
 renderMonSpread('mons-andela', ANDELA_MONS);
