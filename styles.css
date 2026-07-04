@@ -537,7 +537,7 @@ h2::after {
 
 .btn span {
     display: block;
-    font-family: var(--mono);
+    font-family: var(--mono), serif;
     font-weight: 700;
     font-size: 0.85rem;
     letter-spacing: 0.05em;
@@ -631,7 +631,7 @@ h2::after {
 }
 
 .tag {
-    font-family: var(--mono);
+    font-family: var(--mono), serif;
     font-size: 0.85rem;
     letter-spacing: 0.06em;
     color: var(--duo, var(--ink));
@@ -639,7 +639,7 @@ h2::after {
 }
 
 .spread h3 {
-    font-family: var(--display);
+    font-family: var(--display), serif;
     font-weight: 800;
     font-size: clamp(2rem, 4vw, 2.9rem);
     margin: 0 0 0.75rem;
@@ -790,14 +790,14 @@ h2::after {
 }
 
 .mon-num {
-    font-family: var(--mono);
+    font-family: var(--mono), serif;
     font-size: 0.72rem;
     letter-spacing: 0.05em;
     color: var(--duo, var(--ink));
 }
 
 .mon-name {
-    font-family: var(--display);
+    font-family: var(--display), serif;
     font-weight: 700;
     font-size: 1rem;
     color: var(--ink);
@@ -829,7 +829,7 @@ h2::after {
 .stamp {
     position: relative;
     z-index: 2;
-    font-family: var(--mono);
+    font-family: var(--mono), serif;
     font-weight: 700;
     font-size: 1.3rem;
     letter-spacing: 0.08em;
@@ -848,7 +848,7 @@ h2::after {
    ========================== */
 .scrawl {
     display: inline-block;
-    font-family: var(--mono);
+    font-family: var(--mono), serif;
     font-style: italic;
     font-weight: 400;
     font-size: 0.82rem;
@@ -895,7 +895,7 @@ h2::after {
    About
    ========================== */
 .footnote {
-    font-family: var(--mono);
+    font-family: var(--mono), serif;
     font-size: 0.85rem;
     line-height: 1.7;
     color: var(--ink);
@@ -931,7 +931,7 @@ h2::after {
 }
 
 .colophon-footer p {
-    font-family: var(--mono);
+    font-family: var(--mono), serif;
     font-size: 0.75rem;
     color: var(--ink);
     opacity: 0.6;
