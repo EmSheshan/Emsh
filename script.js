@@ -169,23 +169,27 @@ const blobs = document.querySelectorAll('.blob');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-// Each mon spread slides its three images in from the outer edge, staggered,
-// once the section actually scrolls into view (see the .in-view rules in
-// styles.css — the initial offset and timing live there, this just flips
-// the class at the right moment).
-const monSpreads = document.querySelectorAll('.mon-spread');
-if (monSpreads.length) {
+// Each mon card slides in from the outer edge once it scrolls into view
+// (see the .in-view rules in styles.css for the offset/timing). Observing
+// each card individually — not the shared .mon-spread container — matters
+// on mobile: the three stack full-height there, so a container-level
+// trigger fires as soon as the first card peeks into view and every card's
+// delay has long finished by the time you scroll down to the third one,
+// which looks like no stagger at all. Per-card observation makes each one
+// slide in right as it arrives, on both layouts.
+const monCards = document.querySelectorAll('.mon-card');
+if (monCards.length) {
     if (reduceMotion || !('IntersectionObserver' in window)) {
-        monSpreads.forEach((el) => el.classList.add('in-view'));
+        monCards.forEach((el) => el.classList.add('in-view'));
     } else {
-        const spreadObserver = new IntersectionObserver((entries) => {
+        const cardObserver = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (!entry.isIntersecting) return;
                 entry.target.classList.add('in-view');
-                spreadObserver.unobserve(entry.target);
+                cardObserver.unobserve(entry.target);
             });
         }, { threshold: 0.3 });
-        monSpreads.forEach((el) => spreadObserver.observe(el));
+        monCards.forEach((el) => cardObserver.observe(el));
     }
 }
 
@@ -223,7 +227,7 @@ const headline = document.querySelector('.headline');
 if (headline) {
     const layerMain = headline.querySelector('.layer-main');
     const offsetLayers = headline.querySelectorAll('.layer');
-    const lines = ['fake regions.', 'real spreadsheets.'];
+    const lines = ['drawing creatures.', 'building worlds.'];
     const CARET = '<span class="type-caret" aria-hidden="true"></span>';
 
     // Both lines are always present (empty until reached) so the headline
