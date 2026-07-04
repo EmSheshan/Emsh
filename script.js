@@ -169,6 +169,26 @@ const blobs = document.querySelectorAll('.blob');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
+// Each mon spread slides its three images in from the outer edge, staggered,
+// once the section actually scrolls into view (see the .in-view rules in
+// styles.css — the initial offset and timing live there, this just flips
+// the class at the right moment).
+const monSpreads = document.querySelectorAll('.mon-spread');
+if (monSpreads.length) {
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+        monSpreads.forEach((el) => el.classList.add('in-view'));
+    } else {
+        const spreadObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('in-view');
+                spreadObserver.unobserve(entry.target);
+            });
+        }, { threshold: 0.3 });
+        monSpreads.forEach((el) => spreadObserver.observe(el));
+    }
+}
+
 if (hero && blobs.length && !reduceMotion && hasFinePointer) {
     let ticking = false;
     let lastEvent = null;
