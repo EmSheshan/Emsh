@@ -195,6 +195,60 @@ if (monCards.length) {
     }
 }
 
+// Section headers, spread text, and closing copy fade/rise in the same
+// way, generalized from the mon-card reveal above.
+const revealEls = document.querySelectorAll('.reveal');
+if (revealEls.length) {
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+        revealEls.forEach((el) => el.classList.add('in-view'));
+    } else {
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('in-view');
+                revealObserver.unobserve(entry.target);
+            });
+        }, { threshold: 0.15 });
+        revealEls.forEach((el) => revealObserver.observe(el));
+    }
+}
+
+// Colorbar registration mark travels down the bar with scroll progress,
+// and the background kanji drifts at a different rate than the page for
+// a touch of depth. Both fixed/absolute decorations, both desktop-only
+// (colorbar is hidden under 45rem), so this never runs against layouts
+// where it wouldn't be visible anyway.
+const colorbar = document.querySelector('.colorbar');
+const colorbarMark = document.querySelector('.colorbar-mark');
+const kanji = document.querySelector('.kanji-accent');
+if (!reduceMotion && ((colorbar && colorbarMark) || (kanji && hero))) {
+    let scrollTicking = false;
+    const updateOnScroll = () => {
+        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = scrollable > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollable)) : 0;
+
+        if (colorbar && colorbarMark) {
+            const travel = colorbar.clientHeight - colorbarMark.clientHeight;
+            colorbarMark.style.transform = `translateY(${progress * travel}px)`;
+        }
+
+        if (kanji && hero) {
+            const rect = hero.getBoundingClientRect();
+            kanji.style.transform = `translateY(calc(-50% + ${rect.top * -0.06}px))`;
+        }
+
+        scrollTicking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+        if (scrollTicking) return;
+        scrollTicking = true;
+        window.requestAnimationFrame(updateOnScroll);
+    }, { passive: true });
+
+    updateOnScroll();
+}
+
 if (hero && blobs.length && !reduceMotion && hasFinePointer) {
     let ticking = false;
     let lastEvent = null;
