@@ -522,7 +522,9 @@ h2::after {
     position: relative;
     white-space: nowrap;
     color: var(--ink);
+    text-shadow: 6px 6px 0 var(--red), -6px -6px 0 var(--blue);
 }
+
 
 .lede {
     font-size: clamp(1rem, 1.6vw, 1.15rem);
@@ -1141,4 +1143,99 @@ h2::after {
     .mon-card:nth-child(3) {
         margin-left: 50%;
     }
+}
+
+
+/* The Main Newspaper Column */
+.ads-container {
+    display: grid;
+    /* Automatically creates responsive columns that wrap on mobile */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    padding: 1.5rem 0;
+}
+
+/* Base style for all Ads */
+.ad-block {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid var(--ink, #000);
+    padding: 1rem;
+    text-decoration: none;
+    color: var(--ink, #000);
+    background-color: transparent;
+    position: relative;
+    transition: transform 0.15s ease;
+}
+
+.ad-block:hover {
+    transform: translateY(-2px);
+}
+
+.ad-block h4 {
+    font-family: monospace;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    margin: 0 0 0.5rem 0;
+    border-bottom: 1px solid var(--ink, #000);
+    padding-bottom: 0.35rem;
+    letter-spacing: 0.05em;
+}
+
+.ad-block p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    flex-grow: 1; /* Pushes the button to the bottom */
+    margin: 0 0 1.5rem 0;
+}
+
+.ad-link {
+    font-size: 0.85rem;
+    align-self: flex-start;
+    background: var(--ink, #000);
+
+    font-family: var(--mono), serif;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--paper);
+    padding: 0.6rem 1rem;
+    border-radius: 3px 14px 4px 12px;
+}
+
+/* Socials ad — several links share one card, so they sit in a wrapping
+   row of the same pills used elsewhere rather than a single button. */
+.ad-socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* Variant 1: The Coupon */
+.ad-coupon {
+    border: 2px dashed var(--ink, #000);
+}
+
+.scissors {
+    position: absolute;
+    top: -12px;
+    left: 10px;
+    /* Match this to your site's exact background color to mask the dashed line */
+    background: var(--paper);
+    padding: 0 5px;
+    font-size: 1.2rem;
+}
+
+/* Variant 2: Heavy Black Fill */
+.ad-inverted {
+    background-color: var(--ink, #000);
+    color: #fff;
+}
+
+.ad-inverted h4 {
+    border-bottom-color: #fff;
+}
+
+.ad-inverted .ad-link {
+    background: #fff;
+    color: var(--ink, #000);
 }
