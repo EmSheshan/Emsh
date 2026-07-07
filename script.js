@@ -122,6 +122,8 @@ const ANDELA_MONS = [
     ["sealor", 2006, "Sealor"],
     ["seagent", 2007, "Seagent"],
     ["brigantide", 2008, "Brigantide"],
+    ["panacha", 2009, "Panacha"],
+    ["marracacha", 2010, "Marracacha"],
     ["cackloon", 2021, "Cackloon"],
     ["necrondor", 2022, "Necrondor"],
     ["sedimentaldormant", 2036, "Sedimental-Dormant"],
