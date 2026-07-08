@@ -215,6 +215,62 @@ if (revealEls.length) {
     }
 }
 
+// Maintenance proof video — a muted, looping preview. It autoplays only when
+// the visitor hasn't asked to reduce motion, and clicking (or Enter/Space when
+// focused) anywhere on the frame toggles play/pause — no visible control, the
+// whole viewer is the target. It also pauses itself while scrolled out of view
+// so an off-screen loop isn't burning cycles.
+const proofViewer = document.querySelector('.viewer-proof');
+const proofVideo = proofViewer && proofViewer.querySelector('.proof-video');
+if (proofVideo) {
+    // Reduced-motion visitors start opted-out (no autoplay); a click opts in.
+    let manualPause = reduceMotion;
+
+    const syncLabel = () => {
+        proofViewer.setAttribute('aria-pressed', String(!proofVideo.paused));
+        proofViewer.setAttribute('aria-label', proofVideo.paused ? 'Play preview' : 'Pause preview');
+    };
+
+    const toggle = () => {
+        if (proofVideo.paused) {
+            manualPause = false;
+            // play() can still be rejected (battery saver, etc.); harmless.
+            proofVideo.play().catch(() => {});
+        } else {
+            manualPause = true;
+            proofVideo.pause();
+        }
+    };
+
+    proofViewer.addEventListener('click', toggle);
+    proofViewer.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+            e.preventDefault();
+            toggle();
+        }
+    });
+    proofVideo.addEventListener('play', syncLabel);
+    proofVideo.addEventListener('pause', syncLabel);
+
+    if (!reduceMotion) proofVideo.play().catch(() => {});
+    syncLabel();
+
+    // Pause while off-screen; resume on re-entry only if the visitor hasn't
+    // deliberately paused it (or asked to reduce motion).
+    if ('IntersectionObserver' in window) {
+        const proofObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    if (!manualPause) proofVideo.play().catch(() => {});
+                } else if (!proofVideo.paused) {
+                    proofVideo.pause();
+                }
+            });
+        }, { threshold: 0.25 });
+        proofObserver.observe(proofViewer);
+    }
+}
+
 // Colorbar registration mark travels down the bar with scroll progress,
 // and the background kanji drifts at a different rate than the page for
 // a touch of depth. Both fixed/absolute decorations, both desktop-only

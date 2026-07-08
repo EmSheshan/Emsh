@@ -317,13 +317,15 @@ main {
     --rule: var(--red);
 }
 
-.index,
-.about {
+.index {
     --rule: var(--blue);
 }
-
-.contact {
+.about {
     --rule: var(--gold);
+}
+
+.classifieds {
+    --rule: var(--teal);
 }
 
 .eyebrow {
@@ -858,7 +860,13 @@ h2::after {
     justify-content: center;
     min-height: 20rem;
     overflow: hidden;
-    background: linear-gradient(150deg, var(--paper-2), #b9b19c);
+
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23ff4423' stroke='%2317130f' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cellipse cx='13' cy='15.5' rx='6.4' ry='6' stroke='none'/%3E%3Cpath d='M8 13v-8.5a1.5 1.5 0 0 1 3 0v7.5'/%3E%3Cpath d='M11 11.5v-2a1.5 1.5 0 0 1 3 0v2.5'/%3E%3Cpath d='M14 10.5a1.5 1.5 0 0 1 3 0v1.5'/%3E%3Cpath d='M17 11.5a1.5 1.5 0 0 1 3 0v4.5a6 6 0 0 1 -6 6h-2h.208a6 6 0 0 1 -5.012 -2.7l-.196 -.3c-.312 -.479 -1.407 -2.388 -3.286 -5.728a1.5 1.5 0 0 1 .536 -2.022a1.867 1.867 0 0 1 2.28 .28l1.47 1.47'/%3E%3Cpath d='M5 3l-1 -1'/%3E%3Cpath d='M4 7h-1'/%3E%3Cpath d='M14 3l1 -1'/%3E%3Cpath d='M15 6h1'/%3E%3C/svg%3E") 9 4, pointer;
+}
+
+.viewer-proof:focus-visible {
+    outline: 3px solid var(--red);
+    outline-offset: -3px;
 }
 
 /* Halftone dissolve — kept ink/neutral, since this one's unfinished. */
@@ -866,25 +874,39 @@ h2::after {
     content: "";
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(circle, var(--ink) 26%, transparent 29%);
-    background-size: 9px 9px;
-    -webkit-mask-image: linear-gradient(150deg, #000, transparent 72%);
-    mask-image: linear-gradient(150deg, #000, transparent 72%);
     opacity: 0.5;
     z-index: 1;
 }
 
+/* The looping preview sits behind the halftone ::after and the corner stamp,
+   so it keeps reading as an unfinished proof sheet. object-fit: none shows the
+   video at its native pixel size and lets the frame crop the overflow — the
+   dither is 1-bit and downscaling it (cover) resamples the dots into muddy
+   artifacts, so we crop rather than shrink. */
+.proof-video {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: none;
+    object-position: center;
+}
+
 .stamp {
-    position: relative;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
     z-index: 2;
     font-family: var(--mono), serif;
     font-weight: 700;
-    font-size: 1.3rem;
+    font-size: 1.05rem;
     letter-spacing: 0.08em;
     text-align: center;
     color: var(--red);
     border: 4px solid var(--red);
-    padding: 1rem 1.6rem;
+    padding: 0.55rem 0.9rem;
     line-height: 1.4;
     filter: url(#rough);
     animation: stamp-wobble 7s ease-in-out infinite;
