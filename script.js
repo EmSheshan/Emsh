@@ -120,12 +120,17 @@ const ANDELA_MONS = [
     ["pyroncho", 2004, "Pyroncho"],
     ["smoldero", 2005, "Smoldero"],
     ["sealor", 2006, "Sealor"],
-    ["seagent", 2007, "Seagent"],
+    ["enseal", 2007, "Enseal"],
     ["brigantide", 2008, "Brigantide"],
     ["panacha", 2009, "Panacha"],
     ["marracacha", 2010, "Marracacha"],
+    ["grismirk", 2017, "Grismirk"],
+    ["grimson", 2018, "Grimson"],
     ["cackloon", 2021, "Cackloon"],
     ["necrondor", 2022, "Necrondor"],
+    ["peppilla", 2023, "Peppilla"],
+    ["peppyre", 2024, "Peppyre"],
+    ["pepperisher", 2025, "Pepperisher"],
     ["sedimentaldormant", 2036, "Sedimental-Dormant"],
     ["sedimentalbloom", 2036, "Sedimental-Bloom"],
     ["amistaphore", 2068, "Amistaphore"]
@@ -235,6 +240,7 @@ if (proofVideo) {
         if (proofVideo.paused) {
             manualPause = false;
             // play() can still be rejected (battery saver, etc.); harmless.
+            proofVideo.defaultPlaybackRate = 0.5;
             proofVideo.play().catch(() => {});
         } else {
             manualPause = true;
@@ -251,6 +257,7 @@ if (proofVideo) {
     });
     proofVideo.addEventListener('play', syncLabel);
     proofVideo.addEventListener('pause', syncLabel);
+    proofVideo.defaultPlaybackRate = 0.5;
 
     if (!reduceMotion) proofVideo.play().catch(() => {});
     syncLabel();
