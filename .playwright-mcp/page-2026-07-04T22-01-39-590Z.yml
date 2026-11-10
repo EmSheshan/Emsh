@@ -1,0 +1,98 @@
+- generic [active] [ref=e1]:
+  - paragraph: EM/SH — PROOF 003 — CMYK + 2 SPOT — DO NOT SCALE
+  - banner [ref=e2]:
+    - link "emsh." [ref=e3]:
+      - /url: "#top"
+    - paragraph [ref=e4]: self‑published · ongoing series
+  - main [ref=e5]:
+    - generic [ref=e6]:
+      - generic: 図鑑
+      - paragraph [ref=e9]: vol. 01
+      - heading "drawing crea" [level=1] [ref=e10]:
+        - generic [ref=e11]: drawing crea
+        - generic [ref=e12]: drawing crea
+        - generic [ref=e13]: drawing crea
+      - paragraph [ref=e15]: I'm Emsh. This is just a spot to keep my art organized for myself and my friends. I illustrate custom Pokémon regions, then code the websites to house them. Two are below, and a third project is on the way.
+      - generic [ref=e16]:
+        - link "SEE THE INDEX ↓" [ref=e17]:
+          - /url: "#index"
+          - generic [ref=e18]: SEE THE INDEX ↓
+        - link "GITHUB ↗" [ref=e19]:
+          - /url: https://github.com/EmSheshan
+          - generic [ref=e20]: GITHUB ↗
+    - generic [ref=e21]:
+      - paragraph [ref=e22]: index
+      - heading "contents" [level=2] [ref=e23]
+      - article [ref=e24]:
+        - generic [ref=e25]:
+          - paragraph [ref=e26]: N° 01
+          - heading "Andela" [level=3] [ref=e27]
+          - paragraph [ref=e28]: still in progress...
+          - paragraph [ref=e29]: A Chilean-inspired region with a deeper focus on design and atmosphere.
+          - link "VIEW ANDELA ↗" [ref=e30]:
+            - /url: https://emsheshan.github.io/Andela/
+            - generic [ref=e31]: VIEW ANDELA ↗
+        - generic "Three random Andela Pokémon" [ref=e32]:
+          - generic [ref=e33]:
+            - img "Smoldero" [ref=e35]
+            - generic [ref=e36]:
+              - generic [ref=e37]: N° 06
+              - generic [ref=e38]: Smoldero
+          - generic [ref=e39]:
+            - img "Necrondor" [ref=e41]
+            - generic [ref=e42]:
+              - generic [ref=e43]: N° 23
+              - generic [ref=e44]: Necrondor
+          - generic [ref=e45]:
+            - img "Sedimental-Dormant" [ref=e47]
+            - generic [ref=e48]:
+              - generic [ref=e49]: N° 37
+              - generic [ref=e50]: Sedimental-Dormant
+      - article [ref=e51]:
+        - generic [ref=e52]:
+          - paragraph [ref=e53]: N° 02
+          - heading "Lacadia" [level=3] [ref=e54]
+          - paragraph [ref=e55]: 100 complete original mons
+          - paragraph [ref=e56]: My first finished dex. A bit rough around the edges, but where it all began.
+          - link "VIEW LACADIA ↗" [ref=e57]:
+            - /url: https://emsheshan.github.io/Lacadia/
+            - generic [ref=e58]: VIEW LACADIA ↗
+        - generic "Three random Lacadia Pokémon" [ref=e59]:
+          - generic [ref=e60]:
+            - img "Ceraphinx" [ref=e62]
+            - generic [ref=e63]:
+              - generic [ref=e64]: N° 55
+              - generic [ref=e65]: Ceraphinx
+          - generic [ref=e66]:
+            - img "Marazcal" [ref=e68]
+            - generic [ref=e69]:
+              - generic [ref=e70]: N° 70
+              - generic [ref=e71]: Marazcal
+          - generic [ref=e72]:
+            - img "Libradon" [ref=e74]
+            - generic [ref=e75]:
+              - generic [ref=e76]: N° 86
+              - generic [ref=e77]: Libradon
+      - article [ref=e78]:
+        - generic [ref=e79]:
+          - paragraph [ref=e80]: N° 03
+          - heading "Maintenance" [level=3] [ref=e81]
+          - paragraph [ref=e82]: I'll get to this one day
+          - paragraph [ref=e83]: An idle game about the simple work of restoring old systems and keeping things running. Still theorizing how it unfolds.
+        - generic [ref=e85]:
+          - text: PROOF
+          - text: NOT FOR PRINT
+    - generic [ref=e87]:
+      - paragraph [ref=e88]: colophon
+      - heading "the person to blame" [level=2] [ref=e89]
+      - paragraph [ref=e90]: I'm an artist first, but I like building the spaces where my work lives. I design the creatures and illustrate the regions, and coding these web dexes gives them a permanent home to share with friends, as well as a way to use my CS degree for something.
+      - paragraph [ref=e91]: Held together with vanilla JS, too many service workers, and high-res art doing its best to load quickly.
+    - generic [ref=e92]:
+      - paragraph [ref=e93]: contact
+      - heading "drop a line" [level=2] [ref=e94]
+      - paragraph [ref=e95]: If you spot a bug in the code, or just want to poke around, you can find me over on GitHub.
+      - link "GITHUB ↗" [ref=e97]:
+        - /url: https://github.com/EmSheshan
+        - generic [ref=e98]: GITHUB ↗
+  - contentinfo [ref=e99]:
+    - paragraph [ref=e100]: Andela and Lacadia are fan‑made, non‑commercial Pokémon projects. Not affiliated with or endorsed by Nintendo, Game Freak, or The Pokémon Company.

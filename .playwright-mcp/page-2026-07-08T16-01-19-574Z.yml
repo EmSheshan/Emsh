@@ -1,0 +1,112 @@
+- generic [active] [ref=f8e1]:
+  - banner [ref=f8e2]:
+    - link "emsh." [ref=f8e3]:
+      - /url: "#top"
+    - paragraph [ref=f8e4]: self‑published · ongoing series
+  - main [ref=f8e5]:
+    - generic [ref=f8e6]:
+      - generic: 図鑑
+      - paragraph [ref=f8e9]: vol. 01
+      - heading [level=1] [ref=f8e10]
+      - paragraph [ref=f8e13]: I'm Emsh. This is just a spot to keep my art organized for myself and my friends. I illustrate custom Pokémon regions, then code the websites to house them. Two are below, and a third project is on the way.
+      - generic [ref=f8e14]:
+        - link "SEE THE INDEX ↓" [ref=f8e15]:
+          - /url: "#index"
+          - generic [ref=f8e16]: SEE THE INDEX ↓
+        - link "GITHUB ↗" [ref=f8e17]:
+          - /url: https://github.com/EmSheshan
+          - generic [ref=f8e18]: GITHUB ↗
+    - generic [ref=f8e19]:
+      - paragraph [ref=f8e20]: index
+      - heading "contents" [level=2] [ref=f8e21]
+      - article [ref=f8e22]:
+        - generic [ref=f8e23]:
+          - paragraph [ref=f8e24]: N° 01
+          - heading "Lacadia" [level=3] [ref=f8e25]
+          - paragraph [ref=f8e26]: The original 100
+          - paragraph [ref=f8e27]: My first finished dex. This colorful variety of designs is where I got my start.
+          - link "VIEW LACADIA ↗" [ref=f8e28]:
+            - /url: https://emsheshan.github.io/Lacadia/
+            - generic [ref=f8e29]: VIEW LACADIA ↗
+        - generic "Three random Lacadia Pokémon" [ref=f8e30]:
+          - generic [ref=f8e31]:
+            - img "Smeltmor" [ref=f8e33]
+            - generic [ref=f8e34]:
+              - generic [ref=f8e35]: N° 81
+              - generic [ref=f8e36]: Smeltmor
+          - generic [ref=f8e37]:
+            - img "Rocadocio" [ref=f8e39]
+            - generic [ref=f8e40]:
+              - generic [ref=f8e41]: N° 21
+              - generic [ref=f8e42]: Rocadocio
+          - generic [ref=f8e43]:
+            - img "Balite" [ref=f8e45]
+            - generic [ref=f8e46]:
+              - generic [ref=f8e47]: N° 40
+              - generic [ref=f8e48]: Balite
+      - article [ref=f8e49]:
+        - generic [ref=f8e50]:
+          - paragraph [ref=f8e51]: N° 02
+          - heading "Andela" [level=3] [ref=f8e52]
+          - paragraph [ref=f8e53]: 15/100 complete
+          - paragraph [ref=f8e54]: A Chilean-inspired region with a deeper focus on design and atmosphere.
+          - link "VIEW ANDELA ↗" [ref=f8e55]:
+            - /url: https://emsheshan.github.io/Andela/
+            - generic [ref=f8e56]: VIEW ANDELA ↗
+        - generic "Three random Andela Pokémon" [ref=f8e57]:
+          - generic [ref=f8e58]:
+            - img "Sedimental-Bloom" [ref=f8e60]
+            - generic [ref=f8e61]:
+              - generic [ref=f8e62]: N° 37
+              - generic [ref=f8e63]: Sedimental-Bloom
+          - generic [ref=f8e64]:
+            - img "Pumace" [ref=f8e66]
+            - generic [ref=f8e67]:
+              - generic [ref=f8e68]: N° 04
+              - generic [ref=f8e69]: Pumace
+          - generic [ref=f8e70]:
+            - img "Panacha" [ref=f8e72]
+            - generic [ref=f8e73]:
+              - generic [ref=f8e74]: N° 10
+              - generic [ref=f8e75]: Panacha
+      - article [ref=f8e76]:
+        - generic [ref=f8e77]:
+          - paragraph [ref=f8e78]: N° 03
+          - heading "Maintenance" [level=3] [ref=f8e79]
+          - paragraph [ref=f8e80]: Coming late 2041
+          - paragraph [ref=f8e81]: An idle game about the simple work of restoring old systems and keeping things running.
+        - button "Play preview" [ref=f8e82] [cursor=pointer]:
+          - generic "Silent looping video of dithered flowers in the wind" [ref=f8e83]
+          - generic [ref=f8e84]:
+            - text: PROOF
+            - text: NOT FOR PRINT
+    - generic [ref=f8e86]:
+      - paragraph [ref=f8e87]: colophon
+      - heading "the person to blame" [level=2] [ref=f8e88]
+      - paragraph [ref=f8e89]: I like drawing and I have a CS degree, so this is the most natural intersection of the two.
+      - paragraph [ref=f8e90]: No, I cannot make the art load faster!
+    - generic [ref=f8e91]:
+      - paragraph [ref=f8e92]: back matter
+      - heading "classifieds" [level=2] [ref=f8e93]
+      - generic [ref=f8e94]:
+        - generic [ref=f8e95]:
+          - heading "FIND ME ELSEWHERE" [level=4] [ref=f8e96]
+          - paragraph [ref=f8e97]: The socials exist, but expect very infrequent updates.
+          - generic [ref=f8e98]:
+            - link "INSTAGRAM ↗" [ref=f8e99]:
+              - /url: https://www.instagram.com/emsheshan/
+            - link "TUMBLR ↗" [ref=f8e100]:
+              - /url: https://www.tumblr.com/blog/emsh
+        - generic [ref=f8e101]:
+          - generic [ref=f8e102]: ✂
+          - heading "FREE CHAT COUPON" [level=4] [ref=f8e103]
+          - paragraph [ref=f8e104]: Valid for one (1) conversation about custom Pokémon, web development, or print design. Void where prohibited.
+          - link "REDEEM VIA BLUESKY ↗" [ref=f8e105]:
+            - /url: https://bsky.app/profile/emsheshan.bsky.social
+        - link "VIEW THE SOURCE Inspect the machinery running this press. GITHUB ↗" [ref=f8e106]:
+          - /url: https://github.com/EmSheshan/Emsh
+          - heading "VIEW THE SOURCE" [level=4] [ref=f8e107]
+          - paragraph [ref=f8e108]: Inspect the machinery running this press.
+          - generic [ref=f8e109]: GITHUB ↗
+  - contentinfo [ref=f8e110]:
+    - paragraph [ref=f8e111]: Andela and Lacadia are fan‑made, non‑commercial Pokémon projects. Not affiliated with or endorsed by Nintendo, Game Freak, or The Pokémon Company.

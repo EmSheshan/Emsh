@@ -1,0 +1,614 @@
+- generic [active] [ref=e1]:
+  - button [ref=e2] [cursor=pointer]
+  - banner:
+    - generic [ref=e4]:
+      - heading "◆ Lacadia Pokédex ◆" [level=1] [ref=e5]
+      - button "Search & Filter" [ref=e6] [cursor=pointer]
+  - generic:
+    - generic [ref=e8]:
+      - textbox "Search Pokémon" [ref=e10]:
+        - /placeholder: Search Pokémon…
+      - generic [ref=e11]: 100 / 100
+    - generic [ref=e12]:
+      - button "Bug Bug" [ref=e13] [cursor=pointer]:
+        - img "Bug" [ref=e14]
+        - text: Bug
+      - button "Dark Dark" [ref=e15] [cursor=pointer]:
+        - img "Dark" [ref=e16]
+        - text: Dark
+      - button "Dragon Dragon" [ref=e17] [cursor=pointer]:
+        - img "Dragon" [ref=e18]
+        - text: Dragon
+      - button "Electric Electric" [ref=e19] [cursor=pointer]:
+        - img "Electric" [ref=e20]
+        - text: Electric
+      - button "Fairy Fairy" [ref=e21] [cursor=pointer]:
+        - img "Fairy" [ref=e22]
+        - text: Fairy
+      - button "Fighting Fighting" [ref=e23] [cursor=pointer]:
+        - img "Fighting" [ref=e24]
+        - text: Fighting
+      - button "Fire Fire" [ref=e25] [cursor=pointer]:
+        - img "Fire" [ref=e26]
+        - text: Fire
+      - button "Flying Flying" [ref=e27] [cursor=pointer]:
+        - img "Flying" [ref=e28]
+        - text: Flying
+      - button "Ghost Ghost" [ref=e29] [cursor=pointer]:
+        - img "Ghost" [ref=e30]
+        - text: Ghost
+      - button "Grass Grass" [ref=e31] [cursor=pointer]:
+        - img "Grass" [ref=e32]
+        - text: Grass
+      - button "Ground Ground" [ref=e33] [cursor=pointer]:
+        - img "Ground" [ref=e34]
+        - text: Ground
+      - button "Ice Ice" [ref=e35] [cursor=pointer]:
+        - img "Ice" [ref=e36]
+        - text: Ice
+      - button "Normal Normal" [ref=e37] [cursor=pointer]:
+        - img "Normal" [ref=e38]
+        - text: Normal
+      - button "Poison Poison" [ref=e39] [cursor=pointer]:
+        - img "Poison" [ref=e40]
+        - text: Poison
+      - button "Psychic Psychic" [ref=e41] [cursor=pointer]:
+        - img "Psychic" [ref=e42]
+        - text: Psychic
+      - button "Rock Rock" [ref=e43] [cursor=pointer]:
+        - img "Rock" [ref=e44]
+        - text: Rock
+      - button "Steel Steel" [ref=e45] [cursor=pointer]:
+        - img "Steel" [ref=e46]
+        - text: Steel
+      - button "Water Water" [ref=e47] [cursor=pointer]:
+        - img "Water" [ref=e48]
+        - text: Water
+  - main [ref=e49]:
+    - generic [ref=e50] [cursor=pointer]:
+      - img "Springbun" [ref=e51]
+      - generic [ref=e52]: "#1 Springbun"
+      - img "Grass" [ref=e54]
+    - generic [ref=e55] [cursor=pointer]:
+      - img "Snapbun" [ref=e56]
+      - generic [ref=e57]: "#2 Snapbun"
+      - img "Grass" [ref=e59]
+    - generic [ref=e60] [cursor=pointer]:
+      - img "Faestalk" [ref=e61]
+      - generic [ref=e62]: "#3 Faestalk"
+      - generic [ref=e63]:
+        - img "Grass" [ref=e64]
+        - img "Fairy" [ref=e65]
+    - generic [ref=e66] [cursor=pointer]:
+      - img "Basilly" [ref=e67]
+      - generic [ref=e68]: "#4 Basilly"
+      - img "Fire" [ref=e70]
+    - generic [ref=e71] [cursor=pointer]:
+      - img "Knaviper" [ref=e72]
+      - generic [ref=e73]: "#5 Knaviper"
+      - img "Fire" [ref=e75]
+    - generic [ref=e76] [cursor=pointer]:
+      - img "Verkillion" [ref=e77]
+      - generic [ref=e78]: "#6 Verkillion"
+      - generic [ref=e79]:
+        - img "Fire" [ref=e80]
+        - img "Poison" [ref=e81]
+    - generic [ref=e82] [cursor=pointer]:
+      - img "Purluxe" [ref=e83]
+      - generic [ref=e84]: "#7 Purluxe"
+      - img "Water" [ref=e86]
+    - generic [ref=e87] [cursor=pointer]:
+      - img "Lyonite" [ref=e88]
+      - generic [ref=e89]: "#8 Lyonite"
+      - img "Water" [ref=e91]
+    - generic [ref=e92] [cursor=pointer]:
+      - img "Enkidros" [ref=e93]
+      - generic [ref=e94]: "#9 Enkidros"
+      - generic [ref=e95]:
+        - img "Water" [ref=e96]
+        - img "Ground" [ref=e97]
+    - generic [ref=e98] [cursor=pointer]:
+      - img "Possolo" [ref=e99]
+      - generic [ref=e100]: "#10 Possolo"
+      - img "Normal" [ref=e102]
+    - generic [ref=e103] [cursor=pointer]:
+      - img "Oposse" [ref=e104]
+      - generic [ref=e105]: "#11 Oposse"
+      - generic [ref=e106]:
+        - img "Normal" [ref=e107]
+        - img "Ghost" [ref=e108]
+    - generic [ref=e109] [cursor=pointer]:
+      - img "Tirakitsu" [ref=e110]
+      - generic [ref=e111]: "#12 Tirakitsu"
+      - generic [ref=e112]:
+        - img "Fairy" [ref=e113]
+        - img "Normal" [ref=e114]
+    - generic [ref=e115] [cursor=pointer]:
+      - img "Asterbat" [ref=e116]
+      - generic [ref=e117]: "#13 Asterbat"
+      - generic [ref=e118]:
+        - img "Fairy" [ref=e119]
+        - img "Flying" [ref=e120]
+    - generic [ref=e121] [cursor=pointer]:
+      - img "Wittern" [ref=e122]
+      - generic [ref=e123]: "#14 Wittern"
+      - img "Flying" [ref=e125]
+    - generic [ref=e126] [cursor=pointer]:
+      - img "Aerin" [ref=e127]
+      - generic [ref=e128]: "#15 Aerin"
+      - img "Flying" [ref=e130]
+    - generic [ref=e131] [cursor=pointer]:
+      - img "Zephyrin" [ref=e132]
+      - generic [ref=e133]: "#16 Zephyrin"
+      - img "Flying" [ref=e135]
+    - generic [ref=e136] [cursor=pointer]:
+      - img "Decaffin" [ref=e137]
+      - generic [ref=e138]: "#17 Decaffin"
+      - img "Grass" [ref=e140]
+    - generic [ref=e141] [cursor=pointer]:
+      - img "Espressurge" [ref=e142]
+      - generic [ref=e143]: "#18 Espressurge"
+      - generic [ref=e144]:
+        - img "Grass" [ref=e145]
+        - img "Electric" [ref=e146]
+    - generic [ref=e147] [cursor=pointer]:
+      - img "Grubblo" [ref=e148]
+      - generic [ref=e149]: "#19 Grubblo"
+      - generic [ref=e150]:
+        - img "Bug" [ref=e151]
+        - img "Normal" [ref=e152]
+    - generic [ref=e153] [cursor=pointer]:
+      - img "Tentrilo" [ref=e154]
+      - generic [ref=e155]: "#20 Tentrilo"
+      - generic [ref=e156]:
+        - img "Bug" [ref=e157]
+        - img "Normal" [ref=e158]
+    - generic [ref=e159] [cursor=pointer]:
+      - img "Rocadocio" [ref=e160]
+      - generic [ref=e161]: "#21 Rocadocio"
+      - generic [ref=e162]:
+        - img "Bug" [ref=e163]
+        - img "Normal" [ref=e164]
+    - generic [ref=e165] [cursor=pointer]:
+      - img "Nokoi" [ref=e166]
+      - generic [ref=e167]: "#22 Nokoi"
+      - img "Water" [ref=e169]
+    - generic [ref=e170] [cursor=pointer]:
+      - img "Yakoyza-Tiger" [ref=e171]
+      - generic [ref=e172]: "#23 Yakoyza"
+      - generic [ref=e173]:
+        - img "Water" [ref=e174]
+        - img "Fighting" [ref=e175]
+    - generic [ref=e176] [cursor=pointer]:
+      - img "Ribbeat" [ref=e177]
+      - generic [ref=e178]: "#24 Ribbeat"
+      - img "Fighting" [ref=e180]
+    - generic [ref=e181] [cursor=pointer]:
+      - img "Ventribbit" [ref=e182]
+      - generic [ref=e183]: "#25 Ventribbit"
+      - img "Fighting" [ref=e185]
+    - generic [ref=e186] [cursor=pointer]:
+      - img "Mochu" [ref=e187]
+      - generic [ref=e188]: "#26 Mochu"
+      - generic [ref=e189]:
+        - img "Ice" [ref=e190]
+        - img "Electric" [ref=e191]
+    - generic [ref=e192] [cursor=pointer]:
+      - img "Snochu" [ref=e193]
+      - generic [ref=e194]: "#27 Snochu"
+      - generic [ref=e195]:
+        - img "Ice" [ref=e196]
+        - img "Electric" [ref=e197]
+    - generic [ref=e198] [cursor=pointer]:
+      - img "Murkitty" [ref=e199]
+      - generic [ref=e200]: "#28 Murkitty"
+      - img "Dark" [ref=e202]
+    - generic [ref=e203] [cursor=pointer]:
+      - img "Tammalkin" [ref=e204]
+      - generic [ref=e205]: "#29 Tammalkin"
+      - generic [ref=e206]:
+        - img "Dark" [ref=e207]
+        - img "Fighting" [ref=e208]
+    - generic [ref=e209] [cursor=pointer]:
+      - img "Velyger" [ref=e210]
+      - generic [ref=e211]: "#30 Velyger"
+      - generic [ref=e212]:
+        - img "Dark" [ref=e213]
+        - img "Fighting" [ref=e214]
+    - generic [ref=e215] [cursor=pointer]:
+      - img "Lileef" [ref=e216]
+      - generic [ref=e217]: "#31 Lileef"
+      - img "Grass" [ref=e219]
+    - generic [ref=e220] [cursor=pointer]:
+      - img "Citradily" [ref=e221]
+      - generic [ref=e222]: "#32 Citradily"
+      - img "Grass" [ref=e224]
+    - generic [ref=e225] [cursor=pointer]:
+      - img "Krabuto" [ref=e226]
+      - generic [ref=e227]: "#33 Krabuto"
+      - generic [ref=e228]:
+        - img "Water" [ref=e229]
+        - img "Steel" [ref=e230]
+    - generic [ref=e231] [cursor=pointer]:
+      - img "Krabutops" [ref=e232]
+      - generic [ref=e233]: "#34 Krabutops"
+      - generic [ref=e234]:
+        - img "Water" [ref=e235]
+        - img "Steel" [ref=e236]
+    - generic [ref=e237] [cursor=pointer]:
+      - img "Filch"
+      - generic [ref=e238]: "#35 Filch"
+      - generic [ref=e239]:
+        - img "Normal" [ref=e240]
+        - img "Dark" [ref=e241]
+    - generic [ref=e242] [cursor=pointer]:
+      - img "Dodon" [ref=e243]
+      - generic [ref=e244]: "#36 Dodon"
+      - generic [ref=e245]:
+        - img "Rock" [ref=e246]
+        - img "Ground" [ref=e247]
+    - generic [ref=e248] [cursor=pointer]:
+      - img "Dodonodon"
+      - generic [ref=e249]: "#37 Dodonodon"
+      - generic [ref=e250]:
+        - img "Rock" [ref=e251]
+        - img "Ground" [ref=e252]
+    - generic [ref=e253] [cursor=pointer]:
+      - img "Tuatot"
+      - generic [ref=e254]: "#38 Tuatot"
+      - generic [ref=e255]:
+        - img "Rock" [ref=e256]
+        - img "Psychic" [ref=e257]
+    - generic [ref=e258] [cursor=pointer]:
+      - img "Tuatargon"
+      - generic [ref=e259]: "#39 Tuatargon"
+      - generic [ref=e260]:
+        - img "Rock" [ref=e261]
+        - img "Psychic" [ref=e262]
+    - generic [ref=e263] [cursor=pointer]:
+      - img "Balite"
+      - generic [ref=e264]: "#40 Balite"
+      - generic [ref=e265]:
+        - img "Ice" [ref=e266]
+        - img "Flying" [ref=e267]
+    - generic [ref=e268] [cursor=pointer]:
+      - img "Baleet"
+      - generic [ref=e269]: "#41 Baleet"
+      - generic [ref=e270]:
+        - img "Ice" [ref=e271]
+        - img "Flying" [ref=e272]
+    - generic [ref=e273] [cursor=pointer]:
+      - img "Balaast"
+      - generic [ref=e274]: "#42 Balaast"
+      - generic [ref=e275]:
+        - img "Ice" [ref=e276]
+        - img "Fighting" [ref=e277]
+    - generic [ref=e278] [cursor=pointer]:
+      - img "Cryocone"
+      - generic [ref=e279]: "#43 Cryocone"
+      - generic [ref=e280]:
+        - img "Ice" [ref=e281]
+        - img "Poison" [ref=e282]
+    - generic [ref=e283] [cursor=pointer]:
+      - img "Cryoconda"
+      - generic [ref=e284]: "#44 Cryoconda"
+      - generic [ref=e285]:
+        - img "Ice" [ref=e286]
+        - img "Poison" [ref=e287]
+    - generic [ref=e288] [cursor=pointer]:
+      - img "Cobblin"
+      - generic [ref=e289]: "#45 Cobblin"
+      - img "Rock" [ref=e291]
+    - generic [ref=e292] [cursor=pointer]:
+      - img "Grumblock"
+      - generic [ref=e293]: "#46 Grumblock"
+      - img "Rock" [ref=e295]
+    - generic [ref=e296] [cursor=pointer]:
+      - img "Ragnarock"
+      - generic [ref=e297]: "#47 Ragnarock"
+      - generic [ref=e298]:
+        - img "Rock" [ref=e299]
+        - img "Fairy" [ref=e300]
+    - generic [ref=e301] [cursor=pointer]:
+      - img "Battrey"
+      - generic [ref=e302]: "#48 Battrey"
+      - generic [ref=e303]:
+        - img "Electric" [ref=e304]
+        - img "Flying" [ref=e305]
+    - generic [ref=e306] [cursor=pointer]:
+      - img "Vladibolt"
+      - generic [ref=e307]: "#49 Vladibolt"
+      - generic [ref=e308]:
+        - img "Electric" [ref=e309]
+        - img "Flying" [ref=e310]
+    - generic [ref=e311] [cursor=pointer]:
+      - img "Phalankton"
+      - generic [ref=e312]: "#50 Phalankton"
+      - img "Poison" [ref=e314]
+    - generic [ref=e315] [cursor=pointer]:
+      - img "Shardling"
+      - generic [ref=e316]: "#51 Shardling"
+      - generic [ref=e317]:
+        - img "Ghost" [ref=e318]
+        - img "Rock" [ref=e319]
+    - generic [ref=e320] [cursor=pointer]:
+      - img "Crucigem"
+      - generic [ref=e321]: "#52 Crucigem"
+      - generic [ref=e322]:
+        - img "Ghost" [ref=e323]
+        - img "Rock" [ref=e324]
+    - generic [ref=e325] [cursor=pointer]:
+      - img "Scrithymn"
+      - generic [ref=e326]: "#53 Scrithymn"
+      - img "Fairy" [ref=e328]
+    - generic [ref=e329] [cursor=pointer]:
+      - img "Blazephemy"
+      - generic [ref=e330]: "#54 Blazephemy"
+      - generic [ref=e331]:
+        - img "Fairy" [ref=e332]
+        - img "Fire" [ref=e333]
+    - generic [ref=e334] [cursor=pointer]:
+      - img "Ceraphinx"
+      - generic [ref=e335]: "#55 Ceraphinx"
+      - generic [ref=e336]:
+        - img "Ground" [ref=e337]
+        - img "Fairy" [ref=e338]
+    - generic [ref=e339] [cursor=pointer]:
+      - img "Censerpent"
+      - generic [ref=e340]: "#56 Censerpent"
+      - generic [ref=e341]:
+        - img "Poison" [ref=e342]
+        - img "Dark" [ref=e343]
+    - generic [ref=e344] [cursor=pointer]:
+      - img "Roignon"
+      - generic [ref=e345]: "#57 Roignon"
+      - generic [ref=e346]:
+        - img "Grass" [ref=e347]
+        - img "Fairy" [ref=e348]
+    - generic [ref=e349] [cursor=pointer]:
+      - img "Scallahad"
+      - generic [ref=e350]: "#58 Scallahad"
+      - generic [ref=e351]:
+        - img "Grass" [ref=e352]
+        - img "Fairy" [ref=e353]
+    - generic [ref=e354] [cursor=pointer]:
+      - img "Moosenge"
+      - generic [ref=e355]: "#59 Moosenge"
+      - generic [ref=e356]:
+        - img "Normal" [ref=e357]
+        - img "Rock" [ref=e358]
+    - generic [ref=e359] [cursor=pointer]:
+      - img "Bitbyte"
+      - generic [ref=e360]: "#60 Bitbyte"
+      - img "Electric" [ref=e362]
+    - generic [ref=e363] [cursor=pointer]:
+      - img "Cathogen"
+      - generic [ref=e364]: "#61 Cathogen"
+      - img "Electric" [ref=e366]
+    - generic [ref=e367] [cursor=pointer]:
+      - img "Ramnant"
+      - generic [ref=e368]: "#62 Ramnant"
+      - generic [ref=e369]:
+        - img "Electric" [ref=e370]
+        - img "Ghost" [ref=e371]
+    - generic [ref=e372] [cursor=pointer]:
+      - img "Logomorph"
+      - generic [ref=e373]: "#63 Logomorph"
+      - img "Normal" [ref=e375]
+    - generic [ref=e376] [cursor=pointer]:
+      - img "Ornidrone"
+      - generic [ref=e377]: "#64 Ornidrone"
+      - generic [ref=e378]:
+        - img "Steel" [ref=e379]
+        - img "Flying" [ref=e380]
+    - generic [ref=e381] [cursor=pointer]:
+      - img "Velostrike"
+      - generic [ref=e382]: "#65 Velostrike"
+      - generic [ref=e383]:
+        - img "Steel" [ref=e384]
+        - img "Flying" [ref=e385]
+    - generic [ref=e386] [cursor=pointer]:
+      - img "Gunraptor"
+      - generic [ref=e387]: "#66 Gunraptor"
+      - generic [ref=e388]:
+        - img "Steel" [ref=e389]
+        - img "Flying" [ref=e390]
+    - generic [ref=e391] [cursor=pointer]:
+      - img "Jellien"
+      - generic [ref=e392]: "#67 Jellien"
+      - generic [ref=e393]:
+        - img "Water" [ref=e394]
+        - img "Psychic" [ref=e395]
+    - generic [ref=e396] [cursor=pointer]:
+      - img "Encephid"
+      - generic [ref=e397]: "#68 Encephid"
+      - generic [ref=e398]:
+        - img "Water" [ref=e399]
+        - img "Psychic" [ref=e400]
+    - generic [ref=e401] [cursor=pointer]:
+      - img "Monolithid"
+      - generic [ref=e402]: "#69 Monolithid"
+      - generic [ref=e403]:
+        - img "Water" [ref=e404]
+        - img "Psychic" [ref=e405]
+    - generic [ref=e406] [cursor=pointer]:
+      - img "Marazcal"
+      - generic [ref=e407]: "#70 Marazcal"
+      - img "Grass" [ref=e409]
+    - generic [ref=e410] [cursor=pointer]:
+      - img "Iguavadon"
+      - generic [ref=e411]: "#71 Iguavadon"
+      - generic [ref=e412]:
+        - img "Grass" [ref=e413]
+        - img "Fire" [ref=e414]
+    - generic [ref=e415] [cursor=pointer]:
+      - img "Tortarma-Solar"
+      - generic [ref=e416]: "#72 Tortarma"
+      - img "Fire" [ref=e418]
+    - generic [ref=e419] [cursor=pointer]:
+      - img "Tortality"
+      - generic [ref=e420]: "#73 Tortality"
+      - generic [ref=e421]:
+        - img "Fire" [ref=e422]
+        - img "Ice" [ref=e423]
+    - generic [ref=e424] [cursor=pointer]:
+      - img "Kheprini"
+      - generic [ref=e425]: "#74 Kheprini"
+      - generic [ref=e426]:
+        - img "Ground" [ref=e427]
+        - img "Dark" [ref=e428]
+    - generic [ref=e429] [cursor=pointer]:
+      - img "Servankh"
+      - generic [ref=e430]: "#75 Servankh"
+      - generic [ref=e431]:
+        - img "Ground" [ref=e432]
+        - img "Dark" [ref=e433]
+    - generic [ref=e434] [cursor=pointer]:
+      - img "Pharomancy"
+      - generic [ref=e435]: "#76 Pharomancy"
+      - generic [ref=e436]:
+        - img "Ground" [ref=e437]
+        - img "Dark" [ref=e438]
+    - generic [ref=e439] [cursor=pointer]:
+      - img "Furnawurm"
+      - generic [ref=e440]: "#77 Furnawurm"
+      - generic [ref=e441]:
+        - img "Steel" [ref=e442]
+        - img "Ground" [ref=e443]
+    - generic [ref=e444] [cursor=pointer]:
+      - img "Selky"
+      - generic [ref=e445]: "#78 Selky"
+      - generic [ref=e446]:
+        - img "Water" [ref=e447]
+        - img "Ice" [ref=e448]
+    - generic [ref=e449] [cursor=pointer]:
+      - img "Lumajesty"
+      - generic [ref=e450]: "#79 Lumajesty"
+      - generic [ref=e451]:
+        - img "Water" [ref=e452]
+        - img "Electric" [ref=e453]
+    - generic [ref=e454] [cursor=pointer]:
+      - img "Shuckler"
+      - generic [ref=e455]: "#80 Shuckler"
+      - generic [ref=e456]:
+        - img "Bug" [ref=e457]
+        - img "Steel" [ref=e458]
+    - generic [ref=e459] [cursor=pointer]:
+      - img "Smeltmor"
+      - generic [ref=e460]: "#81 Smeltmor"
+      - generic [ref=e461]:
+        - img "Fire" [ref=e462]
+        - img "Steel" [ref=e463]
+    - generic [ref=e464] [cursor=pointer]:
+      - img "Pyrant"
+      - generic [ref=e465]: "#82 Pyrant"
+      - generic [ref=e466]:
+        - img "Bug" [ref=e467]
+        - img "Fire" [ref=e468]
+    - generic [ref=e469] [cursor=pointer]:
+      - img "Patopod"
+      - generic [ref=e470]: "#83 Patopod"
+      - generic [ref=e471]:
+        - img "Dragon" [ref=e472]
+        - img "Grass" [ref=e473]
+    - generic [ref=e474] [cursor=pointer]:
+      - img "Nymphlora"
+      - generic [ref=e475]: "#84 Nymphlora"
+      - generic [ref=e476]:
+        - img "Dragon" [ref=e477]
+        - img "Grass" [ref=e478]
+    - generic [ref=e479] [cursor=pointer]:
+      - img "Idagon"
+      - generic [ref=e480]: "#85 Idagon"
+      - generic [ref=e481]:
+        - img "Fighting" [ref=e482]
+        - img "Psychic" [ref=e483]
+    - generic [ref=e484] [cursor=pointer]:
+      - img "Libradon"
+      - generic [ref=e485]: "#86 Libradon"
+      - generic [ref=e486]:
+        - img "Fighting" [ref=e487]
+        - img "Psychic" [ref=e488]
+    - generic [ref=e489] [cursor=pointer]:
+      - img "Suprion"
+      - generic [ref=e490]: "#87 Suprion"
+      - generic [ref=e491]:
+        - img "Fighting" [ref=e492]
+        - img "Psychic" [ref=e493]
+    - generic [ref=e494] [cursor=pointer]:
+      - img "Larvos"
+      - generic [ref=e495]: "#88 Larvos"
+      - img "Bug" [ref=e497]
+    - generic [ref=e498] [cursor=pointer]:
+      - img "Syrinsect"
+      - generic [ref=e499]: "#89 Syrinsect"
+      - generic [ref=e500]:
+        - img "Bug" [ref=e501]
+        - img "Dragon" [ref=e502]
+    - generic [ref=e503] [cursor=pointer]:
+      - img "Stratoclysm"
+      - generic [ref=e504]: "#90 Stratoclysm"
+      - generic [ref=e505]:
+        - img "Bug" [ref=e506]
+        - img "Dragon" [ref=e507]
+    - generic [ref=e508] [cursor=pointer]:
+      - img "Paracabra"
+      - generic [ref=e509]: "#91 Paracabra"
+      - generic [ref=e510]:
+        - img "Dark" [ref=e511]
+        - img "Ghost" [ref=e512]
+    - generic [ref=e513] [cursor=pointer]:
+      - img "Saskrypt"
+      - generic [ref=e514]: "#92 Saskrypt"
+      - generic [ref=e515]:
+        - img "Poison" [ref=e516]
+        - img "Ghost" [ref=e517]
+    - generic [ref=e518] [cursor=pointer]:
+      - img "Devile"
+      - generic [ref=e519]: "#93 Devile"
+      - generic [ref=e520]:
+        - img "Flying" [ref=e521]
+        - img "Ghost" [ref=e522]
+    - generic [ref=e523] [cursor=pointer]:
+      - img "Azamoth"
+      - generic [ref=e524]: "#94 Azamoth"
+      - generic [ref=e525]:
+        - img "Bug" [ref=e526]
+        - img "Ghost" [ref=e527]
+    - generic [ref=e528] [cursor=pointer]:
+      - img "Albythos"
+      - generic [ref=e529]: "#95 Albythos"
+      - generic [ref=e530]:
+        - img "Ground" [ref=e531]
+        - img "Dragon" [ref=e532]
+    - generic [ref=e533] [cursor=pointer]:
+      - img "Xerasige"
+      - generic [ref=e534]: "#96 Xerasige"
+      - generic [ref=e535]:
+        - img "Psychic" [ref=e536]
+        - img "Dragon" [ref=e537]
+    - generic [ref=e538] [cursor=pointer]:
+      - img "Jeneosis"
+      - generic [ref=e539]: "#97 Jeneosis"
+      - generic [ref=e540]:
+        - img "Fairy" [ref=e541]
+        - img "Ghost" [ref=e542]
+    - generic [ref=e543] [cursor=pointer]:
+      - img "Xophis"
+      - generic [ref=e544]: "#98 Xophis"
+      - generic [ref=e545]:
+        - img "Fairy" [ref=e546]
+        - img "Dragon" [ref=e547]
+    - generic [ref=e548] [cursor=pointer]:
+      - img "Ravenger"
+      - generic [ref=e549]: "#99 Ravenger"
+      - generic [ref=e550]:
+        - img "Electric" [ref=e551]
+        - img "Steel" [ref=e552]
+    - generic [ref=e553] [cursor=pointer]:
+      - img "Sacrabell-Hymn"
+      - generic [ref=e554]: "#100 Sacrabell"
+      - img "Dark" [ref=e556]
+  - contentinfo [ref=e557]:
+    - paragraph [ref=e558]: © 2024 Pokémon Project. All rights reserved. This is a fan-made project and is not affiliated with or endorsed by Pokémon, Nintendo, Game Freak, or any related entities.
+  - button "Back to top"
