@@ -1,33 +1,42 @@
-/* theme.css — the Instagram-carousel look, layered over Andela's styles.css.
+/* theme.css — the site's look, layered over Andela's styles.css.
  *
- * styles.css still owns layout and behaviour; this file only restyles:
- *   - navy type-tinted backdrop (+ a blurred habitat scene on card pages)
- *   - yellow slanted name banner with a halftone tail
- *   - liquid-glass panels: real backdrop blur, faint hairline rim
- *   - gold double frame with diamond studs around the viewport
- *   - art sits straight on the backdrop with a soft drop shadow (no stroke)
- *   - SmileySans for display type, diamond bullets, gold labels
- * Always dark: the carousel look has no light variant, so the toggle is hidden.
+ * styles.css still owns layout and spacing; this file only restyles:
+ *   - navy type-tinted backdrop (+ a blurred habitat photo on card pages)
+ *   - titles floating in off-white over the backdrop, dex number in muted gold
+ *   - light liquid-glass panels: translucent, wide backdrop blur, hairline rim
+ *   - art sits straight on the backdrop with a soft drop shadow
+ *   - type: Plus Jakarta Sans (titles), DM Sans (UI + numbers),
+ *     Instrument Serif italic (the "The ___ Pokémon" line)
+ * Always dark, so the light/dark toggle is hidden.
  */
 
 @font-face {
-  font-family: "SmileySans";
-  src: url(assets/fonts/SmileySans-Oblique-latin.woff2) format("woff2");
+  font-family: "Plus Jakarta Sans";
+  src: url(assets/fonts/PlusJakartaSans-latin.woff2) format("woff2");
+  font-weight: 500 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Instrument Serif";
+  src: url(assets/fonts/InstrumentSerif-Italic-latin.woff2) format("woff2");
+  font-style: italic;
+  font-weight: 400;
   font-display: swap;
 }
 
 :root,
 html.dark-mode,
 body.dark-mode {
-  --gold: #ffd200;
-  --gold-soft: rgba(255, 210, 0, 0.55);
-  --paper: #f4f1e8;
-  --muted: #c9c7d8;
+  --gold: #fbbf24;
+  --gold-soft: rgba(251, 191, 36, 0.5);
+  --paper: #f8fafc;
+  --muted: #cbd2df;
   --navy: #1b1d38;
-  --glass: rgba(14, 16, 36, 0.42);
-  --glass-strong: rgba(14, 16, 36, 0.6);
-  --rim: rgba(255, 255, 255, 0.14);
-  --display: "SmileySans", "Arial Narrow", sans-serif;
+  --glass: rgba(255, 255, 255, 0.06);
+  --rim: rgba(255, 255, 255, 0.12);
+  --display: "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+  --ui: "DM Sans", system-ui, sans-serif;
+  --serif: "Instrument Serif", Georgia, serif;
 
   /* Same palette as the carousel generator, so the two match. */
   --type-normal: #c3c29b;
@@ -96,15 +105,12 @@ body#card-page.dark-mode {
   will-change: transform;
 }
 
-/* Navy -> dusk -> slate -> navy, tinted from type 1 (top) to type 2 (bottom),
-   with the halftone dot bands of the original cards. */
+/* Navy -> dusk -> slate -> navy, tinted from type 1 (top) to type 2 (bottom). */
 .page-bg::before {
   content: "";
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.32) 0 40%, transparent 41%) 0 -18px / 70px 70px repeat-x,
-    radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.32) 0 40%, transparent 41%) 0 calc(100% + 18px) / 70px 70px repeat-x,
     linear-gradient(180deg,
       color-mix(in oklab, #1e1e34 76%, var(--t1)) 0%,
       color-mix(in oklab, #463a54 64%, var(--t1)) 24%,
@@ -150,45 +156,6 @@ body#card-page.dark-mode {
   display: none;
 }
 
-/* ---------------------------------------------------------------- frame */
-
-/* Gold double rule with diamond studs, inset from the viewport edge. */
-.gold-frame {
-  position: fixed;
-  inset: 10px;
-  z-index: 50;
-  pointer-events: none;
-  transform: translateZ(0);       /* own layer: stays put while scrolling */
-  will-change: transform;
-  border: 2px solid rgba(255, 210, 0, 0.85);
-  border-radius: 14px;
-}
-.gold-frame::before {
-  content: "";
-  position: absolute;
-  inset: 7px;
-  border: 1px dashed rgba(255, 226, 120, 0.35);
-  border-radius: 8px;
-}
-.gold-frame i {
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  background: var(--gold);
-  transform: translate(-50%, -50%) rotate(45deg);
-  box-shadow: inset 0 0 0 4px var(--gold), inset 0 0 0 7px #1a1420;
-}
-.gold-frame i:nth-child(1) { left: 0; top: 0; }
-.gold-frame i:nth-child(2) { left: 100%; top: 0; }
-.gold-frame i:nth-child(3) { left: 0; top: 100%; }
-.gold-frame i:nth-child(4) { left: 100%; top: 100%; }
-.gold-frame i:nth-child(5) { left: 50%; top: 0; }
-.gold-frame i:nth-child(6) { left: 50%; top: 100%; }
-@media (max-width: 600px) {
-  .gold-frame { inset: 6px; }
-  .gold-frame i:nth-child(n + 5) { display: none; }
-}
-
 /* ---------------------------------------------------------------- glass */
 
 .glass,
@@ -202,23 +169,32 @@ body#card-page.dark-mode {
 .measurement-pill,
 .no-results {
   background: var(--glass) !important;
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
   border: 1px solid var(--rim) !important;
-  border-top-color: rgba(255, 255, 255, 0.24) !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22) !important;
+  border-top-color: rgba(255, 255, 255, 0.2) !important;
+  box-shadow: none !important;
   color: var(--paper);
 }
 
 /* ---------------------------------------------------------------- type */
 
+/* Titles: wide, upright, calm. */
 h1,
 h2,
 .name,
+.no-results-title {
+  font-family: var(--display) !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+  text-transform: none !important;
+}
+
+/* UI, stats and numbers: normal-width sans, numbers in even columns. */
 .dex-num,
 .stat-name,
 .stat-value,
-.pokemon-title,
 .evo-node-name,
 .evo-method,
 .pokemon-ability,
@@ -226,9 +202,20 @@ h2,
 .arrow,
 .result-count-badge,
 .type-filter-btn,
-.form-switch-button {
-  font-family: var(--display) !important;
-  letter-spacing: 0.01em;
+.form-switch-button,
+.pokemon-sigmove,
+.hub-link {
+  font-family: var(--ui) !important;
+  font-style: normal !important;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+}
+
+/* "The ___ Pokémon": a small editorial serif touch. */
+.pokemon-title {
+  font-family: var(--serif) !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
 }
 
 .dex-num {
@@ -247,39 +234,32 @@ h2,
   transform: rotate(45deg) translateY(-0.12em);
 }
 
-/* ---------------------------------------------------------------- banner */
+/* ---------------------------------------------------------------- titles */
 
-/* The carousel's slanted yellow name banner with a halftone tail. */
+/* Region header: a frosted strip with the title floating in off-white. */
 header .banner-main {
   height: auto !important;
-  padding: 22px 0 16px !important;
+  padding: 20px 0 16px !important;
   justify-content: flex-start;
   gap: 12px;
-  background: linear-gradient(180deg, rgba(10, 12, 26, 0.6), rgba(10, 12, 26, 0.35)) !important;
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
+  background: linear-gradient(180deg, rgba(10, 12, 26, 0.55), rgba(10, 12, 26, 0.3)) !important;
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
   border: 0 !important;
   border-bottom: 1px solid var(--rim) !important;
   box-shadow: none !important;
 }
 header .banner-main h1,
 .title-type-container h2 {
-  display: inline-block;
-  position: relative;
   margin: 0;
-  padding: 0.12em 1.1em 0.1em clamp(22px, 5vw, 64px);
-  color: #111 !important;
-  font-family: var(--display) !important;
-  font-style: normal;
-  font-weight: 400;
-  text-transform: none;
-  background: linear-gradient(90deg, #ffb800, #ffdf1a);
-  clip-path: polygon(0 0, 100% 0, calc(100% - 0.55em) 100%, 0 100%);
-  filter: drop-shadow(0 8px 0 rgba(0, 0, 0, 0.3));
+  padding: 0 0 0 clamp(22px, 5vw, 64px);
+  color: var(--paper) !important;
+  background: none !important;
+  -webkit-text-stroke: 0;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
 }
 header .banner-main h1 {
-  font-size: clamp(2rem, 5.5vw, 3.6rem) !important;
-  -webkit-text-stroke: 0;
+  font-size: clamp(1.8rem, 4.2vw, 2.8rem) !important;
   margin-right: auto !important;
 }
 header .search-toggle-btn {
@@ -288,23 +268,16 @@ header .search-toggle-btn {
   width: 2.6rem;
   height: 2.6rem;
 }
-header .banner-main h1::after,
-.title-type-container h2::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 100%;
-  width: 3.2em;
-  margin-left: -0.9em;
-  background: radial-gradient(circle, #ffdc1f 0 38%, transparent 40%) 0 0 / 0.4em 0.4em;
-  -webkit-mask: linear-gradient(90deg, #000, transparent);
-  mask: linear-gradient(90deg, #000, transparent);
-  transform: skewX(-22deg);
-}
+
+/* Card title: dex number sits small above the name, in muted gold. */
 .title-type-container h2 .dex-num {
-  color: #111 !important;
-  opacity: 0.55;
+  display: block;
+  margin-bottom: 0.2em;
+  font-size: 0.34em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--gold) !important;
+  opacity: 1;
 }
 
 /* ---------------------------------------------------------------- art */
@@ -340,12 +313,12 @@ header .banner-main h1::after,
   background: none !important;
 }
 .pokemon .name {
-  font-size: 1.35rem !important;
+  font-size: 1.05rem !important;
   color: var(--paper) !important;
 }
 .pokemon:hover,
 .pokemon:focus-visible {
-  border-color: rgba(255, 210, 0, 0.6) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
   transform: translateY(-4px);
 }
 .pokemon .pokemon-image.missing-art {
@@ -389,8 +362,7 @@ header .banner-main h1::after,
 
 /* Region-hub link in the grid header, beside the search button. */
 .hub-link {
-  font-family: var(--display);
-  font-size: 1.15rem;
+  font-size: 0.95rem;
   color: var(--paper);
   text-decoration: none;
   padding: 0.35em 0.9em;
@@ -399,7 +371,7 @@ header .banner-main h1::after,
   border: 1px solid var(--rim);
   white-space: nowrap;
 }
-.hub-link:hover { color: #111; background: var(--gold); }
+.hub-link:hover { color: #111; background: var(--paper); }
 @media (max-width: 600px) {
   .hub-link { font-size: 0; padding: 0.5em 0.8em; }
   .hub-link::before { content: "\2190"; font-size: 1.1rem; }
@@ -422,11 +394,13 @@ header .banner-main h1::after,
 }
 
 .title-type-container h2 {
-  font-size: clamp(2.2rem, 6vw, 4rem) !important;
+  font-size: clamp(2.2rem, 5vw, 3.6rem) !important;
 }
 .pokemon-title {
-  color: var(--paper) !important;
-  font-size: 1.5rem !important;
+  color: var(--muted) !important;
+  font-size: 1.45rem !important;
+  padding-left: clamp(22px, 5vw, 64px) !important;  /* line up under the name */
+  margin-left: 0 !important;
 }
 
 /* Andela's ring behind the art -> invisible; the habitat does that job now. */
@@ -507,7 +481,6 @@ header .banner-main h1::after,
 
 .pokemon-sigmove {
   color: var(--paper) !important;
-  font-family: var(--display);
 }
 .pokemon-sigmove-description {
   color: var(--muted) !important;
@@ -524,8 +497,8 @@ header .banner-main h1::after,
   content: "";
   position: absolute;
   inset: 12%;
-  background: rgba(255, 210, 0, 0.16);
-  border: 2px solid rgba(255, 210, 0, 0.85);
+  background: rgba(251, 191, 36, 0.12);
+  border: 1.5px solid rgba(251, 191, 36, 0.7);
   transform: rotate(45deg);
   z-index: 0;
 }
@@ -558,20 +531,17 @@ header .banner-main h1::after,
   border-top-color: var(--rim) !important;
 }
 .no-results-title {
-  font-family: var(--display) !important;
-  font-size: 1.8rem !important;
-  letter-spacing: 0.01em !important;
-  text-transform: none !important;
+  font-size: 1.6rem !important;
 }
 .no-results-mark {
   color: var(--gold) !important;
 }
 
-/* Megas/Xenos: Andela clips a gradient into the title text; keep the yellow
-   banner and dark text like every other card instead. */
+/* Megas/Xenos: Andela clips a gradient into the title text; keep the plain
+   off-white title like every other card instead. */
 body.mega-pokemon .title-type-container h2 {
-  background: linear-gradient(90deg, #ffb800, #ffdf1a) !important;
+  background: none !important;
   -webkit-background-clip: border-box !important;
   background-clip: border-box !important;
-  color: #111 !important;
+  color: var(--paper) !important;
 }
