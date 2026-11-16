@@ -1,0 +1,626 @@
+/* andela.css — Andela 2.0: an editorial field guide.
+ *
+ * Modern digital product + natural habitat + Andela's own identity. Layered
+ * over shared/styles.css (which still owns behaviour: search, filters, tile
+ * reveal) and loaded ONLY by andela/index.html, so Lacadia and Misc are
+ * untouched.
+ *
+ *   hero    full-bleed habitat photograph, the region's name in a large
+ *           high-contrast serif, a thin italic line beside it, one Pokémon
+ *           standing in the scene
+ *   paper   cream encyclopedia sheet: A–Z index on the left (serif letters,
+ *           tracked caps names), the Pokédex grid on the right
+ *   tiles   each Pokémon over a crisp photo of its habitat, with one large
+ *           rounded corner; bold compact name, original type icons
+ *
+ * Type: Playfair Display (display only: hero + index letters), Syne (section
+ * titles and names), DM Sans (everything else, tabular numbers).
+ */
+
+@font-face {
+  font-family: "Playfair Display";
+  src: url(../shared/assets/fonts/PlayfairDisplay-latin.woff2) format("woff2");
+  font-weight: 400 600;
+  font-display: swap;
+}
+
+:root {
+  --forest: #182820;
+  --moss: #304b3b;
+  --gold: #d8b95f;
+  --mist: #e8e8dd;
+  --paper: #f7f7f2;
+  --cream: #f3efdc;          /* hero type, a touch warmer than paper */
+  --ink: #1d2b23;
+  --muted: #5c6b61;
+  --line: rgba(24, 40, 32, 0.13);
+  --night: #111a15;          /* page behind the sheet */
+
+  --serif: "Playfair Display", Georgia, serif;
+  --head: "Syne", "DM Sans", sans-serif;
+  --sans: "DM Sans", system-ui, sans-serif;
+
+  --sheet-radius: 28px;
+  --gutter: clamp(20px, 4vw, 56px);
+}
+
+/* ---------------------------------------------------------------- page */
+
+body.andela2 {
+  margin: 0;
+  display: block;
+  min-height: 100vh;
+  padding: clamp(0px, 1.4vw, 18px);
+  background: var(--night) !important;
+  background-image: none !important;
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+body.andela2 .toggle-dark-mode {
+  display: none;
+}
+
+/* Tracked small caps: the encyclopedia's labelling voice. */
+.eyebrow {
+  margin: 0 0 1.1rem;
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+/* ---------------------------------------------------------------- hero */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: min(88vh, 860px);
+  max-width: 1480px;
+  margin: 0 auto;
+  border-radius: var(--sheet-radius) var(--sheet-radius) 0 0;
+  color: var(--cream);
+  background:
+    linear-gradient(90deg, rgba(10, 18, 13, 0.55) 0%, rgba(10, 18, 13, 0.1) 45%, rgba(10, 18, 13, 0.35) 100%),
+    linear-gradient(180deg, rgba(10, 18, 13, 0.35) 0%, transparent 30%, transparent 60%, rgba(10, 18, 13, 0.55) 100%),
+    url("data/scenes/hero.jpg") center / cover no-repeat,
+    var(--forest);
+}
+
+.hero-nav {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(20px, 3vw, 36px) var(--gutter);
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--cream);
+  text-decoration: none;
+}
+.brand-mark {
+  width: 0.62em;
+  height: 0.62em;
+  background: var(--gold);
+  transform: rotate(45deg);
+}
+
+/* "LACADIA" with a long hairline arrow under it, like the reference's nav. */
+.hero-link {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.55rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--cream);
+  text-decoration: none;
+}
+.hero-link-rule {
+  position: relative;
+  width: 8.5rem;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.3s ease;
+}
+.hero-link-rule::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -3px;
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  transform: rotate(45deg);
+}
+.hero-link:hover .hero-link-rule {
+  width: 10.5rem;
+}
+
+.hero-mon {
+  position: absolute;
+  z-index: 1;
+  left: clamp(-30px, 1.5vw, 40px);
+  bottom: -2%;
+  height: min(80%, 660px);
+  width: auto;
+  filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.45));
+}
+
+/* The region's name, set like a book cover: the italic line hangs to its left
+   on the baseline. */
+.hero-title {
+  position: absolute;
+  z-index: 2;
+  right: var(--gutter);
+  bottom: clamp(70px, 12vh, 130px);
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(14px, 2vw, 28px);
+}
+.hero-sub {
+  margin: 0 0 1.4em;
+  font-family: var(--sans);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.15rem, 2vw, 1.85rem);
+  line-height: 1.3;
+  text-align: right;
+}
+.hero-word {
+  position: relative;
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(5rem, 15vw, 13.5rem);
+  line-height: 0.82;
+  letter-spacing: -0.02em;
+}
+/* A small four-point sparkle in gold, the reference's star over the "i". */
+.hero-spark {
+  position: absolute;
+  top: 0.04em;
+  right: -0.06em;
+  width: 0.2em;
+  height: 0.2em;
+  background: var(--gold);
+  clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+}
+
+.hero-scroll {
+  position: absolute;
+  z-index: 3;
+  left: var(--gutter);
+  bottom: clamp(22px, 3vw, 34px);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--cream);
+  text-decoration: none;
+}
+.hero-scroll::after {
+  content: "";
+  width: 3.5rem;
+  height: 1px;
+  background: currentColor;
+}
+
+/* ---------------------------------------------------------------- paper */
+
+.paper {
+  max-width: 1480px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(200px, 250px) minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 64px);
+  padding: clamp(36px, 5vw, 64px) var(--gutter) clamp(48px, 6vw, 88px);
+  background: var(--paper);
+  border-radius: 0 0 var(--sheet-radius) var(--sheet-radius);
+}
+
+/* A–Z index: serif capitals, tracked caps names. */
+.az {
+  position: sticky;
+  top: 24px;
+  align-self: start;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  padding-right: 8px;
+}
+.az-letter {
+  margin: 1.4rem 0 0.5rem;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 2.3rem;
+  line-height: 1;
+  color: var(--ink);
+}
+.az-letter:first-child {
+  margin-top: 0.4rem;
+}
+.az-list a {
+  display: block;
+  padding: 0.28rem 0;
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.az-list a:hover,
+.az-list a:focus-visible {
+  color: var(--moss);
+  transform: translateX(3px);
+}
+.az-list a .az-num {
+  margin-left: 0.6em;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.paper-main {
+  min-width: 0;
+}
+
+.section-head {
+  position: relative;
+  margin-bottom: 1.6rem;
+}
+.section-title {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-family: var(--head);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.section-head--sub {
+  margin-top: clamp(56px, 7vw, 96px);
+}
+/* The organic moss line from the reference, sweeping behind the heading. */
+.vine {
+  position: absolute;
+  z-index: 0;
+  right: -3%;
+  top: 18px;
+  width: 46%;
+  height: 90px;
+  overflow: visible;
+  pointer-events: none;
+}
+.vine path {
+  fill: none;
+  stroke: var(--moss);
+  stroke-width: 7;
+  stroke-linecap: round;
+  opacity: 0.85;
+}
+
+/* ---------------------------------------------------------------- search */
+
+/* Always open here, as a clean solid surface (styles.css collapses it). */
+body.andela2 .search-filter-bar,
+body.andela2 .search-filter-bar.open {
+  position: relative;
+  top: auto;
+  z-index: 2;
+  width: 100%;
+  max-height: none;
+  overflow: visible;
+  align-items: stretch;
+  gap: 14px;
+  margin: 0 0 32px;
+  padding: 14px 16px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: none;
+}
+body.andela2 .search-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+body.andela2 .search-icon {
+  color: var(--muted);
+}
+body.andela2 .search-input {
+  flex: 1;
+  border: 0;
+  background: none;
+  font-family: var(--sans);
+  font-size: 1rem;
+  color: var(--ink);
+  outline: none;
+  box-shadow: none;
+  padding: 6px 0;
+}
+body.andela2 .search-input::placeholder {
+  color: var(--muted);
+}
+body.andela2 .result-count-badge {
+  background: none;
+  clip-path: none;
+  border: 0;
+  padding: 0;
+  font-family: var(--sans);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+body.andela2 .type-filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 6px;
+}
+body.andela2 .type-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px 5px 6px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  box-shadow: none;
+  clip-path: none;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+body.andela2 .type-filter-btn img {
+  width: 18px;
+  height: 18px;
+}
+body.andela2 .type-filter-btn:hover {
+  border-color: var(--moss);
+}
+body.andela2 .type-filter-btn.active {
+  background: var(--forest);
+  border-color: var(--forest);
+  color: var(--paper);
+}
+
+/* ---------------------------------------------------------------- tiles */
+
+body.andela2 #pokedex,
+body.andela2 #megadex {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 34px 22px;
+  min-height: 0;          /* styles.css's min-height:100% stretched the rows apart */
+  align-content: start;
+}
+
+body.andela2 .pokemon {
+  align-items: stretch;
+  padding: 0;
+  text-align: left;
+  color: var(--ink);
+}
+body.andela2 .pokemon::before {
+  display: none;                     /* Andela's tile frame */
+}
+
+/* The art sits on a crisp photo of its habitat; one big rounded corner. */
+body.andela2 .pokemon-art {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 14px 14px 14px 76px;
+  background:
+    linear-gradient(180deg, rgba(10, 18, 13, 0.25) 0%, rgba(10, 18, 13, 0) 35%, rgba(10, 18, 13, 0.18) 100%),
+    var(--scene, linear-gradient(160deg, var(--moss), var(--forest))) center / cover no-repeat;
+}
+body.andela2 .pokemon-image {
+  width: 86%;
+  height: auto;
+  margin-bottom: 4%;
+  filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.35));
+  transition: transform 0.35s ease;
+}
+body.andela2 .pokemon-art .dex-num {
+  top: 12px;
+  left: 14px;
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--cream);
+  background: none;
+  clip-path: none;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
+}
+body.andela2 .name-row {
+  margin-top: 12px;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 8px;
+  padding: 0 2px;
+}
+body.andela2 .name {
+  font-family: var(--head);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-align: left;
+}
+body.andela2 .type-image {
+  max-height: 1.15rem;
+}
+
+/* Hover: a slight lift, no glow. */
+body.andela2 .pokemon.slide-in:hover,
+body.andela2 .pokemon.slide-in:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: none;
+  outline: none;
+}
+body.andela2 .pokemon.slide-in:hover .pokemon-image {
+  transform: scale(1.04);
+}
+body.andela2 .pokemon.slide-in:focus-visible .pokemon-art {
+  outline: 2px solid var(--moss);
+  outline-offset: 3px;
+}
+body.andela2 .pokemon .pokemon-image.missing-art,
+body.andela2 .pokemon img[src=""] {
+  visibility: hidden;
+}
+
+body.andela2 .no-results {
+  grid-column: 1 / -1;
+  background: none;
+  border: 1px dashed var(--line);
+  border-radius: 16px;
+  color: var(--ink);
+}
+body.andela2 .no-results-title {
+  font-family: var(--head);
+  color: var(--ink);
+}
+body.andela2 .no-results-mark {
+  color: var(--gold);
+}
+
+/* ---------------------------------------------------------------- footer */
+
+body.andela2 .footer {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 28px var(--gutter) 40px;
+  background: none;
+  border: 0;
+  text-align: center;
+  color: rgba(232, 232, 221, 0.6);
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+body.andela2 .back-to-top {
+  background: var(--forest);
+  color: var(--paper);
+  border: 0;
+  border-radius: 99px;
+  clip-path: none;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+body.andela2 .back-to-top::before {
+  display: none;
+}
+
+/* ---------------------------------------------------------------- small screens */
+
+@media (max-width: 900px) {
+  .paper {
+    grid-template-columns: 1fr;
+  }
+  /* The index moves below the grid, as a compact two-column list. */
+  .az {
+    order: 2;
+    position: static;
+    max-height: none;
+    overflow: visible;
+    border-top: 1px solid var(--line);
+    padding-top: 32px;
+  }
+  .az-list {
+    columns: 2;
+    column-gap: 24px;
+  }
+  .az-letter {
+    break-after: avoid;
+  }
+  .vine {
+    width: 90%;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    min-height: 88svh;
+  }
+  .hero-mon {
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20%;
+    height: 46%;
+  }
+  .hero-title {
+    left: var(--gutter);
+    right: var(--gutter);
+    bottom: 76px;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+  .hero-sub {
+    margin: 0;
+  }
+  .hero-word {
+    font-size: 24vw;
+  }
+  body.andela2 #pokedex,
+  body.andela2 #megadex {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 26px 14px;
+  }
+  body.andela2 .pokemon-art {
+    border-radius: 12px 12px 12px 52px;
+  }
+  body.andela2 .name {
+    font-size: 0.85rem;
+  }
+  .vine {
+    display: none;          /* no room beside the title; it would cross it */
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-link-rule,
+  body.andela2 .pokemon-image,
+  .az-list a {
+    transition: none;
+  }
+}

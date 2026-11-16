@@ -7,10 +7,6 @@
     <!-- Apply dark mode before first paint so a saved dark theme never flashes
          light on load. Runs synchronously here (and on <body> below); the full
          toggle wiring lives in darkMode.js. -->
-    <script>
-      const isDarkMode = localStorage.getItem("darkMode") === "enabled";
-      if (isDarkMode) document.documentElement.classList.add("dark-mode");
-    </script>
 
     <!-- Fonts are self-hosted (see @font-face in styles.css + assets/fonts/),
          so there's no Google Fonts origin to preconnect to. Preload the primary
@@ -33,9 +29,12 @@
     />
 
     <link rel="stylesheet" href="../shared/styles.css" />
-    <link rel="stylesheet" href="../shared/theme.css" />
-    <link rel="stylesheet" href="data/region.css" />
-    <script src="../shared/theme.js" defer></script>
+    <!-- Andela 2.0: an editorial field-guide look, scoped to this page (see
+         andela.css). It replaces the shared dark theme here only, so Lacadia
+         and Misc are untouched. -->
+    <link rel="stylesheet" href="andela.css" />
+    <script src="andela.js" type="module"></script>
+    <link rel="preload" href="data/scenes/hero.jpg" as="image" fetchpriority="high" />
 
     <link
       id="dynamic-favicon"
@@ -85,8 +84,6 @@
     <!-- Both are ~500 bytes; preloading both unconditionally avoids a mismatch
          with the site's manual (localStorage-based) dark mode toggle, which
          prefers-color-scheme can't detect. -->
-    <link rel="preload" href="../shared/assets/Bg_Light.svg" as="image" />
-    <link rel="preload" href="../shared/assets/Bg_Dark.svg" as="image" />
 
     <!-- LCP image: the first Pokédex tile (Synthecyte) is the largest element
          above the fold. The grid is rendered by a deferred module script, so
@@ -108,120 +105,78 @@
     <link rel="preload" href="data/pokedex.csv" as="fetch" crossorigin />
     <link rel="preload" href="data/megadex.csv" as="fetch" crossorigin />
   </head>
-  <body>
-    <script>
-      if (isDarkMode) document.body.classList.add("dark-mode");
-    </script>
-
+  <body class="andela2">
     <a class="skip-link" href="#pokedex">Skip to the Pokédex</a>
 
-    <button
-      class="toggle-dark-mode"
-      onclick="toggleDarkMode('.toggle-dark-mode')"
-    ></button>
+    <!-- Hero: the habitat photograph, the region's name set large, and one of
+         its Pokémon standing in it. -->
+    <section class="hero" aria-label="Andela">
+      <nav class="hero-nav">
+        <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"></span>emsh</a>
+        <a class="hero-link" href="../lacadia/index.html">
+          <span>Lacadia</span><span class="hero-link-rule" aria-hidden="true"></span>
+        </a>
+      </nav>
+      <img class="hero-mon" src="data/pokemonArt/dynastag.webp" alt="Dynastag" fetchpriority="high" />
+      <div class="hero-title">
+        <p class="hero-sub">A field guide<br />to the Pokémon of</p>
+        <p class="hero-word" aria-hidden="true">Andela<span class="hero-spark"></span></p>
+      </div>
+      <a class="hero-scroll" href="#encyclopedia">Explore the region</a>
+    </section>
 
-    <header>
-      <div class="banner-main">
-        <h1>Andela Pokédex</h1>
-        <button
-          id="searchToggleBtn"
-          class="search-toggle-btn"
-          title="Search & Filter"
-          aria-label="Search & Filter"
-          aria-expanded="false"
-        >
-          <svg
-            class="icon-svg"
-            viewBox="0 -960 960 960"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              d="M782.87-98.52 526.91-354.48q-29.43 21.74-68.15 34.61Q420.04-307 375.48-307q-114.09 0-193.55-79.46-79.45-79.45-79.45-193.54 0-114.09 79.45-193.54Q261.39-853 375.48-853q114.09 0 193.54 79.46 79.46 79.45 79.46 193.54 0 45.13-12.87 83.28T601-429.7l256.52 257.09-74.65 74.09ZM375.48-413q69.91 0 118.45-48.54 48.55-48.55 48.55-118.46t-48.55-118.46Q445.39-747 375.48-747t-118.46 48.54Q208.48-649.91 208.48-580t48.54 118.46Q305.57-413 375.48-413Z"
-            />
+    <main class="paper" id="encyclopedia">
+      <!-- A-Z index of every Pokémon (built by andela.js), like an encyclopedia's. -->
+      <aside class="az" aria-labelledby="az-heading">
+        <p class="eyebrow" id="az-heading">Andela encyclopedia</p>
+        <nav id="azIndex" class="az-list" aria-label="Pokémon A to Z"></nav>
+      </aside>
+
+      <div class="paper-main">
+        <header class="section-head">
+          <p class="eyebrow">Regional Pokédex</p>
+          <h1 class="section-title">The Pokémon</h1>
+          <svg class="vine" viewBox="0 0 1200 220" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M-20 200 C 260 40, 620 20, 1220 90" />
           </svg>
-        </button>
-      </div>
-    </header>
+        </header>
 
-    <div class="search-filter-bar">
-      <div class="search-wrapper">
-        <svg
-          class="icon-svg search-icon"
-          viewBox="0 -960 960 960"
-          fill="currentColor"
-          aria-hidden="true"
-        >
-          <path
-            d="M782.87-98.52 526.91-354.48q-29.43 21.74-68.15 34.61Q420.04-307 375.48-307q-114.09 0-193.55-79.46-79.45-79.45-79.45-193.54 0-114.09 79.45-193.54Q261.39-853 375.48-853q114.09 0 193.54 79.46 79.46 79.45 79.46 193.54 0 45.13-12.87 83.28T601-429.7l256.52 257.09-74.65 74.09ZM375.48-413q69.91 0 118.45-48.54 48.55-48.55 48.55-118.46t-48.55-118.46Q445.39-747 375.48-747t-118.46 48.54Q208.48-649.91 208.48-580t48.54 118.46Q305.57-413 375.48-413Z"
-          />
-        </svg>
-        <input
-          type="text"
-          id="searchInput"
-          class="search-input"
-          placeholder="Search Pokémon…"
-          autocomplete="off"
-          aria-label="Search Pokémon"
-        />
-        <span
-          id="resultCount"
-          class="result-count-badge"
-          role="status"
-          aria-live="polite"
-          aria-atomic="true"
-        ></span>
-      </div>
-      <div id="typeFilterContainer" class="type-filter-container"></div>
-    </div>
+        <div class="search-filter-bar open">
+          <div class="search-wrapper">
+            <svg class="icon-svg search-icon" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true">
+              <path d="M782.87-98.52 526.91-354.48q-29.43 21.74-68.15 34.61Q420.04-307 375.48-307q-114.09 0-193.55-79.46-79.45-79.45-79.45-193.54 0-114.09 79.45-193.54Q261.39-853 375.48-853q114.09 0 193.54 79.46 79.46 79.45 79.46 193.54 0 45.13-12.87 83.28T601-429.7l256.52 257.09-74.65 74.09ZM375.48-413q69.91 0 118.45-48.54 48.55-48.55 48.55-118.46t-48.55-118.46Q445.39-747 375.48-747t-118.46 48.54Q208.48-649.91 208.48-580t48.54 118.46Q305.57-413 375.48-413Z" />
+            </svg>
+            <input type="text" id="searchInput" class="search-input" placeholder="Search by name" autocomplete="off" aria-label="Search Pokémon" />
+            <span id="resultCount" class="result-count-badge" role="status" aria-live="polite" aria-atomic="true"></span>
+          </div>
+          <div id="typeFilterContainer" class="type-filter-container"></div>
+        </div>
 
-    <main class="dex-main">
-      <h2 id="regional-heading" class="visually-hidden">Regional Pokédex</h2>
-      <section id="pokedex" aria-labelledby="regional-heading"></section>
-      <h2 id="mega-heading" class="section-heading">
-        <span class="h3-inner"
-          ><span class="gradient-text">◆</span
-          ><span class="gradient-text h3-label">Xenos and Megas</span
-          ><span class="gradient-text">◆</span></span
-        >
-      </h2>
-      <section id="megadex" aria-labelledby="mega-heading"></section>
+        <h2 id="regional-heading" class="visually-hidden">Regional Pokédex</h2>
+        <section id="pokedex" aria-labelledby="regional-heading"></section>
+
+        <header class="section-head section-head--sub">
+          <p class="eyebrow">Beyond the regional dex</p>
+          <h2 id="mega-heading" class="section-title">Xenos &amp; Megas</h2>
+        </header>
+        <section id="megadex" aria-labelledby="mega-heading"></section>
+      </div>
     </main>
-
-    <script src="../shared/index.js" type="module"></script>
-    <script src="../shared/darkMode.js" defer></script>
 
     <footer class="footer">
       <p>
-        &copy; 2026 Pokémon Project. All rights reserved. This is a fan-made
-        project and is not affiliated with or endorsed by Pokémon, Nintendo,
-        Game Freak, or any related entities.
+        Fan-made project, not affiliated with or endorsed by Pokémon, Nintendo,
+        Game Freak, or The Pokémon Company. Art &copy; @EmSheshan. Habitat
+        photos from Unsplash.
       </p>
     </footer>
 
-    <button
-      id="backToTop"
-      class="back-to-top"
-      title="Back to top"
-      aria-label="Back to top"
-    >
-      <svg
-        class="icon-svg"
-        viewBox="0 -960 960 960"
-        fill="currentColor"
-        aria-hidden="true"
-      >
-        <path
-          d="M427-140.78v-475.13L215.43-404.35 140.78-480 480-819.22 819.22-480l-74.65 75.65L533-615.91v475.13H427Z"
-        />
+    <button id="backToTop" class="back-to-top" title="Back to top" aria-label="Back to top">
+      <svg class="icon-svg" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true">
+        <path d="M427-140.78v-475.13L215.43-404.35 140.78-480 480-819.22 819.22-480l-74.65 75.65L533-615.91v475.13H427Z" />
       </svg>
     </button>
 
-    <script>
-      // Set initial icon and mode based on the saved state
-      document.addEventListener("DOMContentLoaded", () => {
-        setDarkModeFromStorage(".toggle-dark-mode");
-      });
-    </script>
+    <script src="../shared/index.js" type="module"></script>
   </body>
 </html>
