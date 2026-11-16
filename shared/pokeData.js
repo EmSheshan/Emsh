@@ -197,7 +197,7 @@ export function buildDex(rows, { mega = false, external = false, start = 0 } = {
 }
 
 async function fetchDex(url, opts) {
-  const res = await fetch(url);
+  const res = await fetch(url, { cache: "no-cache" });   // always revalidate: dex edits show at once
   if (!res.ok)
     throw new Error(`Failed to load ${url}: ${res.status} ${res.statusText}`);
   return buildDex(parseCSV(await res.text()), opts);
@@ -207,7 +207,7 @@ async function fetchDex(url, opts) {
 // throwing — used for canondex.csv, which is optional.
 async function fetchDexOptional(url, opts) {
   try {
-    const res = await fetch(url);
+    const res = await fetch(url, { cache: "no-cache" });   // always revalidate: dex edits show at once
     if (!res.ok) return {};
     return buildDex(parseCSV(await res.text()), opts);
   } catch {
