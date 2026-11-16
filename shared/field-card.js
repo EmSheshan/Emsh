@@ -94,8 +94,8 @@ function bandHTML(mon, list, formIndex) {
       <div class="band-steps">${navTo(order[i - 1], "prev")}${navTo(order[i + 1], "next")}</div>
     </nav>
     <div class="band-title">
-      <p class="band-meta">${mon.num != null ? `<span class="band-num">Nº ${pad(mon.num)}</span>` : `<span class="band-num">${mon.isMega ? "Xeno / Mega" : ""}</span>`}${mon.types.map(typeChip).join("")}</p>
-      <p class="band-kind">The ${esc(mon.kind)} Pokémon</p>
+      <p class="band-meta">${mon.num != null ? `<span class="band-num">Nº ${pad(mon.num)}</span>` : ""}${mon.types.map(typeChip).join("")}</p>
+      ${mon.kind ? `<p class="band-kind">The ${esc(mon.kind)} Pokémon</p>` : ""}
       <h1 class="visually-hidden">${esc(baseName(mon))}</h1>
       ${formTabs}
     </div>
@@ -166,7 +166,7 @@ function nodeHTML(p, current, viewing = null) {
   const tile = tileFor(shown.id);
   const inner = `
     <span class="fam-art" ${tile ? `style="--scene: url('${abs(tile)}')"` : ""}><img src="${art(shown.id)}" alt="" loading="lazy"></span>
-    <span class="fam-label">${p.num != null ? `<span class="fam-num">Nº ${pad(p.num)}</span>` : p.isExternal ? `<span class="fam-num">Canon</span>` : p.isMega ? `<span class="fam-num">Xeno / Mega</span>` : ""}
+    <span class="fam-label">${p.num != null ? `<span class="fam-num">Nº ${pad(p.num)}</span>` : p.isExternal ? `<span class="fam-num">Canon</span>` : ""}
       <span class="fam-name">${esc(baseName(p))}</span></span>`;
   const cls = `fam-node${isCurrent ? " is-current" : ""}${p.isExternal ? " is-canon" : ""}`;
   return p.isExternal || isCurrent
@@ -191,7 +191,7 @@ function evoHTML(mon) {
   if (mon.isMega) {
     if (top.id === mon.id) return "";
     return `<section class="family"><h2 class="entry-label">Base form</h2>
-      <div class="fam-tree">${nodeHTML(top, mon.speciesId)}<p class="fam-note">${esc(baseName(mon))} is a Xeno / Mega form of ${esc(baseName(top))}.</p></div></section>`;
+      <div class="fam-tree">${nodeHTML(top, mon.speciesId)}<p class="fam-note">${esc(baseName(mon))} transforms from ${esc(baseName(top))}.</p></div></section>`;
   }
   const solo = !children(top).length;
   return `<section class="family"><h2 class="entry-label">Family</h2>
@@ -266,7 +266,7 @@ async function render(sid, formIndex = 0, { scroll = false } = {}) {
 
   document.title = `${mon.num != null ? `Nº ${pad(mon.num)} · ` : ""}${baseName(mon)} — ${region.title ?? `${region.name} Pokédex`}`;
   band.style.setProperty("--len", baseName(mon).length);   // sizes the big name
-  document.documentElement.style.setProperty("--t1", `var(--type-${mon.types[0].toLowerCase()})`);
+  document.documentElement.style.setProperty("--t1", `var(--type-${(mon.types[0] ?? "Normal").toLowerCase()})`);
 
   band.querySelector(".band-chrome").innerHTML = bandHTML(mon, list, formIndex);
   // One compact entry: About + Field notes beside Base stats, Family below.

@@ -309,7 +309,7 @@ function displayPokemonData(pokemonList, containerId) {
     // it paints as fast as possible; everything below the fold stays lazy.
     const isLcpTile = containerId === "pokedex" && index === 0;
 
-    const type1 = pokemon.types[0];
+    const type1 = pokemon.types[0] ?? "Normal";   // data not filled in yet
     const type2 = pokemon.types[1];
 
     const baseId =
@@ -372,7 +372,7 @@ function displayPokemonData(pokemonList, containerId) {
             <div class="name-row">
                 <div class="name">${displayTileName}</div>
                 <div class="types">
-                    <img src="${type1Image}" alt="${type1}" class="type-image" loading="lazy">
+                    ${pokemon.types.length ? `<img src="${type1Image}" alt="${type1}" class="type-image" loading="lazy">` : ""}
                     ${type2Image ? `<img src="${type2Image}" alt="${type2}" class="type-image" loading="lazy">` : ""}
                 </div>
             </div>
