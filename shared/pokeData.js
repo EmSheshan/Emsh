@@ -32,6 +32,8 @@
 //   evo           id(s) it evolves INTO — comma-separated for split evolutions
 //   evoMethod     how it evolves from its prevo, e.g. "Level 16" or "Fire Stone".
 //                 Stored on the child so each branch of a split evo can differ.
+//   environment   where it lives, e.g. "forest" or "ocean". Picks its background:
+//                 the photo environments/<environment>.jpg, or a painted scene.
 //
 // Evolution trees may reference canon Pokémon (e.g. Amistaphore evolves from the
 // canon Shiinotic). Those live in data/canondex.csv — same columns, but they get
@@ -142,7 +144,9 @@ function parseRow(row) {
           .filter(Boolean)
       : [],
     evoMethod: row.evoMethod || null,
-    habitat: row.habitat || null,
+    // Background scene: names a photo in /environments (e.g. "forest" ->
+    // environments/forest.jpg). See tools/build-backdrops.mjs.
+    environment: row.environment || row.habitat || null,
   };
 }
 

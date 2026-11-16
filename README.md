@@ -23,17 +23,17 @@ andela/  lacadia/  misc/      one folder per region:
   data/region.js              name, where numbering starts, whether it's numbered
   data/pokemonArt/<id>.webp   art (and <id>_shiny.webp)
   data/backdrops/<id>.jpg     blurred habitat behind each Pokémon
+environments/                 background photos, one per environment name (forest.jpg, …)
 tools/                        art + backdrop scripts
 ```
 
 ## Adding a Pokémon
 
-1. Add a row to `<region>/data/pokedex.csv`. Optional `habitat` column picks
-   the backdrop scene (forest, ocean, cave, space, … — see `tools/habitats.mjs`);
-   left blank, one is guessed from the flavour text and type.
+1. Add a row to `<region>/data/pokedex.csv`. Its `environment` column (forest,
+   ocean, cave, space, …) picks the background — see `environments/README.md`.
 2. Add the art: `python3 tools/optimize-art.py <folder of PNGs> <region>/data/pokemonArt [id …]`
 3. Build its backdrop: `npm install` once, then `node tools/build-backdrops.mjs <region>`.
-   A photo at `<region>/data/environments/<id>.jpg` is used instead of a painted scene.
+   It uses the photo `environments/<environment>.jpg`, or a painted stand-in until there is one.
 
 ## Adding a region
 
