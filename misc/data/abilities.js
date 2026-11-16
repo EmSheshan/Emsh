@@ -915,4 +915,13 @@ export const abilities = {
       "Takes reduced damage from moves with a base power of 100 or higher.",
     tag: "andela",
   },
+  // Misc originals. Descriptions to come from Em.
+  "Sky Iron": {
+    description: "Description coming soon.",
+    tag: "misc",
+  },
+  "Gilded Cage": {
+    description: "Description coming soon.",
+    tag: "misc",
+  },
 };

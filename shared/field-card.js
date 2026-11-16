@@ -90,7 +90,7 @@ function bandHTML(mon, list, formIndex) {
   return `
     <nav class="hero-nav band-nav">
       <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"></span>emsh</a>
-      <a class="band-back" href="index.html">${esc(region.name)} Pokédex</a>
+      <a class="band-back" href="index.html">${esc(region.title ?? `${region.name} Pokédex`)}</a>
       <div class="band-steps">${navTo(order[i - 1], "prev")}${navTo(order[i + 1], "next")}</div>
     </nav>
     <div class="band-title">
@@ -264,7 +264,7 @@ async function render(sid, formIndex = 0, { scroll = false } = {}) {
   if (!sameMon && !formeOnly) state.shiny = false;
   state = { ...state, id: sid, form: formIndex };
 
-  document.title = `${mon.num != null ? `Nº ${pad(mon.num)} · ` : ""}${baseName(mon)} — ${region.name} Pokédex`;
+  document.title = `${mon.num != null ? `Nº ${pad(mon.num)} · ` : ""}${baseName(mon)} — ${region.title ?? `${region.name} Pokédex`}`;
   band.style.setProperty("--len", baseName(mon).length);   // sizes the big name
   document.documentElement.style.setProperty("--t1", `var(--type-${mon.types[0].toLowerCase()})`);
 

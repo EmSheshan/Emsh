@@ -9,6 +9,7 @@ import { parseCSV, buildDex } from "./shared/pokeData.js";
 const REGIONS = [
   { key: "lacadia", name: "Lacadia" },
   { key: "andela", name: "Andela" },
+  { key: "misc", name: "Misc" },
 ];
 const HOLD_MS = 5000;
 const pad = (n) => String(n).padStart(3, "0");
