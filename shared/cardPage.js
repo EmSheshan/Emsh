@@ -2,6 +2,11 @@
 import { loadDex } from "./pokeData.js";
 import { region, abilities, moves, SHARED, ART_EXT } from "./region.js";
 
+// Which backdrop image each Pokemon uses (built by tools/build-backdrops.mjs).
+const backdropIndex = fetch("data/backdrops/index.json")
+  .then((r) => (r.ok ? r.json() : {}))
+  .catch(() => ({}));
+
 // Base tab title from the region name; displaySelectedPokemon overrides it with
 // the current Pokémon's name once data loads.
 document.title = `${region.name} Pokédex`;
@@ -323,8 +328,13 @@ function displaySelectedPokemon(formIndex = 0) {
 
   // Habitat backdrop (built by tools/build-backdrops.mjs), cross-faded in by
   // theme.js. Absolute URL so it doesn't depend on who resolves it.
-  window.emshSetBackdrop?.(
-    new URL(`data/backdrops/${selectedPokemon.id}.jpg`, document.baseURI).href,
+  // Pokemon sharing a scene share one file (see backdrops/index.json), so a
+  // switch between them requests the same URL and theme.js skips the fade.
+  const backdropFor = selectedPokemon.id;
+  backdropIndex.then((index) =>
+    window.emshSetBackdrop?.(
+      new URL(`data/backdrops/${index[backdropFor] ?? `${backdropFor}.jpg`}`, document.baseURI).href,
+    ),
   );
 
   // Handle Abilities

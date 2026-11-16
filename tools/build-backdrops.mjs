@@ -12,8 +12,10 @@
 //   3. only if that is missing too, a painted scene (see tools/habitats.mjs).
 // Environment names are kept as-is, so adding e.g. volcano.jpg later moves
 // every volcano Pokemon off the default on the next run.
-// Output: <region>/data/backdrops/<id>.jpg, ~20 KB each. Re-run after adding
-// photos or changing the column.
+// Output: one image per distinct scene in <region>/data/backdrops/ (forest.jpg,
+// meadow.jpg, ...), plus index.json mapping each Pokemon id to its file. Sharing
+// files is what lets the card page skip the cross-fade when the next Pokemon
+// has the same background. Re-run after adding photos or changing the column.
 
 import { createCanvas, loadImage } from 'canvas';
 import fs from 'node:fs';
@@ -60,32 +62,43 @@ const missingPhotos = new Set();
 for (const region of regions) {
     const dir = path.join(region, 'data');
     const out = path.join(dir, 'backdrops');
+    fs.rmSync(out, { recursive: true, force: true });  // drop files no longer used
     fs.mkdirSync(out, { recursive: true });
+    const index = {};
+    const written = new Set();
     const read = (f) => fs.existsSync(path.join(dir, f)) ? parseCSV(fs.readFileSync(path.join(dir, f), 'utf8')) : [];
     const mons = [...Object.values(buildDex(read('pokedex.csv'))), ...Object.values(buildDex(read('megadex.csv'), { mega: true }))];
     const tally = {};
 
     for (const mon of mons) {
         const env = mon.environment;
-        let src = await photoFor(env), label;
+        // `key` names the output file: the same key means the same image.
+        let src = await photoFor(env), label, key;
         if (src) {
             label = `${env} (photo)`;
+            key = env;
         } else if ((src = await photoFor(DEFAULT_ENV))) {
             if (env) missingPhotos.add(env);
             label = `${DEFAULT_ENV} (default, for ${env || 'blank'})`;
+            key = DEFAULT_ENV;
         } else {
             if (env) missingPhotos.add(env);
             const scene = HABITATS.includes(env) ? env : pickHabitat(mon);
+            key = `painted-${scene}-${mon.speciesId ?? mon.id}`;
             src = paintHabitat(scene, mon.speciesId ?? mon.id);
             label = `${scene} (painted)`;
         }
+        index[mon.id] = `${key}.jpg`;
+        tally[label] = (tally[label] ?? 0) + 1;
+        if (written.has(key)) continue;
+        written.add(key);
         const sharp = createCanvas(W, H);
         const s = Math.max(W / src.width, H / src.height) * 1.08;  // overscan hides blurred edges
         sharp.getContext('2d').drawImage(src, (W - src.width * s) / 2, (H - src.height * s) / 2, src.width * s, src.height * s);
         const img = blur(sharp, W, H, label.includes('(painted)') ? 4 : 8);
-        fs.writeFileSync(path.join(out, `${mon.id}.jpg`), img.toBuffer('image/jpeg', { quality: 0.8 }));
-        tally[label] = (tally[label] ?? 0) + 1;
+        fs.writeFileSync(path.join(out, `${key}.jpg`), img.toBuffer('image/jpeg', { quality: 0.8 }));
     }
+    fs.writeFileSync(path.join(out, 'index.json'), JSON.stringify(index, null, 1) + '\n');
     if (mons.length) console.log(region + ':', Object.entries(tally).map(([k, v]) => `${k} ${v}`).join(', '));
 }
 if (missingPhotos.size) {

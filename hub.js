@@ -9,8 +9,13 @@ for (const card of document.querySelectorAll(".region")) {
 
   if (hero) {
     card.querySelector(".region-art").src = `${region}/data/pokemonArt/${hero}.webp`;
-    card.querySelector(".region-bg").style.backgroundImage =
-      `url("${region}/data/backdrops/${hero}.jpg")`;
+    fetch(`${region}/data/backdrops/index.json`)
+      .then((r) => (r.ok ? r.json() : {}))
+      .catch(() => ({}))
+      .then((index) => {
+        card.querySelector(".region-bg").style.backgroundImage =
+          `url("${region}/data/backdrops/${index[hero] ?? `${hero}.jpg`}")`;
+      });
   }
 
   fetch(`${region}/data/pokedex.csv`)
