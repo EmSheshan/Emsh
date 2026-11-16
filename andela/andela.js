@@ -1,4 +1,5 @@
 // andela.js — the Andela 2.0 homepage additions (see andela.css):
+//   - the hero: a random Pokémon in its own habitat on every visit
 //   - the A–Z encyclopedia index
 //   - each grid tile's habitat photo (--scene)
 // The grid itself, search and filters are still built by shared/index.js.
@@ -12,9 +13,112 @@ document.addEventListener("DOMContentLoaded", () => document.body.classList.remo
 const pad = (n) => String(n).padStart(3, "0");
 const displayName = (p) => p.name.split("-")[0];
 
+// Which environment each Pokémon lives in (tools/build-backdrops.mjs). Photos
+// have crisp copies in data/scenes/ (tools/build-scenes.py); painted stand-ins
+// only exist as the blurred backdrop.
+const [index, { pokedex, megadex }] = await Promise.all([
+  fetch("data/backdrops/index.json", { cache: "no-cache" })
+    .then((r) => (r.ok ? r.json() : {}))
+    .catch(() => ({})),
+  loadDex(),
+]);
+const photoOf = (id) => {
+  const file = index[id];
+  return file && !file.startsWith("painted-") ? file.replace(/\.jpg$/, "") : null;
+};
+
+// ---------------------------------------------------------------- hero
+
+// A random Pokémon in its own habitat on each visit, then every few seconds a
+// cross-fade to one from a different evolution family. Runs alongside the rest
+// of the page (not awaited), so the index and grid never wait on hero images.
+const HERO_HOLD_MS = 5000;
+
+function startHero() {
+  const hero = document.querySelector(".hero");
+  const stage = hero?.querySelector(".hero-stage");
+  const cap = hero?.querySelector(".hero-caption");
+  if (!stage || !cap) return;
+
+  // Any Pokémon (Megas and Xenos included) whose habitat has a real photo.
+  const all = { ...pokedex, ...megadex };
+  const pool = Object.values(all).filter((p) => !p.isForme && photoOf(p.id));
+  if (!pool.length) return;
+
+  // Evolution family = the top of its prevo chain.
+  const family = (p) => {
+    let cur = p;
+    for (let i = 0; i < 5 && cur.prevo && all[cur.prevo]; i++) cur = all[cur.prevo];
+    return cur.id;
+  };
+
+  const load = (src) => new Promise((ok) => { const i = new Image(); i.onload = i.onerror = ok; i.src = src; });
+  let current = null;
+  const recent = [];
+
+  const pick = () => {
+    // Not the current family, and not one of the last few shown if possible.
+    let choices = pool.filter((p) => !current || family(p) !== family(current));
+    const fresh = choices.filter((p) => !recent.includes(p.id));
+    if (fresh.length) choices = fresh;
+    if (!current) {
+      let last = null;
+      try { last = sessionStorage.getItem("andelaHero"); } catch {}
+      const notLast = choices.filter((p) => p.id !== last);
+      if (notLast.length) choices = notLast;
+    }
+    return choices[Math.floor(Math.random() * choices.length)];
+  };
+
+  const show = async (mon) => {
+    const env = photoOf(mon.id);
+    const photoUrl = `data/scenes/hero-${env}.jpg`;
+    const artUrl = `data/pokemonArt/${mon.id}.webp`;
+    await Promise.all([load(photoUrl), load(artUrl)]);   // never fade in half-loaded
+
+    const slide = document.createElement("div");
+    slide.className = "hero-slide";
+    slide.innerHTML = `<div class="hero-photo"></div><img class="hero-mon" alt="" src="${artUrl}">`;
+    slide.querySelector(".hero-photo").style.setProperty("--hero-photo", `url("${photoUrl}")`);
+    stage.append(slide);
+
+    cap.classList.remove("is-shown");
+    setTimeout(() => {
+      cap.href = `cardPage.html?pokemon=${mon.speciesId ?? mon.id}`;
+      cap.setAttribute("aria-label", `${displayName(mon)}, shown in the ${env.replace(/-/g, " ")}`);
+      cap.querySelector(".hero-caption-num").textContent = mon.num != null ? `Nº ${pad(mon.num)}` : "";
+      cap.querySelector(".hero-caption-name").textContent = displayName(mon);
+      cap.querySelector(".hero-caption-env").textContent = env.replace(/-/g, " ");
+      cap.classList.add("is-shown");
+    }, current ? 500 : 0);
+
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      const old = stage.querySelectorAll(".hero-slide.is-active");
+      slide.classList.add("is-active");
+      old.forEach((o) => { o.classList.remove("is-active"); setTimeout(() => o.remove(), 1600); });
+    }));
+
+    current = mon;
+    recent.push(mon.id);
+    if (recent.length > Math.max(3, Math.floor(pool.length / 2))) recent.shift();
+    try { sessionStorage.setItem("andelaHero", mon.id); } catch {}
+  };
+
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let timer = null;
+  const schedule = () => {
+    clearTimeout(timer);
+    if (still || document.hidden) return;              // pause while the tab is hidden
+    timer = setTimeout(async () => { await show(pick()); schedule(); }, HERO_HOLD_MS);
+  };
+  document.addEventListener("visibilitychange", schedule);
+
+  show(pick()).then(schedule);
+}
+startHero();
+
 // ---------------------------------------------------------------- A–Z index
 
-const { pokedex, megadex } = await loadDex();
 const entries = [...Object.values(pokedex).filter((p) => !p.isForme), ...Object.values(megadex)]
   .map((p) => ({ id: p.speciesId ?? p.id, name: displayName(p), num: p.num }))
   .sort((a, b) => a.name.localeCompare(b.name));
@@ -38,13 +142,7 @@ for (const e of entries) {
 
 // ---------------------------------------------------------------- tile scenes
 
-// Which environment each Pokémon lives in (tools/build-backdrops.mjs). Photos
-// have a crisp copy in data/scenes/ (tools/build-scenes.py); painted stand-ins
-// only exist as the blurred backdrop, so tiles fall back to that.
-const index = await fetch("data/backdrops/index.json", { cache: "no-cache" })
-  .then((r) => (r.ok ? r.json() : {}))
-  .catch(() => ({}));
-
+// Painted stand-ins have no crisp scene, so their tiles use the backdrop.
 const sceneFor = (id) => {
   const file = index[id];
   if (!file) return null;

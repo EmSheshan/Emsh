@@ -34,7 +34,7 @@
          and Misc are untouched. -->
     <link rel="stylesheet" href="andela.css" />
     <script src="andela.js" type="module"></script>
-    <link rel="preload" href="data/scenes/hero.jpg" as="image" fetchpriority="high" />
+
 
     <link
       id="dynamic-favicon"
@@ -108,8 +108,9 @@
   <body class="andela2">
     <a class="skip-link" href="#pokedex">Skip to the Pokédex</a>
 
-    <!-- Hero: the habitat photograph, the region's name set large, and one of
-         its Pokémon standing in it. -->
+    <!-- Hero: a random Andela Pokémon standing in its own habitat, picked on
+         every visit by andela.js, then cross-fading every few seconds to one
+         from a different evolution family. -->
     <section class="hero" aria-label="Andela">
       <nav class="hero-nav">
         <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"></span>emsh</a>
@@ -117,7 +118,8 @@
           <span>Lacadia</span><span class="hero-link-rule" aria-hidden="true"></span>
         </a>
       </nav>
-      <img class="hero-mon" src="data/pokemonArt/dynastag.webp" alt="Dynastag" fetchpriority="high" />
+      <div class="hero-stage" aria-hidden="true"></div>
+      <a class="hero-caption" href="#"><span class="hero-caption-num"></span><span class="hero-caption-name"></span><span class="hero-caption-env"></span></a>
       <div class="hero-title">
         <p class="hero-sub">A field guide<br />to the Pokémon of</p>
         <p class="hero-word" aria-hidden="true">Andela<span class="hero-spark"></span></p>

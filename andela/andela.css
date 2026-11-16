@@ -82,11 +82,39 @@ body.andela2 .toggle-dark-mode {
   margin: 0 auto;
   border-radius: var(--sheet-radius) var(--sheet-radius) 0 0;
   color: var(--cream);
+  background: var(--forest);
+}
+
+/* The stage holds one slide per shown Pokémon: its habitat photo (shaded for
+   legibility) and its art. andela.js adds a slide, then cross-fades it in by
+   making it .is-active; the photo settles from a slight zoom and the Pokémon
+   rises into place. */
+.hero-stage,
+.hero-slide,
+.hero-photo {
+  position: absolute;
+  inset: 0;
+}
+.hero-stage {
+  z-index: 0;
+}
+.hero-slide {
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+.hero-slide.is-active {
+  opacity: 1;
+}
+.hero-photo {
+  transform: scale(1.06);
+  transition: transform 3s cubic-bezier(0.2, 0.7, 0.2, 1);
   background:
     linear-gradient(90deg, rgba(10, 18, 13, 0.55) 0%, rgba(10, 18, 13, 0.1) 45%, rgba(10, 18, 13, 0.35) 100%),
     linear-gradient(180deg, rgba(10, 18, 13, 0.35) 0%, transparent 30%, transparent 60%, rgba(10, 18, 13, 0.55) 100%),
-    url("data/scenes/hero.jpg") center / cover no-repeat,
-    var(--forest);
+    var(--hero-photo, none) center / cover no-repeat;
+}
+.hero-slide.is-active .hero-photo {
+  transform: scale(1);
 }
 
 .hero-nav {
@@ -152,11 +180,53 @@ body.andela2 .toggle-dark-mode {
 .hero-mon {
   position: absolute;
   z-index: 1;
+  opacity: 0;
+  translate: 0 24px;
+  transition: opacity 0.9s ease 0.3s, translate 1.3s cubic-bezier(0.2, 0.7, 0.2, 1) 0.3s;
   left: clamp(-30px, 1.5vw, 40px);
   bottom: -2%;
+  /* A fixed box: tall Pokémon fill its height, wide ones shrink to its width,
+     so none can reach the title on the right. */
   height: min(80%, 660px);
-  width: auto;
+  width: min(31%, 460px);
+  object-fit: contain;
+  object-position: left bottom;
   filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.45));
+}
+.hero-slide.is-active .hero-mon {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* "Nº 004  PUMACE  · BADLANDS" -- who you're looking at, linking to its page. */
+.hero-caption {
+  position: absolute;
+  z-index: 3;
+  right: var(--gutter);
+  bottom: clamp(22px, 3vw, 34px);
+  display: inline-flex;
+  gap: 0.9rem;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cream);
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.hero-caption.is-shown {
+  opacity: 0.85;
+}
+.hero-caption:hover {
+  opacity: 1 !important;
+}
+.hero-caption-num {
+  color: var(--gold);
+}
+.hero-caption-env::before {
+  content: "\00b7";
+  margin-right: 0.9rem;
 }
 
 /* The region's name, set like a book cover: the italic line hangs to its left
@@ -164,6 +234,7 @@ body.andela2 .toggle-dark-mode {
 .hero-title {
   position: absolute;
   z-index: 2;
+  pointer-events: none;
   right: var(--gutter);
   bottom: clamp(70px, 12vh, 130px);
   display: flex;
@@ -584,8 +655,10 @@ body.andela2 .back-to-top::before {
   .hero-mon {
     left: 50%;
     transform: translateX(-50%);
-    bottom: 20%;
-    height: 46%;
+    bottom: 22%;
+    height: 44%;
+    width: 86%;
+    object-position: center bottom;
   }
   .hero-title {
     left: var(--gutter);
@@ -617,7 +690,23 @@ body.andela2 .back-to-top::before {
   }
 }
 
+@media (max-width: 640px) {
+  .hero-caption {
+    right: auto;
+    left: var(--gutter);
+    bottom: 48px;
+    letter-spacing: 0.22em;
+  }
+  .hero-scroll {
+    bottom: 20px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .hero-slide,
+  .hero-photo,
+  .hero-mon,
+  .hero-caption,
   .hero-link-rule,
   body.andela2 .pokemon-image,
   .az-list a {
