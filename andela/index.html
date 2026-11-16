@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Must be within the first 1024 bytes, so keep it first in <head>. -->
+    <meta charset="UTF-8" />
+
+    <!-- Apply dark mode before first paint so a saved dark theme never flashes
+         light on load. Runs synchronously here (and on <body> below); the full
+         toggle wiring lives in darkMode.js. -->
+    <script>
+      const isDarkMode = localStorage.getItem("darkMode") === "enabled";
+      if (isDarkMode) document.documentElement.classList.add("dark-mode");
+    </script>
+
+    <!-- Fonts are self-hosted (see @font-face in styles.css + assets/fonts/),
+         so there's no Google Fonts origin to preconnect to. Preload the primary
+         latin files (DM Sans body, Syne headings) so they're ready before first
+         paint — this avoids the layout shift a late font swap would cause.
+         crossorigin is required on font preloads, even same-origin. -->
+    <link
+      rel="preload"
+      href="../shared/assets/fonts/rP2Hp2ywxg089UriCZOIHQ.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="../shared/assets/fonts/8vIH7w4qzmVxm2BL9A.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <link rel="stylesheet" href="../shared/styles.css" />
+
+    <link
+      id="dynamic-favicon"
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 100 100'><text y='.9em' font-size='90'>☀️</text></svg>'"
+    />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Andela Pokédex</title>
+
+    <meta
+      name="description"
+      content="A regional Pokédex of 29 original Pokémon from Andela — artwork, dex entries, base stats, abilities and evolution lines."
+    />
+    <link rel="canonical" href="https://emsheshan.github.io/Emsh/andela/" />
+
+    <!-- Link previews. Crawlers read the HTML as served and do not run JS, so
+         these are the same on every card — the card page picks its Pokémon
+         from ?pokemon= at runtime, long after a crawler has gone. Per-mon
+         previews would need one prerendered page per Pokémon. -->
+    <meta property="og:site_name" content="Andela Pokédex" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://emsheshan.github.io/Emsh/andela/" />
+    <meta property="og:title" content="Andela Pokédex" />
+    <meta
+      property="og:description"
+      content="A regional Pokédex of 29 original Pokémon from Andela — artwork, dex entries, base stats, abilities and evolution lines."
+    />
+    <meta
+      property="og:image"
+      content="https://emsheshan.github.io/Andela/sharablePokemonArt/dynastag-1-art.png"
+    />
+    <meta property="og:image:width" content="1080" />
+    <meta property="og:image:height" content="1080" />
+    <meta property="og:image:alt" content="Dynastag, the Crested Pokémon" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Andela Pokédex" />
+    <meta
+      name="twitter:description"
+      content="A regional Pokédex of 29 original Pokémon from Andela — artwork, dex entries, base stats, abilities and evolution lines."
+    />
+    <meta
+      name="twitter:image"
+      content="https://emsheshan.github.io/Andela/sharablePokemonArt/dynastag-1-art.png"
+    />
+
+    <!-- Both are ~500 bytes; preloading both unconditionally avoids a mismatch
+         with the site's manual (localStorage-based) dark mode toggle, which
+         prefers-color-scheme can't detect. -->
+    <link rel="preload" href="../shared/assets/Bg_Light.svg" as="image" />
+    <link rel="preload" href="../shared/assets/Bg_Dark.svg" as="image" />
+
+    <!-- LCP image: the first Pokédex tile (Synthecyte) is the largest element
+         above the fold. The grid is rendered by a deferred module script, so
+         without this the request isn't discoverable until index.js runs.
+         Preloading it here lets the browser's preload scanner fetch it from
+         the initial document, at high priority. Keep this href in sync with
+         the first tile rendered by index.js. -->
+
+    <!-- Preload the whole module graph up front. Without this the browser
+         discovers each import only as the previous module executes
+         (index.js → pokeData.js, a serial round-trip each), which delays
+         creation of the LCP <img> element and shows up as LCP "render delay".
+         modulepreload fetches + compiles them in parallel now. -->
+    <link rel="modulepreload" href="../shared/index.js" />
+    <link rel="modulepreload" href="../shared/pokeData.js" />
+
+    <!-- The dex data is a small CSV fetched by pokeData.js. Preload it so the
+         request starts during initial parse rather than after the module runs. -->
+    <link rel="preload" href="data/pokedex.csv" as="fetch" crossorigin />
+    <link rel="preload" href="data/megadex.csv" as="fetch" crossorigin />
+  </head>
+  <body>
+    <script>
+      if (isDarkMode) document.body.classList.add("dark-mode");
+    </script>
+
+    <a class="skip-link" href="#pokedex">Skip to the Pokédex</a>
+
+    <button
+      class="toggle-dark-mode"
+      onclick="toggleDarkMode('.toggle-dark-mode')"
+    ></button>
+
+    <header>
+      <div class="banner-main">
+        <h1>Andela Pokédex</h1>
+        <button
+          id="searchToggleBtn"
+          class="search-toggle-btn"
+          title="Search & Filter"
+          aria-label="Search & Filter"
+          aria-expanded="false"
+        >
+          <svg
+            class="icon-svg"
+            viewBox="0 -960 960 960"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              d="M782.87-98.52 526.91-354.48q-29.43 21.74-68.15 34.61Q420.04-307 375.48-307q-114.09 0-193.55-79.46-79.45-79.45-79.45-193.54 0-114.09 79.45-193.54Q261.39-853 375.48-853q114.09 0 193.54 79.46 79.46 79.45 79.46 193.54 0 45.13-12.87 83.28T601-429.7l256.52 257.09-74.65 74.09ZM375.48-413q69.91 0 118.45-48.54 48.55-48.55 48.55-118.46t-48.55-118.46Q445.39-747 375.48-747t-118.46 48.54Q208.48-649.91 208.48-580t48.54 118.46Q305.57-413 375.48-413Z"
+            />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="search-filter-bar">
+      <div class="search-wrapper">
+        <svg
+          class="icon-svg search-icon"
+          viewBox="0 -960 960 960"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            d="M782.87-98.52 526.91-354.48q-29.43 21.74-68.15 34.61Q420.04-307 375.48-307q-114.09 0-193.55-79.46-79.45-79.45-79.45-193.54 0-114.09 79.45-193.54Q261.39-853 375.48-853q114.09 0 193.54 79.46 79.46 79.45 79.46 193.54 0 45.13-12.87 83.28T601-429.7l256.52 257.09-74.65 74.09ZM375.48-413q69.91 0 118.45-48.54 48.55-48.55 48.55-118.46t-48.55-118.46Q445.39-747 375.48-747t-118.46 48.54Q208.48-649.91 208.48-580t48.54 118.46Q305.57-413 375.48-413Z"
+          />
+        </svg>
+        <input
+          type="text"
+          id="searchInput"
+          class="search-input"
+          placeholder="Search Pokémon…"
+          autocomplete="off"
+          aria-label="Search Pokémon"
+        />
+        <span
+          id="resultCount"
+          class="result-count-badge"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+        ></span>
+      </div>
+      <div id="typeFilterContainer" class="type-filter-container"></div>
+    </div>
+
+    <main class="dex-main">
+      <h2 id="regional-heading" class="visually-hidden">Regional Pokédex</h2>
+      <section id="pokedex" aria-labelledby="regional-heading"></section>
+      <h2 id="mega-heading" class="section-heading">
+        <span class="h3-inner"
+          ><span class="gradient-text">◆</span
+          ><span class="gradient-text h3-label">Xenos and Megas</span
+          ><span class="gradient-text">◆</span></span
+        >
+      </h2>
+      <section id="megadex" aria-labelledby="mega-heading"></section>
+    </main>
+
+    <script src="../shared/index.js" type="module"></script>
+    <script src="../shared/darkMode.js" defer></script>
+
+    <footer class="footer">
+      <p>
+        &copy; 2026 Pokémon Project. All rights reserved. This is a fan-made
+        project and is not affiliated with or endorsed by Pokémon, Nintendo,
+        Game Freak, or any related entities.
+      </p>
+    </footer>
+
+    <button
+      id="backToTop"
+      class="back-to-top"
+      title="Back to top"
+      aria-label="Back to top"
+    >
+      <svg
+        class="icon-svg"
+        viewBox="0 -960 960 960"
+        fill="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          d="M427-140.78v-475.13L215.43-404.35 140.78-480 480-819.22 819.22-480l-74.65 75.65L533-615.91v475.13H427Z"
+        />
+      </svg>
+    </button>
+
+    <script>
+      // Set initial icon and mode based on the saved state
+      document.addEventListener("DOMContentLoaded", () => {
+        setDarkModeFromStorage(".toggle-dark-mode");
+      });
+    </script>
+  </body>
+</html>

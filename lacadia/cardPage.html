@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Must be within the first 1024 bytes, so keep it first in <head>. -->
+    <meta charset="UTF-8" />
+
+    <!-- LCP discovery: the large Pokémon art is the LCP element, but its URL
+         depends on the ?pokemon slug, so it can't be a static <link rel=preload>.
+         Resolve it synchronously here — the first thing in <head> — so the
+         request is injected during initial parse instead of waiting for the
+         module graph (cardPage.js + the CSV fetch) to download and execute.
+         The slug in the URL *is* the art filename (?pokemon=grismirk →
+         data/pokemonArt/grismirk.png), so no lookup table is needed. A bad slug just
+         means no preload — the page still renders the art normally. -->
+    <script>
+      (function () {
+        var base = new URLSearchParams(location.search).get("pokemon");
+        if (base && /^[a-z0-9]+$/.test(base)) {
+          var link = document.createElement("link");
+          link.rel = "preload";
+          link.as = "image";
+          link.href = "data/pokemonArt/" + base + ".webp";
+          link.setAttribute("fetchpriority", "high");
+          document.head.appendChild(link);
+        }
+      })();
+    </script>
+
+    <link rel="stylesheet" href="../shared/styles.css" />
+    <script>
+      // Check local storage and apply dark-mode class immediately if needed.
+      // (document.body doesn't exist yet here, so only <html> can be tagged;
+      // the body itself is tagged right after its opening tag, below.)
+      const isDarkMode = localStorage.getItem("darkMode") === "enabled";
+      if (isDarkMode) {
+        document.documentElement.classList.add("dark-mode");
+      }
+
+      // Optional: Update favicon immediately if you want
+      window.changeFavicon = (href) => {
+        let link = document.querySelector("link[rel~='icon']");
+        if (!link) {
+          link = document.createElement("link");
+          link.rel = "icon";
+          document.getElementsByTagName("head")[0].appendChild(link);
+        }
+        link.href = href;
+      };
+
+      // Apply initial favicon based on mode
+      if (isDarkMode) {
+        window.changeFavicon(
+          "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌙</text></svg>",
+        );
+      } else {
+        window.changeFavicon(
+          "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☀️</text></svg>",
+        );
+      }
+    </script>
+
+    <!-- Self-hosted fonts (see @font-face in styles.css + assets/fonts/).
+         Preload the primary latin files so they're ready before first paint,
+         avoiding font-swap layout shift. See index.html for full rationale. -->
+    <link
+      rel="preload"
+      href="../shared/assets/fonts/rP2Hp2ywxg089UriCZOIHQ.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="../shared/assets/fonts/8vIH7w4qzmVxm2BL9A.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      id="dynamic-favicon"
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☀️</text></svg>"
+    />
+    <title>Lacadia Pokédex</title>
+
+    <meta
+      name="description"
+      content="A regional Pokédex of original Pokémon from Lacadia — artwork, dex entries, base stats, abilities and evolution lines."
+    />
+    <link
+      rel="canonical"
+      href="https://emsheshan.github.io/Emsh/lacadia/cardPage.html"
+    />
+
+    <!-- Link previews. Crawlers read the HTML as served and do not run JS, so
+         these are the same on every card — the card page picks its Pokémon
+         from ?pokemon= at runtime, long after a crawler has gone. Per-mon
+         previews would need one prerendered page per Pokémon. -->
+    <meta property="og:site_name" content="Lacadia Pokédex" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://emsheshan.github.io/Emsh/lacadia/cardPage.html"
+    />
+    <meta property="og:title" content="Lacadia Pokédex" />
+    <meta
+      property="og:description"
+      content="A regional Pokédex of original Pokémon from Lacadia — artwork, dex entries, base stats, abilities and evolution lines."
+    />
+    <meta
+      property="og:image"
+      content="https://emsheshan.github.io/Lacadia/socialImages/stratoclysm.jpg"
+    />
+    <meta property="og:image:width" content="1080" />
+    <meta property="og:image:height" content="1080" />
+    <meta property="og:image:alt" content="Lacadia Pokédex" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Lacadia Pokédex" />
+    <meta
+      name="twitter:description"
+      content="A regional Pokédex of original Pokémon from Lacadia — artwork, dex entries, base stats, abilities and evolution lines."
+    />
+    <meta
+      name="twitter:image"
+      content="https://emsheshan.github.io/Lacadia/socialImages/stratoclysm.jpg"
+    />
+  </head>
+
+  <body id="card-page">
+    <script>
+      if (isDarkMode) document.body.classList.add("dark-mode");
+    </script>
+
+    <div id="typeColorOverlay"></div>
+
+    <div class="banner-card">
+      <div class="arrow-left">
+        <button
+          class="arrow"
+          onclick="navigatePokemon('previous')"
+          aria-label="Previous Pokémon"
+        >
+          <svg
+            class="icon-svg"
+            viewBox="0 -960 960 960"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              d="M560-221.91 301.91-480 560-738.09 634.09-664l-184 184 184 184L560-221.91Z"
+            />
+          </svg>
+          <span id="previousPokemonNumber"></span>
+          <span id="previousPokemonName"></span>
+        </button>
+        <span id="previousPokemonInfo" class="pokemon-info"></span>
+      </div>
+      <div class="pokemon-info" id="currentPokemonInfo"></div>
+
+      <div class="arrow-right">
+        <button
+          class="arrow"
+          onclick="navigatePokemon('next')"
+          aria-label="Next Pokémon"
+        >
+          <span id="nextPokemonNumber"></span>
+          <span id="nextPokemonName"> </span>
+          <svg
+            class="icon-svg"
+            viewBox="0 -960 960 960"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              d="m485.91-480-184-184L376-738.09 634.09-480 376-221.91 301.91-296l184-184Z"
+            />
+          </svg>
+        </button>
+        <span id="nextPokemonInfo" class="pokemon-info"></span>
+      </div>
+    </div>
+
+    <!-- These two are position:fixed (anchored to the viewport corner). They
+         live OUTSIDE #pokemonCardContainer on purpose: that container gets a
+         `transform` during page-to-page transitions, and a transformed ancestor
+         becomes the containing block for fixed descendants — which used to yank
+         these buttons out of the corner mid-transition. Keeping them here anchors
+         them to the viewport at all times. -->
+    <button
+      class="exit-button"
+      onclick="window.location.href = 'index.html'"
+      aria-label="Back to Pokédex"
+    >
+      <svg
+        class="icon-svg"
+        viewBox="0 -960 960 960"
+        fill="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          d="M256-181.91 181.91-256l224-224-224-224L256-778.09l224 224 224-224L778.09-704l-224 224 224 224L704-181.91l-224-224-224 224Z"
+        />
+      </svg>
+    </button>
+
+    <button
+      class="toggle-dark-mode-card"
+      onclick="toggleDarkMode('.toggle-dark-mode-card')"
+    ></button>
+
+    <div id="pokemonTitleTypeContainer"></div>
+    <div id="pokemonCardContainer" class="pokemon-card-container">
+      <div id="pokemonCardLeft" class="pokemon-card-left"></div>
+      <div id="pokemonCardRight" class="pokemon-card-right"></div>
+    </div>
+
+    <script type="module" src="../shared/cardPage.js"></script>
+    <script src="../shared/darkMode.js" defer></script>
+  </body>
+</html>
