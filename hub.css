@@ -15,26 +15,30 @@ body.hub {
   padding: 48px 0 8px;
 }
 .banner {
+  display: inline-block;
+  position: relative;
   margin: 0;
+  padding: 0.12em 1em 0.14em clamp(28px, 6vw, 72px);
   font-family: var(--display);
   font-weight: 600;
-  letter-spacing: -0.02em;
-  color: var(--paper);
-  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  background: var(--parchment);
+  clip-path: polygon(0 0, 100% 0, calc(100% - 0.5em) 100%, 0 100%);
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.28));
 }
 .hub-head .banner {
-  display: block;
-  padding-left: clamp(28px, 6vw, 72px);
-  font-size: clamp(2.8rem, 8vw, 5rem);
+  font-size: clamp(2.6rem, 7vw, 4.4rem);
 }
 .banner .dot {
-  color: var(--gold);
+  opacity: 0.45;
 }
 .hub-sub {
-  margin: 10px clamp(28px, 6vw, 72px) 0;
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+  margin: 18px clamp(28px, 6vw, 72px) 0;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--muted);
 }
 
@@ -86,9 +90,10 @@ body.hub {
 
 .region-name {
   position: absolute;
-  top: 20px;
-  left: 24px;
-  font-size: clamp(2rem, 3.4vw, 2.5rem);
+  top: 22px;
+  left: 0;
+  padding-left: 24px;
+  font-size: clamp(1.8rem, 3vw, 2.2rem);
 }
 
 .region-art {
@@ -115,9 +120,8 @@ body.hub {
   align-items: center;
   justify-content: center;
   gap: 18px;
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 1.7rem;
+  font-family: var(--display);
+  font-size: 1.6rem;
   text-align: center;
   color: var(--paper);
 }
@@ -148,8 +152,10 @@ body.hub {
   justify-content: space-between;
   padding: 14px 18px;
   border-radius: 18px;
-  font-size: 1.05rem;
-  font-weight: 500;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 .region-go {
   color: var(--gold);

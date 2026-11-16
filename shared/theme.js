@@ -30,8 +30,15 @@
     img.src = url;
   };
 
+  // Hairline viewport frame with small diamonds (styled in theme.css).
+  const frame = document.createElement("div");
+  frame.className = "gold-frame";
+  frame.setAttribute("aria-hidden", "true");
+  frame.innerHTML = "<i></i>".repeat(6);
+
   const mount = () => {
     document.body.prepend(bg);
+    document.body.append(frame);
     const banner = document.querySelector("header .banner-main");
     if (banner && !banner.querySelector(".hub-link")) {
       const a = document.createElement("a");

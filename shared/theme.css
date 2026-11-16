@@ -1,26 +1,32 @@
 /* theme.css — the site's look, layered over Andela's styles.css.
  *
- * styles.css still owns layout and spacing; this file only restyles:
- *   - navy type-tinted backdrop (+ a blurred habitat photo on card pages)
- *   - titles floating in off-white over the backdrop, dex number in muted gold
- *   - light liquid-glass panels: translucent, wide backdrop blur, hairline rim
- *   - art sits straight on the backdrop with a soft drop shadow
- *   - type: Plus Jakarta Sans (titles), DM Sans (UI + numbers),
- *     Instrument Serif italic (the "The ___ Pokémon" line)
+ * styles.css still owns layout and spacing; this file only restyles. The idea
+ * is a researcher's field guide: the graphic signature of the Instagram cards
+ * (slanted name ribbon, viewport frame, diamonds) kept but turned down.
+ *   - navy type-tinted backdrop + blurred habitat photo, with a faint grain
+ *   - parchment name ribbon with dark ink, hairline frame with small diamonds
+ *   - glass panels with fine 1px structure lines
+ *   - type: Fraunces (names/titles), IBM Plex Mono (technical labels and
+ *     numbers), DM Sans (body text)
  * Always dark, so the light/dark toggle is hidden.
  */
 
 @font-face {
-  font-family: "Plus Jakarta Sans";
-  src: url(assets/fonts/PlusJakartaSans-latin.woff2) format("woff2");
-  font-weight: 500 700;
+  font-family: "Fraunces";
+  src: url(assets/fonts/Fraunces-latin.woff2) format("woff2");
+  font-weight: 400 700;
   font-display: swap;
 }
 @font-face {
-  font-family: "Instrument Serif";
-  src: url(assets/fonts/InstrumentSerif-Italic-latin.woff2) format("woff2");
-  font-style: italic;
+  font-family: "IBM Plex Mono";
+  src: url(assets/fonts/IBMPlexMono-400-latin.woff2) format("woff2");
   font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url(assets/fonts/IBMPlexMono-500-latin.woff2) format("woff2");
+  font-weight: 500;
   font-display: swap;
 }
 
@@ -34,9 +40,11 @@ body.dark-mode {
   --navy: #1b1d38;
   --glass: rgba(255, 255, 255, 0.06);
   --rim: rgba(255, 255, 255, 0.12);
-  --display: "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+  --display: "Fraunces", Georgia, serif;
   --ui: "DM Sans", system-ui, sans-serif;
-  --serif: "Instrument Serif", Georgia, serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+  --parchment: #e8dfc8;
+  --ink: #1f1a14;
 
   /* Same palette as the carousel generator, so the two match. */
   --type-normal: #c3c29b;
@@ -119,6 +127,18 @@ body#card-page.dark-mode {
       color-mix(in oklab, #1a1e3e 78%, var(--t2)) 100%);
 }
 
+/* Faint grain over everything in the backdrop, so the colour wash reads like
+   printed paper / frosted acrylic rather than a smooth digital gradient. */
+.page-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1.6 -0.3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
 /* Card pages: two habitat slots. The next Pokemon's backdrop loads into the
    hidden slot, then the two cross-fade (see emshSetBackdrop in theme.js). */
 .page-bg .bg-layer {
@@ -133,6 +153,7 @@ body#card-page.dark-mode {
 }
 /* Dim + vignette over the habitat so text and art stand off it. */
 .page-bg .bg-shade {
+  z-index: 2;
   position: absolute;
   inset: 0;
   opacity: 0;
@@ -154,6 +175,39 @@ body#card-page.dark-mode {
 
 #typeColorOverlay {
   display: none;
+}
+
+/* ---------------------------------------------------------------- frame */
+
+/* A delicate hairline frame inset from the viewport, with small parchment
+   diamonds at the corners and edge midpoints. */
+.gold-frame {
+  position: fixed;
+  inset: 12px;
+  z-index: 50;
+  pointer-events: none;
+  transform: translateZ(0);       /* own layer: stays put while scrolling */
+  will-change: transform;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 12px;
+}
+.gold-frame i {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  background: var(--parchment);
+  opacity: 0.8;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.gold-frame i:nth-child(1) { left: 0; top: 0; }
+.gold-frame i:nth-child(2) { left: 100%; top: 0; }
+.gold-frame i:nth-child(3) { left: 0; top: 100%; }
+.gold-frame i:nth-child(4) { left: 100%; top: 100%; }
+.gold-frame i:nth-child(5) { left: 50%; top: 0; }
+.gold-frame i:nth-child(6) { left: 50%; top: 100%; }
+@media (max-width: 600px) {
+  .gold-frame { inset: 6px; }
+  .gold-frame i:nth-child(n + 5) { display: none; }
 }
 
 /* ---------------------------------------------------------------- glass */
@@ -179,7 +233,7 @@ body#card-page.dark-mode {
 
 /* ---------------------------------------------------------------- type */
 
-/* Titles: wide, upright, calm. */
+/* Names and titles: Fraunces, a soft field-guide serif. */
 h1,
 h2,
 .name,
@@ -187,39 +241,38 @@ h2,
   font-family: var(--display) !important;
   font-style: normal !important;
   font-weight: 600 !important;
+  font-optical-sizing: auto;
   letter-spacing: -0.01em !important;
   text-transform: none !important;
 }
 
-/* UI, stats and numbers: normal-width sans, numbers in even columns. */
+/* Technical labels and numbers: small, wide-tracked mono, like a field device. */
 .dex-num,
 .stat-name,
 .stat-value,
-.evo-node-name,
-.evo-method,
-.pokemon-ability,
 .measurement-pill,
-.arrow,
+.evo-method,
 .result-count-badge,
+.pokemon-title {
+  font-family: var(--mono) !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase;
+}
+
+/* Everything else in the UI: plain DM Sans. */
+.evo-node-name,
+.pokemon-ability,
+.arrow,
 .type-filter-btn,
 .form-switch-button,
 .pokemon-sigmove,
 .hub-link {
   font-family: var(--ui) !important;
   font-style: normal !important;
-  font-variant-numeric: tabular-nums;
   letter-spacing: 0;
-}
-
-/* "The ___ Pokémon": a small editorial serif touch. */
-.pokemon-title {
-  font-family: var(--serif) !important;
-  font-style: italic !important;
-  font-weight: 400 !important;
-}
-
-.dex-num {
-  color: var(--gold) !important;
 }
 
 /* Diamond bullet before section labels. */
@@ -236,7 +289,7 @@ h2,
 
 /* ---------------------------------------------------------------- titles */
 
-/* Region header: a frosted strip with the title floating in off-white. */
+/* Region header: a frosted strip carrying the name ribbon. */
 header .banner-main {
   height: auto !important;
   padding: 20px 0 16px !important;
@@ -249,17 +302,37 @@ header .banner-main {
   border-bottom: 1px solid var(--rim) !important;
   box-shadow: none !important;
 }
+
+/* The slanted name ribbon from the Instagram cards, in parchment and ink
+   instead of signal yellow, with its halftone tail kept faint. */
 header .banner-main h1,
 .title-type-container h2 {
+  display: inline-block;
+  position: relative;
   margin: 0;
-  padding: 0 0 0 clamp(22px, 5vw, 64px);
-  color: var(--paper) !important;
-  background: none !important;
+  padding: 0.14em 1.05em 0.16em clamp(22px, 5vw, 64px);
+  color: var(--ink) !important;
+  background: var(--parchment) !important;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 0.5em) 100%, 0 100%);
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.28));
   -webkit-text-stroke: 0;
-  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
+}
+header .banner-main h1::after,
+.title-type-container h2::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 100%;
+  width: 2.6em;
+  margin-left: -0.8em;
+  background: radial-gradient(circle, var(--parchment) 0 34%, transparent 36%) 0 0 / 0.36em 0.36em;
+  -webkit-mask: linear-gradient(90deg, rgba(0, 0, 0, 0.7), transparent);
+  mask: linear-gradient(90deg, rgba(0, 0, 0, 0.7), transparent);
+  transform: skewX(-22deg);
 }
 header .banner-main h1 {
-  font-size: clamp(1.8rem, 4.2vw, 2.8rem) !important;
+  font-size: clamp(1.7rem, 4vw, 2.6rem) !important;
   margin-right: auto !important;
 }
 header .search-toggle-btn {
@@ -269,15 +342,13 @@ header .search-toggle-btn {
   height: 2.6rem;
 }
 
-/* Card title: dex number sits small above the name, in muted gold. */
+/* Card ribbon: dex number in small mono ink ahead of the name. */
 .title-type-container h2 .dex-num {
-  display: block;
-  margin-bottom: 0.2em;
-  font-size: 0.34em;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: var(--gold) !important;
-  opacity: 1;
+  margin-right: 0.35em;
+  font-size: 0.32em;
+  vertical-align: 0.5em;
+  color: var(--ink) !important;
+  opacity: 0.6;
 }
 
 /* ---------------------------------------------------------------- art */
@@ -394,12 +465,14 @@ header .search-toggle-btn {
 }
 
 .title-type-container h2 {
-  font-size: clamp(2.2rem, 5vw, 3.6rem) !important;
+  font-size: clamp(2rem, 4.6vw, 3.2rem) !important;
 }
+/* "THE PROWLER POKÉMON" as a specimen-label line under the ribbon. */
 .pokemon-title {
   color: var(--muted) !important;
-  font-size: 1.45rem !important;
-  padding-left: clamp(22px, 5vw, 64px) !important;  /* line up under the name */
+  font-size: 0.78rem !important;
+  margin-top: 0.7rem !important;
+  padding-left: clamp(22px, 5vw, 64px) !important;
   margin-left: 0 !important;
 }
 
@@ -537,11 +610,47 @@ header .search-toggle-btn {
   color: var(--gold) !important;
 }
 
-/* Megas/Xenos: Andela clips a gradient into the title text; keep the plain
-   off-white title like every other card instead. */
+/* Megas/Xenos: Andela clips a gradient into the title text; keep the
+   parchment ribbon like every other card instead. */
 body.mega-pokemon .title-type-container h2 {
-  background: none !important;
+  background: var(--parchment) !important;
   -webkit-background-clip: border-box !important;
   background-clip: border-box !important;
-  color: var(--paper) !important;
+  color: var(--ink) !important;
+}
+
+/* ---------------------------------------------------------------- structure
+
+   Fine 1px rules inside the panels, so they read as an engineered specimen
+   card rather than a soft blob of blur. */
+.pokemon-stats .stat-bar {
+  padding: 0.2rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.pokemon-stats .stat-bar:last-child,
+.pokemon-stats .bst-row {
+  border-bottom: 0;
+}
+.pokemon-stats .bst-row {
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  margin-top: 0.2rem;
+  padding-top: 0.35rem;
+}
+.measurement-pill {
+  border-radius: 6px !important;
+  font-size: 0.72rem !important;
+}
+.ability-list .pokemon-ability + .pokemon-ability {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 0.35rem;
+}
+.stat-name,
+.stat-value {
+  font-size: 0.72rem !important;
+}
+.pokemon .dex-num {
+  font-size: 0.62rem !important;
+}
+.pokemon .name {
+  font-size: 1.12rem !important;
 }
