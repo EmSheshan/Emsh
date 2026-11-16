@@ -98,7 +98,7 @@ body.hub {
   top: 52%;
   width: 82%;
   transform: translate(-50%, -50%);
-  filter: url(#art-stroke) drop-shadow(0 14px 22px rgba(0, 0, 0, 0.4));
+  filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.4));
   transition: transform 0.35s ease;
 }
 .region:hover .region-art {

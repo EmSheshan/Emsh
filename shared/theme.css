@@ -279,7 +279,7 @@ header .banner-main h1::after,
 .pokemon-image,
 .pokemon-image-large,
 .evo-node-art img {
-  filter: url(#art-stroke) drop-shadow(0 10px 18px rgba(0, 0, 0, 0.35)) !important;
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.35)) !important;
 }
 
 /* ---------------------------------------------------------------- grid */
