@@ -49,6 +49,41 @@
 
 /* ---------------------------------------------------------------- page */
 
+/* Scroll bars in the region's colours: a slim rounded thumb. */
+html {
+  scrollbar-color: var(--moss) var(--night);
+  scrollbar-width: thin;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--night);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--moss);
+  border: 2px solid var(--night);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+/* Inner scrollers on the paper (the A–Z index, a long family) get a paper track. */
+.az,
+.fam-tree {
+  scrollbar-color: color-mix(in oklab, var(--moss) 55%, var(--paper)) transparent;
+}
+.az::-webkit-scrollbar-track,
+.fam-tree::-webkit-scrollbar-track {
+  background: transparent;
+}
+.az::-webkit-scrollbar-thumb,
+.fam-tree::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, var(--moss) 55%, var(--paper));
+  border-color: var(--paper);
+}
+
 body.field {
   margin: 0;
   display: block;
@@ -735,8 +770,15 @@ body.field .back-to-top::before {
   body.field .pokemon-art {
     border-radius: 12px 12px 12px 52px;
   }
+  body.field .name-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
   body.field .name {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
+    max-width: 100%;
+    overflow-wrap: anywhere;
   }
   .vine {
     display: none;          /* no room beside the title; it would cross it */

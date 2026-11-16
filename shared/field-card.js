@@ -80,7 +80,7 @@ function bandHTML(mon, list, formIndex) {
     if (!sid) return `<span class="band-step band-step--${dir} is-empty"></span>`;
     const p = forms.get(sid)[0];
     return `<a class="band-step band-step--${dir}" href="?pokemon=${sid}" data-go="${sid}">
-      <span class="band-step-label">${p.num != null ? `Nº ${pad(p.num)}` : "Xeno / Mega"}<span class="band-step-name">  ${esc(baseName(p))}</span></span>
+      <span class="band-step-label">${p.num != null ? `Nº ${pad(p.num)}<span class="band-step-name">  ${esc(baseName(p))}</span>` : esc(baseName(p))}</span>
       <span class="hero-link-rule" aria-hidden="true"></span></a>`;
   };
   const formTabs = list.length > 1
@@ -166,11 +166,13 @@ function statsHTML(mon) {
     </section>`;
 }
 
-function nodeHTML(p, current) {
+function nodeHTML(p, current, viewing = null) {
   const isCurrent = p.id === current || p.speciesId === current;
-  const tile = tileFor(p.id);
+  // On the current node, show the forme you're looking at (e.g. Yakoyza-Ink).
+  const shown = isCurrent && viewing ? viewing : p;
+  const tile = tileFor(shown.id);
   const inner = `
-    <span class="fam-art" ${tile ? `style="--scene: url('${abs(tile)}')"` : ""}><img src="${art(p.id)}" alt="" loading="lazy"></span>
+    <span class="fam-art" ${tile ? `style="--scene: url('${abs(tile)}')"` : ""}><img src="${art(shown.id)}" alt="" loading="lazy"></span>
     <span class="fam-label">${p.num != null ? `<span class="fam-num">Nº ${pad(p.num)}</span>` : p.isExternal ? `<span class="fam-num">Canon</span>` : `<span class="fam-num">Xeno / Mega</span>`}
       <span class="fam-name">${esc(baseName(p))}</span></span>`;
   const cls = `fam-node${isCurrent ? " is-current" : ""}${p.isExternal ? " is-canon" : ""}`;
@@ -179,17 +181,20 @@ function nodeHTML(p, current) {
     : `<a class="${cls}" href="?pokemon=${p.speciesId}" data-go="${p.speciesId}">${inner}</a>`;
 }
 
-function familyHTML(p, current) {
+function familyHTML(p, current, viewing) {
   const kids = children(p);
-  if (!kids.length) return `<div class="fam-branch">${nodeHTML(p, current)}</div>`;
-  return `<div class="fam-branch">${nodeHTML(p, current)}
+  if (!kids.length) return `<div class="fam-branch">${nodeHTML(p, current, viewing)}</div>`;
+  return `<div class="fam-branch">${nodeHTML(p, current, viewing)}
     <div class="fam-kids">${kids.map((k) => `
-      <div class="fam-step"><span class="fam-arrow">${k.evoMethod ? `<span class="fam-method">${esc(k.evoMethod)}</span>` : ""}</span>${familyHTML(k, current)}</div>`).join("")}
+      <div class="fam-step"><span class="fam-arrow">${k.evoMethod ? `<span class="fam-method">${esc(k.evoMethod)}</span>` : ""}</span>${familyHTML(k, current, viewing)}</div>`).join("")}
     </div></div>`;
 }
 
 function evoHTML(mon) {
-  const top = root(mon);
+  // Evolution links are recorded on a species' base forme, so climb from that
+  // (an alternate forme like Yakoyza-Ink has no prevo of its own).
+  const base = forms.get(mon.speciesId)?.[0] ?? mon;
+  const top = root(base);
   if (mon.isMega) {
     if (top.id === mon.id) return "";
     return `<section class="family"><p class="eyebrow">Base form</p><h2 class="section-title">Origin</h2>
@@ -197,7 +202,7 @@ function evoHTML(mon) {
   }
   const solo = !children(top).length;
   return `<section class="family"><p class="eyebrow">Evolution</p><h2 class="section-title">Family</h2>
-    <div class="fam-tree">${familyHTML(top, mon.speciesId)}${solo ? '<p class="fam-note">Does not evolve.</p>' : ""}</div></section>`;
+    <div class="fam-tree">${familyHTML(top, mon.speciesId, mon)}${solo ? '<p class="fam-note">Does not evolve.</p>' : ""}</div></section>`;
 }
 
 // ---------------------------------------------------------------- render
@@ -215,6 +220,25 @@ function markIndex(sid) {
   });
 }
 
+// The big name: start from the size CSS gives it, then shrink until the real
+// rendered width fits its column (letter widths vary too much to guess).
+function fitName(el) {
+  if (!el) return;
+  el.style.fontSize = "";
+  const fit = () => {
+    el.style.fontSize = "";
+    const room = el.clientWidth * 0.97;    // a little breathing room at the edge
+    let size = parseFloat(getComputedStyle(el).fontSize);
+    for (let i = 0; i < 12 && el.scrollWidth > room && size > 28; i++) {
+      size *= Math.max(0.6, (room / el.scrollWidth) * 0.99);
+      el.style.fontSize = `${size}px`;
+    }
+  };
+  fit();
+  document.fonts?.ready.then(fit);   // re-check once the serif has loaded
+}
+addEventListener("resize", () => document.querySelectorAll(".band-word").forEach(fitName));
+
 async function showSlide(mon) {
   const stage = band.querySelector(".hero-stage");
   const photo = photoFor(mon.id);
@@ -227,6 +251,7 @@ async function showSlide(mon) {
   if (photo) slide.querySelector(".hero-photo").style.setProperty("--hero-photo", `url("${abs(photo)}")`);
   slide.querySelector("img").addEventListener("error", (e) => (e.target.style.visibility = "hidden"));
   stage.append(slide);
+  fitName(slide.querySelector(".band-word"));
   requestAnimationFrame(() => requestAnimationFrame(() => {
     const old = stage.querySelectorAll(".hero-slide.is-active");
     slide.classList.add("is-active");

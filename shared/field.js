@@ -129,6 +129,9 @@ function startHero() {
 }
 startHero();
 
+// Regions with no Megas/Xenos drop that whole section, heading included.
+if (!Object.keys(megadex).length) document.querySelector(".section-head--sub")?.remove();
+
 // ---------------------------------------------------------------- A–Z index
 
 const entries = [...Object.values(pokedex).filter((p) => !p.isForme), ...Object.values(megadex)]

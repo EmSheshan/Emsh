@@ -125,6 +125,7 @@
 }
 .band-word {
   position: absolute;
+  overflow: hidden;                 /* measured and shrunk to fit by field-card.js */
   z-index: 1;
   left: var(--split);
   right: calc(var(--frame) + var(--gutter));
