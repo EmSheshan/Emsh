@@ -17,9 +17,9 @@
 }
 .band .hero-mon {
   left: calc(var(--frame) + var(--gutter));
-  bottom: 0;
+  bottom: 9%;                       /* floats clear of the window's bottom edge */
   width: calc(var(--split) - var(--frame) - var(--gutter) - 2.5vw);
-  height: min(86%, 740px);
+  height: min(76%, 660px);
   object-position: center bottom;
 }
 .band-chrome {

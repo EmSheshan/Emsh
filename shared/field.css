@@ -210,10 +210,11 @@ body.field .toggle-dark-mode {
   translate: 0 24px;
   transition: opacity 0.9s ease 0.3s, translate 1.3s cubic-bezier(0.2, 0.7, 0.2, 1) 0.3s;
   left: clamp(-30px, 1.5vw, 40px);
-  bottom: -2%;
-  /* A fixed box: tall Pokémon fill its height, wide ones shrink to its width,
-     so none can reach the title on the right. */
-  height: min(80%, 660px);
+  /* Floats in the window, clear of its bottom edge. A fixed box: tall
+     Pokémon fill its height, wide ones shrink to its width, so none can
+     reach the title on the right. */
+  bottom: 9%;
+  height: min(72%, 600px);
   width: min(31%, 460px);
   object-fit: contain;
   object-position: left bottom;
@@ -707,8 +708,8 @@ body.field .back-to-top::before {
   .hero-mon {
     left: 50%;
     transform: translateX(-50%);
-    bottom: 22%;
-    height: 44%;
+    bottom: 26%;
+    height: 40%;
     width: 86%;
     object-position: center bottom;
   }
