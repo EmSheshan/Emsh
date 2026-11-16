@@ -1,0 +1,12 @@
+{
+  "name": "emsh",
+  "private": true,
+  "type": "module",
+  "description": "Static site. Node is only needed for the tools/ scripts that prepare art and backdrops.",
+  "scripts": {
+    "backdrops": "node tools/build-backdrops.mjs"
+  },
+  "devDependencies": {
+    "canvas": "^3.2.0"
+  }
+}

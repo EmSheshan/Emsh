@@ -279,7 +279,7 @@ function displaySelectedPokemon(formIndex = 0) {
   const navLabel = (p) =>
     p?.isMega
       ? { num: "", name: p.name }
-      : { num: p ? `#${p.num}` : "", name: p ? p.name.split("-")[0] : "" };
+      : { num: p ? `Nº ${String(p.num).padStart(3, "0")}` : "", name: p ? p.name.split("-")[0] : "" };
 
   const prev = navLabel(prevPokemon);
   const next = navLabel(nextPokemon);
@@ -318,6 +318,15 @@ function displaySelectedPokemon(formIndex = 0) {
     "--type2-color",
     `var(--type-${(type2 || type1).toLowerCase()})`,
   );
+
+  // Habitat backdrop (built by tools/build-backdrops.mjs), shown behind the art.
+  document.documentElement.style.setProperty(
+    "--backdrop",
+    // Absolute URL: a url() inside a custom property resolves against the
+    // stylesheet that uses it (shared/), not this page, if left relative.
+    `url("${new URL(`data/backdrops/${selectedPokemon.id}.jpg`, document.baseURI).href}")`,
+  );
+  document.body.classList.add("has-backdrop");
 
   // Handle Abilities
   const ability1 = selectedPokemon.abilities["0"];
@@ -407,12 +416,19 @@ function displaySelectedPokemon(formIndex = 0) {
                 ${[ability1, ability2, abilityh]
                   .filter(Boolean)
                   .map((a) => {
-                    const isAndela =
-                      abilities[a]?.tag === "andela" ||
-                      abilities[a]?.tag === "mega";
+                    // Region originals (tagged with the region's name, or "mega")
+                    // get a NEW tag and their effect spelled out; canon
+                    // abilities keep the hover popup.
+                    const tag = abilities[a]?.tag;
+                    const isOriginal =
+                      tag === region.name.toLowerCase() || tag === "mega";
+                    const effect =
+                      typeof abilities[a] === "object"
+                        ? abilities[a].description
+                        : abilities[a] || "";
                     return `
-                    <div class="pokemon-ability${isAndela ? " andela-ability" : ""}" tabindex="0">
-                        ${a}
+                    <div class="pokemon-ability${isOriginal ? " andela-ability original" : ""}" tabindex="0">
+                        ${a}${isOriginal ? `<span class="new-tag">NEW</span><span class="ability-effect">${effect}</span>` : ""}
                         <span class="ability-description-popup">
                             ${typeof abilities[a] === "object" ? abilities[a].description : abilities[a] || "No Description"}
                         </span>

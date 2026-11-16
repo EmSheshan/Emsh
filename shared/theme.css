@@ -1,0 +1,522 @@
+/* theme.css — the Instagram-carousel look, layered over Andela's styles.css.
+ *
+ * styles.css still owns layout and behaviour; this file only restyles:
+ *   - navy type-tinted backdrop (+ a blurred habitat scene on card pages)
+ *   - yellow slanted name banner with a halftone tail
+ *   - liquid-glass panels: real backdrop blur, faint hairline rim
+ *   - gold double frame with diamond studs around the viewport
+ *   - art with a solid half-opacity white stroke (SVG filter from theme.js)
+ *   - SmileySans for display type, diamond bullets, gold labels
+ * Always dark: the carousel look has no light variant, so the toggle is hidden.
+ */
+
+@font-face {
+  font-family: "SmileySans";
+  src: url(assets/fonts/SmileySans-Oblique-latin.woff2) format("woff2");
+  font-display: swap;
+}
+
+:root,
+html.dark-mode,
+body.dark-mode {
+  --gold: #ffd200;
+  --gold-soft: rgba(255, 210, 0, 0.55);
+  --paper: #f4f1e8;
+  --muted: #c9c7d8;
+  --navy: #1b1d38;
+  --glass: rgba(14, 16, 36, 0.42);
+  --glass-strong: rgba(14, 16, 36, 0.6);
+  --rim: rgba(255, 255, 255, 0.14);
+  --display: "SmileySans", "Arial Narrow", sans-serif;
+
+  /* Same palette as the carousel generator, so the two match. */
+  --type-normal: #c3c29b;
+  --type-fire: #ff6320;
+  --type-water: #4b99ff;
+  --type-electric: #f7d02c;
+  --type-grass: #7ac74c;
+  --type-ice: #96d9d6;
+  --type-fighting: #ff2b23;
+  --type-poison: #a622a3;
+  --type-ground: #e39b49;
+  --type-flying: #baa2ff;
+  --type-psychic: #ff4baa;
+  --type-bug: #a6b91a;
+  --type-rock: #958150;
+  --type-ghost: #4d4260;
+  --type-dragon: #5935fc;
+  --type-dark: #322d28;
+  --type-steel: #8c8c9a;
+  --type-fairy: #ff98b5;
+
+  /* Remap Andela's tokens so its components pick up the dark carousel look. */
+  --bg1: #15172e;
+  --bg2: rgba(255, 255, 255, 0.08);
+  --bg3: var(--glass);
+  --main-text: var(--paper);
+  --second-text: var(--gold);
+  --accent2: var(--gold);
+  --gold-ink: var(--gold);
+  --gold-ui: var(--gold);
+  --banner-text: #111;
+  --shadow: rgba(0, 0, 0, 0.35);
+
+  --t1: var(--type1-color, #5a5f9a);
+  --t2: var(--type2-color, var(--t1));
+}
+
+/* The page itself is transparent so the fixed backdrop (body::before) shows;
+   html carries the navy fallback. */
+html,
+html.dark-mode {
+  background: var(--navy) !important;
+}
+body,
+body.dark-mode,
+body#card-page,
+body#card-page.dark-mode {
+  color: var(--paper);
+  background: transparent !important;
+}
+
+/* ---------------------------------------------------------------- backdrop */
+
+/* Navy -> dusk -> slate -> navy, tinted from type 1 (top) to type 2 (bottom),
+   with the halftone dot bands of the original cards. Fixed behind everything. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.32) 0 40%, transparent 41%) 0 -18px / 70px 70px repeat-x,
+    radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.32) 0 40%, transparent 41%) 0 calc(100% + 18px) / 70px 70px repeat-x,
+    linear-gradient(180deg,
+      color-mix(in oklab, #1e1e34 76%, var(--t1)) 0%,
+      color-mix(in oklab, #463a54 64%, var(--t1)) 24%,
+      color-mix(in oklab, #5c607c 70%, color-mix(in oklab, var(--t1), var(--t2))) 50%,
+      color-mix(in oklab, #2a3862 64%, var(--t2)) 80%,
+      color-mix(in oklab, #1a1e3e 78%, var(--t2)) 100%);
+}
+
+/* Card pages: the Pokemon's blurred habitat over that, tinted to match. */
+body.has-backdrop::before {
+  background:
+    linear-gradient(180deg, rgba(10, 12, 26, 0.25), rgba(10, 12, 26, 0.45)),
+    var(--backdrop) center / cover no-repeat,
+    var(--navy);
+}
+body.has-backdrop::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 45%, rgba(0, 0, 0, 0.5));
+}
+
+#typeColorOverlay {
+  display: none;
+}
+
+/* ---------------------------------------------------------------- frame */
+
+/* Gold double rule with diamond studs, inset from the viewport edge. */
+.gold-frame {
+  position: fixed;
+  inset: 10px;
+  z-index: 50;
+  pointer-events: none;
+  border: 2px solid rgba(255, 210, 0, 0.85);
+  border-radius: 14px;
+}
+.gold-frame::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 1px dashed rgba(255, 226, 120, 0.35);
+  border-radius: 8px;
+}
+.gold-frame i {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: var(--gold);
+  transform: translate(-50%, -50%) rotate(45deg);
+  box-shadow: inset 0 0 0 4px var(--gold), inset 0 0 0 7px #1a1420;
+}
+.gold-frame i:nth-child(1) { left: 0; top: 0; }
+.gold-frame i:nth-child(2) { left: 100%; top: 0; }
+.gold-frame i:nth-child(3) { left: 0; top: 100%; }
+.gold-frame i:nth-child(4) { left: 100%; top: 100%; }
+.gold-frame i:nth-child(5) { left: 50%; top: 0; }
+.gold-frame i:nth-child(6) { left: 50%; top: 100%; }
+@media (max-width: 600px) {
+  .gold-frame { inset: 6px; }
+  .gold-frame i:nth-child(n + 5) { display: none; }
+}
+
+/* ---------------------------------------------------------------- glass */
+
+.glass,
+.pokemon,
+.pokemon-description,
+.pokemon-stats,
+.ability-list,
+.pokemon-sigmove,
+.evolution-section,
+.search-filter-bar,
+.measurement-pill,
+.no-results {
+  background: var(--glass) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.3);
+  backdrop-filter: blur(18px) saturate(1.3);
+  border: 1px solid var(--rim) !important;
+  border-top-color: rgba(255, 255, 255, 0.24) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22) !important;
+  color: var(--paper);
+}
+
+/* ---------------------------------------------------------------- type */
+
+h1,
+h2,
+.name,
+.dex-num,
+.stat-name,
+.stat-value,
+.pokemon-title,
+.evo-node-name,
+.evo-method,
+.pokemon-ability,
+.measurement-pill,
+.arrow,
+.result-count-badge,
+.type-filter-btn,
+.form-switch-button {
+  font-family: var(--display) !important;
+  letter-spacing: 0.01em;
+}
+
+.dex-num {
+  color: var(--gold) !important;
+}
+
+/* Diamond bullet before section labels. */
+.diamond-label::before,
+.evolution-section > h3::before {
+  content: "";
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  margin-right: 0.45em;
+  background: var(--gold);
+  transform: rotate(45deg) translateY(-0.12em);
+}
+
+/* ---------------------------------------------------------------- banner */
+
+/* The carousel's slanted yellow name banner with a halftone tail. */
+header .banner-main {
+  height: auto !important;
+  padding: 22px 0 16px !important;
+  justify-content: flex-start;
+  gap: 12px;
+  background: linear-gradient(180deg, rgba(10, 12, 26, 0.6), rgba(10, 12, 26, 0.35)) !important;
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border: 0 !important;
+  border-bottom: 1px solid var(--rim) !important;
+  box-shadow: none !important;
+}
+header .banner-main h1,
+.title-type-container h2 {
+  display: inline-block;
+  position: relative;
+  margin: 0;
+  padding: 0.12em 1.1em 0.1em clamp(22px, 5vw, 64px);
+  color: #111 !important;
+  font-family: var(--display) !important;
+  font-style: normal;
+  font-weight: 400;
+  text-transform: none;
+  background: linear-gradient(90deg, #ffb800, #ffdf1a);
+  clip-path: polygon(0 0, 100% 0, calc(100% - 0.55em) 100%, 0 100%);
+  filter: drop-shadow(0 8px 0 rgba(0, 0, 0, 0.3));
+}
+header .banner-main h1 {
+  font-size: clamp(2rem, 5.5vw, 3.6rem) !important;
+  -webkit-text-stroke: 0;
+  margin-right: auto !important;
+}
+header .search-toggle-btn {
+  margin: 0 clamp(18px, 3vw, 40px) 0 0 !important;
+  border-radius: 99px !important;
+  width: 2.6rem;
+  height: 2.6rem;
+}
+header .banner-main h1::after,
+.title-type-container h2::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 100%;
+  width: 3.2em;
+  margin-left: -0.9em;
+  background: radial-gradient(circle, #ffdc1f 0 38%, transparent 40%) 0 0 / 0.4em 0.4em;
+  -webkit-mask: linear-gradient(90deg, #000, transparent);
+  mask: linear-gradient(90deg, #000, transparent);
+  transform: skewX(-22deg);
+}
+.title-type-container h2 .dex-num {
+  color: #111 !important;
+  opacity: 0.55;
+}
+
+/* ---------------------------------------------------------------- art */
+
+.pokemon-image,
+.pokemon-image-large,
+.evo-node-art img {
+  filter: url(#art-stroke) drop-shadow(0 10px 18px rgba(0, 0, 0, 0.35)) !important;
+}
+
+/* ---------------------------------------------------------------- grid */
+
+.pokemon {
+  border-radius: 20px !important;
+  overflow: hidden;
+}
+.pokemon::before {
+  /* Andela's type bar along the top, kept but slimmer. */
+  height: 3px !important;
+  opacity: 0.9;
+}
+.pokemon .pokemon-art {
+  background: none !important;
+}
+.pokemon .name {
+  font-size: 1.35rem !important;
+  color: var(--paper) !important;
+}
+.pokemon:hover,
+.pokemon:focus-visible {
+  border-color: rgba(255, 210, 0, 0.6) !important;
+  transform: translateY(-4px);
+}
+.pokemon .pokemon-image.missing-art {
+  visibility: hidden;
+}
+
+.search-input {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: var(--paper) !important;
+  border-color: var(--rim) !important;
+}
+.type-filter-btn {
+  background: rgba(255, 255, 255, 0.07) !important;
+  color: var(--paper) !important;
+  border-color: var(--rim) !important;
+}
+.type-filter-btn.active {
+  background: var(--gold) !important;
+  color: #111 !important;
+}
+.search-toggle-btn,
+.back-to-top,
+.exit-button {
+  background: var(--glass) !important;
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  color: var(--gold) !important;
+  border: 1px solid var(--rim) !important;
+}
+
+/* Theme is always dark: no light/dark toggle. */
+.toggle-dark-mode,
+.toggle-dark-mode-card {
+  display: none !important;
+}
+
+.footer {
+  color: var(--muted);
+  background: none !important;
+}
+
+/* Region-hub link in the grid header, beside the search button. */
+.hub-link {
+  font-family: var(--display);
+  font-size: 1.15rem;
+  color: var(--paper);
+  text-decoration: none;
+  padding: 0.35em 0.9em;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--rim);
+  white-space: nowrap;
+}
+.hub-link:hover { color: #111; background: var(--gold); }
+@media (max-width: 600px) {
+  .hub-link { font-size: 0; padding: 0.5em 0.8em; }
+  .hub-link::before { content: "\2190"; font-size: 1.1rem; }
+}
+
+/* ---------------------------------------------------------------- card page */
+
+.banner-card {
+  background: rgba(10, 12, 26, 0.55) !important;
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--rim) !important;
+  box-shadow: none !important;
+}
+.banner-card .arrow {
+  color: var(--paper) !important;
+}
+.banner-card .arrow span:first-of-type {
+  color: var(--gold);
+}
+
+.title-type-container h2 {
+  font-size: clamp(2.2rem, 6vw, 4rem) !important;
+}
+.pokemon-title {
+  color: var(--paper) !important;
+  font-size: 1.5rem !important;
+}
+
+/* Andela's circle behind the art -> nothing; the habitat does that job now. */
+.circle-background {
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.circle-background::before,
+.circle-background::after {
+  display: none !important;
+}
+
+.pokemon-description {
+  border-radius: 22px !important;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+.pokemon-description::before {
+  display: none !important;
+}
+
+.pokemon-stats,
+.ability-list,
+.pokemon-sigmove,
+.evolution-section {
+  border-radius: 22px !important;
+}
+.stat-name,
+.stat-value {
+  color: var(--paper) !important;
+  font-size: 1.2rem !important;
+}
+.bar-container {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-radius: 99px !important;
+}
+.bar-fill {
+  border-radius: 99px !important;
+  background-image: none !important;
+}
+.bar-fill.hp { background-color: #ff5252 !important; }
+.bar-fill.atk { background-color: #ff9a3c !important; }
+.bar-fill.def { background-color: #ffd83b !important; }
+.bar-fill.spa { background-color: #4fa8ff !important; }
+.bar-fill.spd { background-color: #5fdc6e !important; }
+.bar-fill.spe { background-color: #ff7ec8 !important; }
+.bar-fill.bst { background-color: var(--gold) !important; }
+.bst-row .stat-name,
+.bst-row .stat-value {
+  color: var(--gold) !important;
+}
+
+/* Abilities: name, then a NEW tag + spelled-out effect for region originals. */
+.pokemon-ability {
+  color: var(--paper) !important;
+  font-size: 1.3rem;
+}
+.pokemon-ability .new-tag {
+  display: inline-block;
+  margin-left: 0.5em;
+  padding: 0.05em 0.5em;
+  border-radius: 99px;
+  background: var(--gold);
+  color: #111;
+  font-size: 0.7em;
+  vertical-align: 0.15em;
+}
+.pokemon-ability .ability-effect {
+  display: block;
+  margin-top: 0.2em;
+  font-family: inherit;
+  font-size: 0.78em;
+  color: var(--muted);
+  line-height: 1.35;
+}
+.pokemon-ability.original .ability-description-popup {
+  display: none !important;
+}
+
+.pokemon-sigmove {
+  color: var(--paper) !important;
+  font-family: var(--display);
+  font-size: 1.3rem;
+}
+.pokemon-sigmove-description {
+  color: var(--muted) !important;
+  font-family: inherit;
+}
+
+/* Evolution: the current Pokemon sits in a gold diamond, not a circle. */
+.evo-node-frame {
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.evo-node-current .evo-node-frame {
+  position: relative;
+}
+.evo-node-current .evo-node-frame::before {
+  content: "";
+  position: absolute;
+  inset: 12%;
+  background: rgba(255, 210, 0, 0.16);
+  border: 2px solid rgba(255, 210, 0, 0.85);
+  transform: rotate(45deg);
+  z-index: 0;
+}
+.evo-node-current .evo-node-art {
+  position: relative;
+  z-index: 1;
+}
+.evo-node-current .evo-node-name {
+  color: var(--gold) !important;
+}
+.evo-node-name {
+  color: var(--paper) !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+.evo-arrow,
+.evo-method {
+  color: var(--gold) !important;
+}
+
+.card-shiny-toggle,
+.form-switch-button {
+  background: var(--glass) !important;
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--rim) !important;
+  color: var(--paper) !important;
+}
+.card-shiny-toggle.shiny-active {
+  background: var(--gold) !important;
+  color: #111 !important;
+}
