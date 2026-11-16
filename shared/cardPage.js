@@ -416,18 +416,14 @@ function displaySelectedPokemon(formIndex = 0) {
                   .filter(Boolean)
                   .map((a) => {
                     // Region originals (tagged with the region's name, or "mega")
-                    // get a NEW tag and their effect spelled out; canon
-                    // abilities keep the hover popup.
+                    // are marked by colour (see theme.css); every ability shows
+                    // its effect in the hover / tap popup.
                     const tag = abilities[a]?.tag;
                     const isOriginal =
                       tag === region.name.toLowerCase() || tag === "mega";
-                    const effect =
-                      typeof abilities[a] === "object"
-                        ? abilities[a].description
-                        : abilities[a] || "";
                     return `
                     <div class="pokemon-ability${isOriginal ? " andela-ability original" : ""}" tabindex="0">
-                        ${a}${isOriginal ? `<span class="new-tag">NEW</span><span class="ability-effect">${effect}</span>` : ""}
+                        ${a}
                         <span class="ability-description-popup">
                             ${typeof abilities[a] === "object" ? abilities[a].description : abilities[a] || "No Description"}
                         </span>

@@ -526,30 +526,43 @@ header .search-toggle-btn {
   color: var(--gold) !important;
 }
 
-/* Abilities: name, then a NEW tag + spelled-out effect for region originals. */
+/* Abilities: region originals in parchment with a larger diamond; canon ones
+   plain. Every ability reveals its effect in the same popup on hover / tap. */
 .pokemon-ability {
   color: var(--paper) !important;
+  font-weight: 500 !important;
+  border-radius: 6px;
 }
-.pokemon-ability .new-tag {
-  display: inline-block;
-  margin-left: 0.5em;
-  padding: 0.05em 0.5em;
-  border-radius: 99px;
-  background: var(--gold);
-  color: #111;
-  font-size: 0.7em;
-  vertical-align: 0.15em;
+.pokemon-ability::before {
+  background: rgba(255, 255, 255, 0.45) !important;
 }
-.pokemon-ability .ability-effect {
-  display: block;
-  margin-top: 0.2em;
-  font-family: inherit;
-  font-size: 0.78em;
-  color: var(--muted);
-  line-height: 1.35;
+.pokemon-ability.original {
+  color: var(--parchment) !important;
+  font-weight: 600 !important;
 }
-.pokemon-ability.original .ability-description-popup {
-  display: none !important;
+.pokemon-ability.original::before {
+  width: 8px !important;
+  height: 8px !important;
+  background: var(--parchment) !important;
+}
+.pokemon-ability:hover,
+.pokemon-ability:focus {
+  background: rgba(255, 255, 255, 0.07) !important;
+  color: var(--parchment) !important;
+}
+.ability-description-popup {
+  background: rgba(16, 18, 34, 0.96) !important;   /* nearly solid: it overlaps the next ability on phones */
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  color: var(--paper) !important;
+  border: 1px solid var(--rim) !important;
+  border-left: 2px solid var(--parchment) !important;
+  border-radius: 8px !important;
+  clip-path: none !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35) !important;
+  font-family: var(--ui) !important;
+  font-weight: 400;
+  line-height: 1.45;
 }
 
 .pokemon-sigmove {
