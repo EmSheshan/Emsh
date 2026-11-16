@@ -106,7 +106,7 @@ function aboutHTML(mon) {
   const d = mon.description?.length ? mon.description : ["No entry yet."];
   return `
     <section class="about">
-      <h2 class="section-title">About<br />${esc(baseName(mon))}</h2>
+      <h2 class="entry-label">About</h2>
       <div class="about-text">${d.map((p) => `<p>${esc(p)}</p>`).join("")}</div>
     </section>`;
 }
@@ -140,14 +140,8 @@ function notesHTML(mon) {
 
   return `
     <section class="notes">
-      <p class="eyebrow">How to recognise it</p>
-      <h2 class="section-title">Field notes</h2>
-      <div class="notes-field">
-        <svg class="notes-vine" viewBox="0 0 1000 400" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M-20 360 C 180 360, 260 120, 470 150 S 760 330, 1020 40" />
-        </svg>
-        <div class="notes-grid">${items}</div>
-      </div>
+      <h2 class="entry-label">Field notes</h2>
+      <div class="notes-grid">${items}</div>
     </section>`;
 }
 
@@ -156,8 +150,7 @@ function statsHTML(mon) {
   const bst = rows.reduce((t, [k]) => t + (mon.baseStats[k] ?? 0), 0);
   return `
     <section class="stats">
-      <p class="eyebrow">Base stats</p>
-      <div class="stats-head"><h2 class="section-title">Stats</h2><p class="stats-total"><span>${bst}</span> total</p></div>
+      <div class="stats-head"><h2 class="entry-label">Base stats</h2><p class="stats-total"><span>${bst}</span> total</p></div>
       <div class="stats-rows">${rows.map(([k, label]) => {
         const v = mon.baseStats[k] ?? 0;
         return `<div class="stat"><span class="stat-label">${label}</span><span class="stat-num">${v}</span>
@@ -197,11 +190,11 @@ function evoHTML(mon) {
   const top = root(base);
   if (mon.isMega) {
     if (top.id === mon.id) return "";
-    return `<section class="family"><p class="eyebrow">Base form</p><h2 class="section-title">Origin</h2>
+    return `<section class="family"><h2 class="entry-label">Base form</h2>
       <div class="fam-tree">${nodeHTML(top, mon.speciesId)}<p class="fam-note">${esc(baseName(mon))} is a Xeno / Mega form of ${esc(baseName(top))}.</p></div></section>`;
   }
   const solo = !children(top).length;
-  return `<section class="family"><p class="eyebrow">Evolution</p><h2 class="section-title">Family</h2>
+  return `<section class="family"><h2 class="entry-label">Family</h2>
     <div class="fam-tree">${familyHTML(top, mon.speciesId, mon)}${solo ? '<p class="fam-note">Does not evolve.</p>' : ""}</div></section>`;
 }
 
@@ -267,7 +260,8 @@ async function render(sid, formIndex = 0, { scroll = false } = {}) {
   formIndex = Math.min(formIndex, list.length - 1);
   const mon = list[formIndex];
   const sameMon = state.id === sid && state.form === formIndex;
-  if (!sameMon) state.shiny = false;
+  const formeOnly = state.id === sid && state.form !== formIndex;   // same species, other forme
+  if (!sameMon && !formeOnly) state.shiny = false;
   state = { ...state, id: sid, form: formIndex };
 
   document.title = `${mon.num != null ? `Nº ${pad(mon.num)} · ` : ""}${baseName(mon)} — ${region.name} Pokédex`;
@@ -275,7 +269,8 @@ async function render(sid, formIndex = 0, { scroll = false } = {}) {
   document.documentElement.style.setProperty("--t1", `var(--type-${mon.types[0].toLowerCase()})`);
 
   band.querySelector(".band-chrome").innerHTML = bandHTML(mon, list, formIndex);
-  content.innerHTML = aboutHTML(mon) + notesHTML(mon) + statsHTML(mon) + evoHTML(mon);
+  // One compact entry: About + Field notes beside Base stats, Family below.
+  content.innerHTML = `<div class="entry">${aboutHTML(mon)}${statsHTML(mon)}${notesHTML(mon)}${evoHTML(mon)}</div>`;
   requestAnimationFrame(() => content.classList.add("is-in"));
   markIndex(sid);
 
@@ -291,7 +286,22 @@ async function render(sid, formIndex = 0, { scroll = false } = {}) {
     b.addEventListener("click", () => render(sid, Number(b.dataset.form))));
 
   if (scroll) window.scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  if (formeOnly && swapInPlace(mon)) return;
   await showSlide(mon);
+}
+
+// Changing forme keeps the same slide: the art (and the photo, if this forme
+// lives somewhere else) change on the spot -- no cross-fade, no blur-zoom.
+function swapInPlace(mon) {
+  const slide = band.querySelector(".hero-slide.is-active");
+  if (!slide) return false;
+  slide.querySelector(".hero-mon").src = art(mon.id, state.shiny);
+  const photo = photoFor(mon.id);
+  if (photo) slide.querySelector(".hero-photo").style.setProperty("--hero-photo", `url("${abs(photo)}")`);
+  const word = slide.querySelector(".band-word");
+  word.textContent = baseName(mon);
+  fitName(word);
+  return true;
 }
 
 // In-page navigation: prev/next, evolution nodes, the A–Z index.

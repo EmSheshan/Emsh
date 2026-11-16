@@ -68,13 +68,12 @@
 .region-art {
   position: absolute;
   z-index: 1;
-  left: 8%;
-  right: 8%;
-  bottom: 0;
-  width: 84%;
-  height: 86%;
+  /* Centred in its window, with room all round. */
+  inset: 10%;
+  width: 80%;
+  height: 80%;
   object-fit: contain;
-  object-position: center bottom;
+  object-position: center;
   filter: drop-shadow(0 16px 22px rgba(0, 0, 0, 0.4));
   transition: transform 0.45s ease;
 }

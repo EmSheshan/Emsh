@@ -6,7 +6,7 @@
 /* ---------------------------------------------------------------- band */
 
 .band {
-  min-height: min(86vh, 840px);
+  min-height: min(72vh, 700px);
 }
 
 /* Desktop: the Pokémon large in the left half of the window, standing on its
@@ -236,9 +236,6 @@
 #cardContent.is-in {
   opacity: 1;
 }
-#cardContent > section + section {
-  margin-top: clamp(56px, 7vw, 96px);
-}
 
 /* The current entry in the A–Z index. */
 .az-list a[aria-current] {
@@ -255,63 +252,55 @@
   transform: rotate(45deg) translateY(-1px);
 }
 
-/* About: heading on the left, the dex entry beside it. */
-.about {
+/* One compact entry, like a single encyclopedia page: About and Field notes
+   on the left, Base stats on the right, the Family across the bottom. */
+.entry {
   display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-  gap: clamp(20px, 4vw, 56px);
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  grid-template-areas:
+    "about  stats"
+    "notes  stats"
+    "family family";
+  gap: 34px clamp(28px, 4vw, 56px);
   align-items: start;
 }
-.about .section-title {
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
-  line-height: 1.15;
-}
-.about-text p {
-  margin: 0 0 1em;
-  font-size: 1rem;
-  line-height: 1.7;
+.about { grid-area: about; }
+.stats { grid-area: stats; }
+.notes { grid-area: notes; }
+.family { grid-area: family; }
+
+/* Section labels: tracked small caps over a hairline, not big titles. */
+.entry-label {
+  margin: 0 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
   color: var(--ink);
 }
 
-/* Field notes: facts set loosely along a moss line, each on a soft paper
-   patch so the line passes behind them (the reference's "How to recognise it"). */
-.notes .section-title,
-.stats .section-title,
-.family .section-title {
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
+.about-text p {
+  margin: 0 0 0.8em;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--ink);
 }
-.notes-field {
-  position: relative;
-  margin-top: 28px;
+.about-text p:last-child {
+  margin-bottom: 0;
 }
-.notes-vine {
-  position: absolute;
-  inset: 4% -4% 0;
-  width: 108%;
-  height: 92%;
-  pointer-events: none;
-}
-.notes-vine path {
-  fill: none;
-  stroke: var(--moss);
-  stroke-width: 9;
-  stroke-linecap: round;
-  opacity: 0.85;
-  vector-effect: non-scaling-stroke;
-}
+
+/* Field notes: a tight two-column list. */
 .notes-grid {
-  position: relative;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 22px 26px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 24px;
 }
 .note {
-  padding: 14px 16px 12px;
-  border-radius: 18px;
-  background: rgba(247, 247, 242, 0.82);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 0 22px 8px rgba(247, 247, 242, 0.75);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
 }
 .note h3 {
   position: static;
@@ -320,20 +309,25 @@
   background: none;
   text-transform: none;
   letter-spacing: 0;
-  margin: 0 0 6px;
+  margin: 0 0 3px;
   font-family: var(--sans);
-  font-size: 0.95rem;
+  font-size: 0.86rem;
   font-weight: 700;
   color: var(--ink);
 }
+/* styles.css decorates every h3 with an accent rule; not here. */
+.note h3::before,
+.note h3::after {
+  display: none !important;
+}
 .note p {
   margin: 0;
-  font-size: 0.86rem;
-  line-height: 1.5;
+  font-size: 0.82rem;
+  line-height: 1.45;
   color: var(--muted);
 }
 .note-figure {
-  font-size: 1.4rem !important;
+  font-size: 1.15rem !important;
   font-weight: 500;
   color: var(--ink) !important;
   font-variant-numeric: tabular-nums;
@@ -348,32 +342,26 @@
 }
 .note-tag {
   margin-left: 8px;
-  font-size: 0.6rem;
+  font-size: 0.58rem;
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--muted);
 }
-/* styles.css decorates every h3 with an accent rule; not here. */
-.note h3::before,
-.note h3::after {
-  display: none !important;
-}
-
 /* Region-original abilities: a small gold diamond. */
 .orig {
   display: inline-block;
-  width: 8px;
-  height: 8px;
-  margin-right: 8px;
+  width: 7px;
+  height: 7px;
+  margin-right: 7px;
   background: var(--gold);
   transform: rotate(45deg) translateY(-2px);
 }
 .note--wide {
-  grid-column: span 2;
+  grid-column: 1 / -1;
 }
 .move-name {
-  font-size: 1.05rem !important;
+  font-size: 0.98rem !important;
   font-weight: 600;
   color: var(--ink) !important;
   display: flex;
@@ -381,8 +369,8 @@
   gap: 6px;
 }
 .move-stats {
-  margin: 4px 0 6px !important;
-  font-size: 0.7rem !important;
+  margin: 2px 0 4px !important;
+  font-size: 0.66rem !important;
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -393,43 +381,45 @@
   display: flex;
   align-items: baseline;
   justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 4px;
+}
+.stats-head .entry-label {
+  border: 0;
+  margin: 0;
 }
 .stats-total {
   margin: 0;
-  font-size: 0.7rem;
+  font-size: 0.62rem;
   font-weight: 600;
-  letter-spacing: 0.28em;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
   color: var(--muted);
 }
 .stats-total span {
   font-family: var(--serif);
-  font-size: 2.4rem;
+  font-size: 1.7rem;
   letter-spacing: 0;
   color: var(--ink);
   margin-right: 6px;
 }
-.stats-rows {
-  margin-top: 18px;
-  border-top: 1px solid var(--line);
-}
 .stat {
   display: grid;
-  grid-template-columns: 7.5rem 3rem minmax(0, 1fr);
+  grid-template-columns: 6.2rem 2.6rem minmax(0, 1fr);
   align-items: center;
-  gap: 14px;
-  padding: 11px 0;
+  gap: 12px;
+  padding: 7px 0;
   border-bottom: 1px solid var(--line);
 }
 .stat-label {
-  font-size: 0.68rem;
+  font-size: 0.64rem;
   font-weight: 600;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--muted);
 }
 .stat-num {
-  font-size: 1.05rem;
+  font-size: 0.98rem;
   font-weight: 600;
   text-align: right;
   font-variant-numeric: tabular-nums;
@@ -459,7 +449,7 @@
 
 /* Evolution: small recessed habitat tiles joined by method arrows. */
 .fam-tree {
-  margin-top: 24px;
+  margin-top: 6px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -521,7 +511,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  width: 150px;
+  width: 128px;
   color: var(--ink);
   text-decoration: none;
   transition: transform 0.25s ease;
@@ -609,17 +599,15 @@ a.fam-node:hover {
 /* ---------------------------------------------------------------- small screens */
 
 @media (max-width: 900px) {
-  .notes-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .about {
+  .entry {
     grid-template-columns: 1fr;
+    grid-template-areas: "about" "stats" "notes" "family";
   }
 }
 
 @media (max-width: 640px) {
   .band {
-    min-height: 86svh;
+    min-height: 82svh;
   }
   .band-back {
     display: none;
@@ -632,13 +620,6 @@ a.fam-node:hover {
   }
   .band-steps {
     gap: 18px;
-  }
-  .band .hero-mon {
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: calc(70px + var(--name-size) * 0.9);
-    width: 88%;
-    height: 46%;
   }
   /* Phones: art centred, name centred under it, details above. */
   .band {
@@ -656,17 +637,18 @@ a.fam-node:hover {
     right: var(--frame);
     text-align: center;
   }
+  .band .hero-mon {
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: calc(70px + var(--name-size) * 0.9);
+    width: 88%;
+    height: 46%;
+  }
   .shiny-toggle {
     bottom: 22px;
   }
   .notes-grid {
     grid-template-columns: 1fr;
-  }
-  .note--wide {
-    grid-column: auto;
-  }
-  .notes-vine {
-    display: none;
   }
   .stat {
     grid-template-columns: 5.5rem 2.4rem minmax(0, 1fr);
@@ -674,6 +656,14 @@ a.fam-node:hover {
   }
   .fam-node {
     width: 104px;
+  }
+  .fam-arrow {
+    min-width: 48px;
+  }
+  .fam-tree,
+  .fam-branch,
+  .fam-step {
+    gap: 10px;
   }
   /* A long family scrolls sideways inside its own strip, not the page. */
   .fam-tree {
@@ -683,24 +673,6 @@ a.fam-node:hover {
     margin-left: -4px;
     margin-right: -4px;
     scrollbar-width: thin;
-  }
-  .notes-grid {
-    gap: 6px;
-  }
-  .note {
-    padding: 10px 4px;
-    box-shadow: none;
-    background: none;
-    border-bottom: 1px solid var(--line);
-    border-radius: 0;
-  }
-  .fam-arrow {
-    min-width: 48px;
-  }
-  .fam-tree,
-  .fam-branch,
-  .fam-step {
-    gap: 10px;
   }
 }
 
