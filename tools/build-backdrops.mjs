@@ -7,8 +7,11 @@
 // The CSV's `environment` column picks the scene, in this order:
 //   1. a photo at environments/<environment>.jpg (or .jpeg/.png) -- shared by
 //      every region, so one forest photo covers every forest Pokemon;
-//   2. otherwise a painted scene of that name (see tools/habitats.mjs);
-//   3. with the column blank, a painted scene guessed from flavour text + type.
+//   2. otherwise (no photo for that environment yet, or the column is blank)
+//      the default photo, environments/meadow.jpg -- the grassy field;
+//   3. only if that is missing too, a painted scene (see tools/habitats.mjs).
+// Environment names are kept as-is, so adding e.g. volcano.jpg later moves
+// every volcano Pokemon off the default on the next run.
 // Output: <region>/data/backdrops/<id>.jpg, ~20 KB each. Re-run after adding
 // photos or changing the column.
 
@@ -20,6 +23,7 @@ import { pickHabitat, paintHabitat, HABITATS } from './habitats.mjs';
 
 const W = 480, H = 600;
 const ENV_DIR = 'environments';
+const DEFAULT_ENV = 'meadow';   // the grassy field: used until an environment has a photo
 const regions = process.argv.slice(2).length ? process.argv.slice(2)
     : fs.readdirSync('.').filter((d) => fs.existsSync(path.join(d, 'data', 'pokedex.csv')));
 
@@ -66,6 +70,9 @@ for (const region of regions) {
         let src = await photoFor(env), label;
         if (src) {
             label = `${env} (photo)`;
+        } else if ((src = await photoFor(DEFAULT_ENV))) {
+            if (env) missingPhotos.add(env);
+            label = `${DEFAULT_ENV} (default, for ${env || 'blank'})`;
         } else {
             if (env) missingPhotos.add(env);
             const scene = HABITATS.includes(env) ? env : pickHabitat(mon);
@@ -75,13 +82,13 @@ for (const region of regions) {
         const sharp = createCanvas(W, H);
         const s = Math.max(W / src.width, H / src.height) * 1.08;  // overscan hides blurred edges
         sharp.getContext('2d').drawImage(src, (W - src.width * s) / 2, (H - src.height * s) / 2, src.width * s, src.height * s);
-        const img = blur(sharp, W, H, label.endsWith('(photo)') ? 16 : 4);
+        const img = blur(sharp, W, H, label.includes('(painted)') ? 4 : 16);
         fs.writeFileSync(path.join(out, `${mon.id}.jpg`), img.toBuffer('image/jpeg', { quality: 0.8 }));
         tally[label] = (tally[label] ?? 0) + 1;
     }
     if (mons.length) console.log(region + ':', Object.entries(tally).map(([k, v]) => `${k} ${v}`).join(', '));
 }
 if (missingPhotos.size) {
-    console.log(`\nNo photo yet for: ${[...missingPhotos].sort().join(', ')}`);
+    console.log(`\nNo photo yet for: ${[...missingPhotos].sort().join(', ')} (using ${DEFAULT_ENV}.jpg)`);
     console.log(`Add ${ENV_DIR}/<name>.jpg for each, then re-run.`);
 }
