@@ -5,7 +5,7 @@ export const moves = {
     category: "Physical",
     power: 100,
     accuracy: 100,
-    pp: null,
+    pp: 5,
     contact: true,
     description:
       "The user pierces the opponent with its blade and pins them down. The target becomes grounded and unable to flee.",
