@@ -321,14 +321,11 @@ function displaySelectedPokemon(formIndex = 0) {
     `var(--type-${(type2 || type1).toLowerCase()})`,
   );
 
-  // Habitat backdrop (built by tools/build-backdrops.mjs), shown behind the art.
-  document.documentElement.style.setProperty(
-    "--backdrop",
-    // Absolute URL: a url() inside a custom property resolves against the
-    // stylesheet that uses it (shared/), not this page, if left relative.
-    `url("${new URL(`data/backdrops/${selectedPokemon.id}.jpg`, document.baseURI).href}")`,
+  // Habitat backdrop (built by tools/build-backdrops.mjs), cross-faded in by
+  // theme.js. Absolute URL so it doesn't depend on who resolves it.
+  window.emshSetBackdrop?.(
+    new URL(`data/backdrops/${selectedPokemon.id}.jpg`, document.baseURI).href,
   );
-  document.body.classList.add("has-backdrop");
 
   // Handle Abilities
   const ability1 = selectedPokemon.abilities["0"];
