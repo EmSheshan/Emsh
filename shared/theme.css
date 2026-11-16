@@ -289,9 +289,19 @@ header .banner-main h1::after,
   overflow: hidden;
 }
 .pokemon::before {
-  /* Andela's type bar along the top, kept but slimmer. */
-  height: 3px !important;
-  opacity: 0.9;
+  /* No type bar: the whole tile carries a soft diagonal blend of its types
+     instead (type 1 from the top-left, type 2 into the bottom-right). */
+  background-color: transparent !important;
+  background-image: linear-gradient(
+    150deg in oklab,
+    color-mix(in oklab, var(--bar-1) 34%, transparent) 0%,
+    color-mix(in oklab, var(--bar-1) 8%, transparent) 45%,
+    color-mix(in oklab, var(--bar-2) 10%, transparent) 60%,
+    color-mix(in oklab, var(--bar-2) 30%, transparent) 100%
+  ) !important;
+  background-size: 100% 100% !important;
+  border: 0 !important;
+  box-shadow: none !important;
 }
 .pokemon .pokemon-art {
   background: none !important;
@@ -525,4 +535,70 @@ header .banner-main h1::after,
 }
 .no-results-mark {
   color: var(--gold) !important;
+}
+
+/* ---------------------------------------------------------------- card layout
+
+   Desktop: art + description on the left, and a wider right column where
+   stats, abilities and the signature move stack tightly so all three fit on
+   one screen. The evolution tree follows below. */
+@media (min-width: 861px) {
+  .pokemon-card-container {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) clamp(360px, 32vw, 460px);
+    column-gap: clamp(16px, 2vw, 32px);
+    width: min(1320px, 100%) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 0 clamp(24px, 3vw, 48px);
+    box-sizing: border-box;
+  }
+  .pokemon-card-left,
+  .pokemon-card-right {
+    max-width: none !important;
+    width: auto !important;
+    flex: none !important;
+  }
+  .pokemon-card-right {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 1.75rem 0 2rem !important;
+  }
+  .pokemon-card-right > * {
+    margin: 0 !important;
+  }
+}
+
+/* Panels in the right column: compact padding, no Andela slants or offsets. */
+.pokemon-measurements {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-start !important;
+}
+.pokemon-stats {
+  padding: 14px 18px 10px !important;
+  margin-right: 0 !important;
+}
+.pokemon-stats .stat-bar {
+  margin-bottom: 0.15rem !important;
+}
+.ability-list {
+  margin: 0 !important;
+  padding: 12px 18px !important;
+  gap: 6px;
+}
+.pokemon-sigmove {
+  margin: 0 !important;
+  padding: 12px 18px !important;
+  text-align: left !important;
+  clip-path: none !important;
+  filter: none !important;
+  border-left: 1px solid var(--rim) !important;
+  line-height: 1.3;
+}
+.pokemon-sigmove-description {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.85em;
 }
