@@ -1,28 +1,47 @@
-# em/sh
+# emsh dex
 
-A small self-published index for my fan-made Pokémon projects, styled like a
-riso-printed proof sheet. Andela and Lacadia (two invented regional Pokédexes)
-load inline; Maintenance (an in-progress idle game) is shown as a proof.
+Em's fan-made Pokémon in one site: the **Lacadia** and **Andela** regional
+dexes, plus **Misc** for redesigns and one-offs. Every page shares the look of
+the Instagram carousels — habitat backdrops, liquid-glass panels, the yellow
+name banner, a gold frame and outlined art.
 
-Static site — plain HTML, CSS, and vanilla JS. No build step, no dependencies.
+Static site — plain HTML, CSS and vanilla JS, served by GitHub Pages. Node is
+only needed for the scripts in `tools/` that prepare art and backdrops.
 
-## Files
+## Layout
 
-- `index.html` — page structure and copy
-- `styles.css` — print/riso aesthetic (grain, halftone, overprint, rough-inked type)
-- `script.js` — click-to-load dex viewers + hero cursor parallax
+```
+index.html, hub.css, hub.js   the landing page (one card per region)
+shared/                       code + styles used by every region (from Andela)
+  pokeData.js                 CSV loader; region.js loads a region's modules
+  index.js / cardPage.js      the dex grid and the Pokémon page
+  styles.css                  Andela's layout;  theme.css / theme.js  the carousel look
+andela/  lacadia/  misc/      one folder per region:
+  index.html, cardPage.html   thin pages pointing at shared/
+  data/pokedex.csv            the dex — edit in any spreadsheet (columns: see shared/pokeData.js)
+  data/megadex.csv, canondex.csv, abilities.js, moves.js
+  data/region.js              name, where numbering starts, whether it's numbered
+  data/pokemonArt/<id>.webp   art (and <id>_shiny.webp)
+  data/backdrops/<id>.jpg     blurred habitat behind each Pokémon
+tools/                        art + backdrop scripts
+```
+
+## Adding a Pokémon
+
+1. Add a row to `<region>/data/pokedex.csv`. Optional `habitat` column picks
+   the backdrop scene (forest, ocean, cave, space, … — see `tools/habitats.mjs`);
+   left blank, one is guessed from the flavour text and type.
+2. Add the art: `python3 tools/optimize-art.py <folder of PNGs> <region>/data/pokemonArt [id …]`
+3. Build its backdrop: `npm install` once, then `node tools/build-backdrops.mjs <region>`.
+   A photo at `<region>/data/environments/<id>.jpg` is used instead of a painted scene.
+
+## Adding a region
+
+Copy a region folder, empty its CSVs and art, set `data/region.js`, and add a
+card for it in `index.html`.
 
 ## Running locally
 
-Any static file server works, e.g.:
-
 ```
-npx serve .
+python3 -m http.server
 ```
-
-Then open the printed port.
-
-## Credits
-
-Andela and Lacadia are fan-made, non-commercial projects and are not affiliated
-with or endorsed by Nintendo, Game Freak, or The Pokémon Company.

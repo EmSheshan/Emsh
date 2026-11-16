@@ -268,18 +268,20 @@ function displaySelectedPokemon(formIndex = 0) {
   }
 
   // --- Set Page Title & Nav ---
-  const dexLabel = isMega
+  // Megas and unnumbered sections (Misc) show no dex number.
+  const unnumbered = isMega || selectedPokemon.num == null;
+  const dexLabel = unnumbered
     ? ""
     : `Nº ${String(selectedPokemon.num).padStart(3, "0")}`;
-  document.title = isMega ? displayName : `${dexLabel} · ${displayName}`;
-  const titleHtml = isMega
+  document.title = unnumbered ? displayName : `${dexLabel} · ${displayName}`;
+  const titleHtml = unnumbered
     ? displayName
     : `<span class="dex-num">${dexLabel}</span> ${displayName}`;
 
   const navLabel = (p) =>
-    p?.isMega
-      ? { num: "", name: p.name }
-      : { num: p ? `Nº ${String(p.num).padStart(3, "0")}` : "", name: p ? p.name.split("-")[0] : "" };
+    p?.isMega || p?.num == null
+      ? { num: "", name: p ? p.name.split("-")[0] : "" }
+      : { num: `Nº ${String(p.num).padStart(3, "0")}`, name: p.name.split("-")[0] };
 
   const prev = navLabel(prevPokemon);
   const next = navLabel(nextPokemon);

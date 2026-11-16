@@ -1,171 +1,68 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>em/sh — printed matter</title>
-    <meta name="description" content="Em's project index — Andela and Lacadia, two fan-made Pokédex regions, and Maintenance, an idle game still in production.">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>emsh — Pokédex</title>
+    <meta
+      name="description"
+      content="Em's fan-made Pokémon: the Lacadia and Andela regional dexes, plus one-off designs."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='22' y='22' width='56' height='56' fill='%23ffd200' transform='rotate(45 50 50)'/></svg>"
+    />
+    <link rel="stylesheet" href="shared/theme.css" />
+    <link rel="stylesheet" href="hub.css" />
+    <script src="shared/theme.js" defer></script>
+    <script src="hub.js" type="module"></script>
+  </head>
+  <body class="hub">
+    <header class="hub-head">
+      <h1 class="banner">emsh<span class="dot">.</span> dex</h1>
+      <p class="hub-sub">Fan-made Pokémon, drawn by Em. Pick a region.</p>
+    </header>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Work+Sans:wght@400;500;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <main class="regions">
+      <!-- data-region names a folder with data/pokedex.csv; hub.js fills in the
+           count. data-hero is the Pokémon shown on the card. -->
+      <a class="region" href="lacadia/index.html" data-region="lacadia" data-hero="faestalk">
+        <span class="region-bg"></span>
+        <span class="banner region-name">Lacadia</span>
+        <img class="region-art" alt="" />
+        <span class="region-foot glass">
+          <span class="region-count">&nbsp;</span>
+          <span class="region-go">Enter dex</span>
+        </span>
+      </a>
 
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23f5efe1'/><circle cx='42' cy='50' r='26' fill='%232340ff'/><circle cx='58' cy='50' r='26' fill='%23ff4423' style='mix-blend-mode:multiply'/></svg>">
+      <a class="region" href="andela/index.html" data-region="andela" data-hero="amistaphore">
+        <span class="region-bg"></span>
+        <span class="banner region-name">Andela</span>
+        <img class="region-art" alt="" />
+        <span class="region-foot glass">
+          <span class="region-count">&nbsp;</span>
+          <span class="region-go">Enter dex</span>
+        </span>
+      </a>
 
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+      <a class="region" href="misc/index.html" data-region="misc">
+        <span class="region-bg"></span>
+        <span class="banner region-name">Misc</span>
+        <span class="region-empty">
+          <span class="diamonds" aria-hidden="true"><i></i><i></i><i></i></span>
+          Redesigns &amp; one-offs
+        </span>
+        <span class="region-foot glass">
+          <span class="region-count">&nbsp;</span>
+          <span class="region-go">Enter</span>
+        </span>
+      </a>
+    </main>
 
-<!-- Rough-ink displacement filter: roughens the edges of printed type so it
-     reads as physically inked, not crisp vector. Never applied to fixed/sticky
-     elements (a filter creates a containing block and breaks their positioning). -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <filter id="rough" x="-6%" y="-6%" width="112%" height="112%">
-        <feTurbulence type="fractalNoise" baseFrequency="0.012 0.018" numOctaves="2" seed="4" result="noise"/>
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
-    </filter>
-</svg>
-
-<div class="grain" aria-hidden="true"></div>
-
-<div class="crop crop-tl" aria-hidden="true"></div>
-<div class="crop crop-tr" aria-hidden="true"></div>
-<div class="crop crop-bl" aria-hidden="true"></div>
-<div class="crop crop-br" aria-hidden="true"></div>
-
-<div class="colorbar" aria-hidden="true">
-    <span style="background:var(--ink)"></span>
-    <span style="background:var(--blue)"></span>
-    <span style="background:var(--red)"></span>
-    <span style="background:var(--teal)"></span>
-    <span style="background:var(--pink)"></span>
-    <span style="background:var(--gold)"></span>
-</div>
-
-<p class="slug" aria-hidden="true">EM/SH — PROOF 003 — CMYK + 2 SPOT — DO NOT SCALE</p>
-
-<header class="masthead">
-    <a href="#top" class="wordmark" id="top">emsh<span class="wordmark-dot">.</span></a>
-    <p class="tagline">self&#8209;published &middot; ongoing series</p>
-</header>
-
-<main>
-    <section class="hero">
-        <span class="kanji-accent" aria-hidden="true">図鑑</span>
-        <div class="blob blob-blue" aria-hidden="true"></div>
-        <div class="blob blob-red" aria-hidden="true"></div>
-
-        <p class="eyebrow">vol. 01</p>
-        <h1 class="headline">
-            <span class="layer-main">drawing creatures.<br>building worlds.</span>
-        </h1>
-        <p class="lede">I'm Emsh. This is just a spot to keep my art organized for myself and my friends. I illustrate custom Pokémon regions, then code the websites to house them. Two are below, and a third project is on the way.</p>
-        <div class="link-row">
-            <a href="#index" class="btn btn-ink"><span>SEE THE INDEX ↓</span></a>
-            <a href="https://github.com/EmSheshan" class="btn btn-outline" target="_blank" rel="noopener"><span>GITHUB ↗</span></a>
-        </div>
-    </section>
-
-    <section class="index" id="index">
-        <p class="eyebrow reveal">index</p>
-        <h2 class="reveal reveal-1">contents</h2>
-
-        <article class="spread" style="--duo:var(--blue); --duo2:var(--red)">
-            <div class="spread-text reveal">
-                <p class="tag">N&deg; 01</p>
-                <h3>Lacadia</h3>
-                <p class="scrawl" style="margin:0 0 0.7rem;">The original 100</p>
-                <p class="spread-desc">My first finished dex. This colorful variety of designs is where I got my start.</p>
-                <a class="btn btn-duo" href="https://emsheshan.github.io/Lacadia/" target="_blank" rel="noopener">
-                    <span>VIEW LACADIA &#8599;</span>
-                </a>
-            </div>
-            <div class="mon-spread" id="mons-lacadia" data-base="https://emsheshan.github.io/Lacadia/" data-dir="left" aria-label="Three random Lacadia Pok&eacute;mon"></div>
-        </article>
-
-        <article class="spread" style="--duo:var(--teal); --duo2:var(--pink)">
-            <div class="spread-text reveal">
-                <p class="tag">N&deg; 02</p>
-                <h3>Andela</h3>
-                <p class="scrawl" style="margin:0 0 0.7rem;">15/100 complete</p>
-                <p class="spread-desc">A Chilean-inspired region with a deeper focus on design and atmosphere.</p>
-                <a class="btn btn-duo" href="https://emsheshan.github.io/Andela/" target="_blank" rel="noopener">
-                    <span>VIEW ANDELA &#8599;</span>
-                </a>
-
-            </div>
-            <div class="mon-spread" id="mons-andela" data-base="https://emsheshan.github.io/Andela/" data-dir="right" aria-label="Three random Andela Pok&eacute;mon"></div>
-        </article>
-
-
-
-        <article class="spread spread-proof">
-            <div class="spread-text reveal">
-                <p class="tag">N&deg; 03</p>
-                <h3>Maintenance</h3>
-                <p class="scrawl" style="color:var(--red); margin:0 0 0.7rem;">Coming late 2041</p>
-                <p class="spread-desc">An idle game about the simple work of restoring old systems and keeping things running.
-                </p>
-
-            </div>
-            <div class="viewer viewer-proof" role="button" tabindex="0" aria-pressed="true" aria-label="Pause preview">
-                <video class="proof-video" muted loop playsinline preload="metadata"
-                       aria-label="Silent looping video of dithered flowers in the wind">
-                    <source src="maintenance_dither.mp4" type="video/mp4">
-                </video>
-                <span class="stamp">PROOF<br>NOT&nbsp;FOR&nbsp;PRINT</span>
-            </div>
-        </article>
-    </section>
-
-    <section class="about">
-        <p class="eyebrow reveal">colophon</p>
-        <h2 class="reveal reveal-1">the person to blame</h2>
-        <p class="reveal reveal-2">I like drawing and I have a CS degree, so this is the most natural intersection of the two.
-        </p>
-        <p class="footnote reveal reveal-3">No, I cannot make the art load faster!</p>
-    </section>
-
-    <section id="classifieds" class="classifieds">
-        <p class="eyebrow reveal">back matter</p>
-        <h2>classifieds</h2>
-
-        <div class="ads-container">
-            <!-- Ad 1: Socials -->
-            <div class="ad-block">
-                <h4>FIND ME ELSEWHERE</h4>
-                <p>The socials exist, but expect very infrequent updates.</p>
-                <div class="ad-socials">
-                    <a href="https://www.instagram.com/emsheshan/" target="_blank" rel="noopener" class="ad-link">INSTAGRAM ↗</a>
-                    <a href="https://www.tumblr.com/blog/emsh" target="_blank" rel="noopener" class="ad-link">TUMBLR ↗</a>
-                </div>
-            </div>
-
-            <!-- Ad 2: The Cut-Out Coupon -->
-            <div class="ad-block ad-coupon">
-                <span class="scissors">✂</span>
-                <h4>FREE CHAT COUPON</h4>
-                <p>Valid for one (1) conversation about custom Pokémon, web development, or print design. Void where prohibited.</p>
-                <a href="https://bsky.app/profile/emsheshan.bsky.social" target="_blank" rel="noopener" class="ad-link">REDEEM VIA BLUESKY ↗</a>
-            </div>
-
-            <!-- Ad 3: General Portfolio (Inverted Ad) -->
-            <a href="https://github.com/EmSheshan/Emsh" target="_blank" rel="noopener" class="ad-block ad-inverted">
-                <h4>VIEW THE SOURCE</h4>
-                <p>Inspect the machinery running this press.</p>
-                <span class="ad-link">GITHUB ↗</span>
-            </a>
-        </div>
-    </section>
-
-
-</main>
-
-<footer class="colophon-footer">
-    <p>Andela and Lacadia are fan&#8209;made, non&#8209;commercial Pok&eacute;mon projects. Not affiliated with
-        or endorsed by Nintendo, Game Freak, or The Pok&eacute;mon Company.</p>
-</footer>
-
-<script src="script.js"></script>
-</body>
+    <footer class="hub-foot">
+      Fan-made project, not affiliated with or endorsed by Pokémon, Nintendo,
+      Game Freak, or The Pokémon Company. Art &copy; @EmSheshan.
+    </footer>
+  </body>
 </html>

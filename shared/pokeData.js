@@ -226,5 +226,9 @@ export async function loadDex() {
     fetchDex(`${DATA_DIR}megadex.csv`, { mega: true }),
     fetchDexOptional(`${DATA_DIR}canondex.csv`, { external: true }),
   ]);
+  // Sections like Misc hold one-offs, not a regional dex: no numbers at all.
+  if (region.numbered === false) {
+    for (const entry of Object.values(pokedex)) entry.num = null;
+  }
   return { pokedex, megadex, canondex };
 }

@@ -72,8 +72,24 @@ async function loadPokemonData() {
   // (type filters, search, buttons) is not needed for the first paint.
   // Defer it past a paint so the browser can render the LCP tile without
   // waiting for all this work to finish, cutting LCP render delay.
+  // An empty main dex (e.g. Misc before any designs are added) gets a note
+  // instead of a blank grid.
+  if (!pokemonList.length) {
+    document.getElementById("pokedex").innerHTML = `
+      <div class="no-results">
+        <div class="no-results-mark">◆</div>
+        <p class="no-results-title">Nothing here yet</p>
+        <p class="no-results-sub">Designs are on their way.</p>
+      </div>`;
+  }
+
   const buildSecondaryUI = () => {
-    displayPokemonData(megaList, "megadex");
+    // Regions without Megas/Xenos drop that section and its heading entirely.
+    if (!megaList.length) {
+      document.getElementById("megadex")?.remove();
+      document.getElementById("mega-heading")?.remove();
+    }
+    if (megaList.length) displayPokemonData(megaList, "megadex");
 
     // Both grids are now in the DOM (their tiles reserve height up front via
     // the image aspect-ratio), so the page is its full height and a saved

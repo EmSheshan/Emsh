@@ -480,9 +480,6 @@ header .banner-main h1::after,
   border: 0 !important;
   box-shadow: none !important;
 }
-.evo-node-current .evo-node-frame {
-  position: relative;
-}
 .evo-node-current .evo-node-frame::before {
   content: "";
   position: absolute;
@@ -491,10 +488,6 @@ header .banner-main h1::after,
   border: 2px solid rgba(255, 210, 0, 0.85);
   transform: rotate(45deg);
   z-index: 0;
-}
-.evo-node-current .evo-node-art {
-  position: relative;
-  z-index: 1;
 }
 .evo-node-current .evo-node-name {
   color: var(--gold) !important;
@@ -519,4 +512,17 @@ header .banner-main h1::after,
 .card-shiny-toggle.shiny-active {
   background: var(--gold) !important;
   color: #111 !important;
+}
+
+.footer {
+  border-top-color: var(--rim) !important;
+}
+.no-results-title {
+  font-family: var(--display) !important;
+  font-size: 1.8rem !important;
+  letter-spacing: 0.01em !important;
+  text-transform: none !important;
+}
+.no-results-mark {
+  color: var(--gold) !important;
 }
