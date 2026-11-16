@@ -1,0 +1,17 @@
+/* region.css — this dex's colour scheme. Andela: canopy greens and limestone, with the old site's temple gold.
+   Scoped to html[data-region] so the hub can load every region's file at once. */
+/* html[...] and its body both, so this beats Andela's dark-mode tokens
+   (html.dark-mode / body.dark-mode) carried over from the old site. */
+html[data-region="andela"],
+html[data-region="andela"] body,
+[data-region="andela"] {
+  --parchment: #efe8d2;  /* name ribbon */
+  --ink: #1b3324;        /* ribbon text */
+  --gold: #e0a93a;       /* accent: dex numbers, highlights */
+  --base-1: #122019;     /* backdrop gradient, top -> bottom */
+  --base-2: #26392b;
+  --base-3: #4a5a43;
+  --base-4: #203527;
+  --base-5: #0f1a14;
+  --navy: #0f1a14;
+}

@@ -3,7 +3,7 @@ import { loadDex } from "./pokeData.js";
 import { region, abilities, moves, SHARED, ART_EXT } from "./region.js";
 
 // Which backdrop image each Pokemon uses (built by tools/build-backdrops.mjs).
-const backdropIndex = fetch("data/backdrops/index.json")
+const backdropIndex = fetch("data/backdrops/index.json", { cache: "no-cache" })
   .then((r) => (r.ok ? r.json() : {}))
   .catch(() => ({}));
 

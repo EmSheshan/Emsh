@@ -1,0 +1,17 @@
+/* region.css — this dex's colour scheme. Misc: plum and blush.
+   Scoped to html[data-region] so the hub can load every region's file at once. */
+/* html[...] and its body both, so this beats Andela's dark-mode tokens
+   (html.dark-mode / body.dark-mode) carried over from the old site. */
+html[data-region="misc"],
+html[data-region="misc"] body,
+[data-region="misc"] {
+  --parchment: #f1dfe4;  /* name ribbon */
+  --ink: #2a1626;        /* ribbon text */
+  --gold: #f29fb8;       /* accent: dex numbers, highlights */
+  --base-1: #20152a;     /* backdrop gradient, top -> bottom */
+  --base-2: #3e2643;
+  --base-3: #5a4562;
+  --base-4: #2c2145;
+  --base-5: #160f20;
+  --navy: #160f20;
+}

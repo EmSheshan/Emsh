@@ -43,28 +43,18 @@ body.dark-mode {
   --display: "Fraunces", Georgia, serif;
   --ui: "DM Sans", system-ui, sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, monospace;
-  --parchment: #e8dfc8;
-  --ink: #1f1a14;
+  /* Per-dex colour scheme. These are the defaults; each region overrides them
+     in <region>/data/region.css (scoped to html[data-region]). */
+  --parchment: #e8dfc8;       /* name ribbon */
+  --ink: #1f1a14;             /* ribbon text */
+  --base-1: #1e1e34;          /* backdrop gradient, top -> bottom */
+  --base-2: #463a54;
+  --base-3: #5c607c;
+  --base-4: #2a3862;
+  --base-5: #1a1e3e;
 
-  /* Same palette as the carousel generator, so the two match. */
-  --type-normal: #c3c29b;
-  --type-fire: #ff6320;
-  --type-water: #4b99ff;
-  --type-electric: #f7d02c;
-  --type-grass: #7ac74c;
-  --type-ice: #96d9d6;
-  --type-fighting: #ff2b23;
-  --type-poison: #a622a3;
-  --type-ground: #e39b49;
-  --type-flying: #baa2ff;
-  --type-psychic: #ff4baa;
-  --type-bug: #a6b91a;
-  --type-rock: #958150;
-  --type-ghost: #4d4260;
-  --type-dragon: #5935fc;
-  --type-dark: #322d28;
-  --type-steel: #8c8c9a;
-  --type-fairy: #ff98b5;
+  /* Type colours: Andela's own palette (styles.css), which is matched to the
+     type icons, so badges, tile washes and icons agree. */
 
   /* Remap Andela's tokens so its components pick up the dark carousel look. */
   --bg1: #15172e;
@@ -104,7 +94,14 @@ body#card-page.dark-mode {
    on every scroll frame is what made them lag behind the page. */
 .page-bg {
   position: fixed;
-  inset: 0;
+  /* Sized to the large viewport (address bar hidden), not inset:0 -- on phones
+     the bar slides away while scrolling and an inset:0 layer keeps resizing to
+     follow it, which is the lag. 100lvh never changes mid-scroll. */
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  height: 100lvh;
   z-index: -1;
   pointer-events: none;
   overflow: hidden;
@@ -120,11 +117,11 @@ body#card-page.dark-mode {
   inset: 0;
   background:
     linear-gradient(180deg,
-      color-mix(in oklab, #1e1e34 76%, var(--t1)) 0%,
-      color-mix(in oklab, #463a54 64%, var(--t1)) 24%,
-      color-mix(in oklab, #5c607c 70%, color-mix(in oklab, var(--t1), var(--t2))) 50%,
-      color-mix(in oklab, #2a3862 64%, var(--t2)) 80%,
-      color-mix(in oklab, #1a1e3e 78%, var(--t2)) 100%);
+      color-mix(in oklab, var(--base-1) 76%, var(--t1)) 0%,
+      color-mix(in oklab, var(--base-2) 64%, var(--t1)) 24%,
+      color-mix(in oklab, var(--base-3) 70%, color-mix(in oklab, var(--t1), var(--t2))) 50%,
+      color-mix(in oklab, var(--base-4) 64%, var(--t2)) 80%,
+      color-mix(in oklab, var(--base-5) 78%, var(--t2)) 100%);
 }
 
 /* Faint grain over everything in the backdrop, so the colour wash reads like
@@ -183,7 +180,11 @@ body#card-page.dark-mode {
    diamonds at the corners and edge midpoints. */
 .gold-frame {
   position: fixed;
-  inset: 12px;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  height: calc(100vh - 24px);
+  height: calc(100lvh - 24px);   /* fixed height: see .page-bg */
   z-index: 50;
   pointer-events: none;
   transform: translateZ(0);       /* own layer: stays put while scrolling */
@@ -206,7 +207,7 @@ body#card-page.dark-mode {
 .gold-frame i:nth-child(5) { left: 50%; top: 0; }
 .gold-frame i:nth-child(6) { left: 50%; top: 100%; }
 @media (max-width: 600px) {
-  .gold-frame { inset: 6px; }
+  .gold-frame { top: 6px; left: 6px; right: 6px; height: calc(100lvh - 12px); }
   .gold-frame i:nth-child(n + 5) { display: none; }
 }
 
@@ -666,4 +667,31 @@ body.mega-pokemon .title-type-container h2 {
 }
 .pokemon .name {
   font-size: 1.12rem !important;
+}
+
+/* ---------------------------------------------------------------- corners
+
+   No chamfered corner cutouts anywhere: Andela clips little notches into these;
+   round them instead. (The evolution art's slanted crop is a shape, not a
+   corner cut, so it stays.) */
+.result-count-badge,
+.measurement-pill,
+.pokemon::before,
+.pokemon-sigmove,
+.ability-description-popup,
+.type-badge,
+.form-switch-button,
+.evo-node-frame::after {
+  clip-path: none !important;
+}
+.result-count-badge,
+.type-badge,
+.form-switch-button {
+  border-radius: 6px !important;
+}
+.pokemon::before {
+  border-radius: inherit !important;
+}
+.evo-node-frame::after {
+  border-radius: 99px;
 }

@@ -1,0 +1,17 @@
+/* region.css — this dex's colour scheme. Lacadia: the Instagram cards' navy and dusk, parchment ribbon.
+   Scoped to html[data-region] so the hub can load every region's file at once. */
+/* html[...] and its body both, so this beats Andela's dark-mode tokens
+   (html.dark-mode / body.dark-mode) carried over from the old site. */
+html[data-region="lacadia"],
+html[data-region="lacadia"] body,
+[data-region="lacadia"] {
+  --parchment: #e8dfc8;  /* name ribbon */
+  --ink: #1f1a14;        /* ribbon text */
+  --gold: #fbbf24;       /* accent: dex numbers, highlights */
+  --base-1: #1e1e34;     /* backdrop gradient, top -> bottom */
+  --base-2: #463a54;
+  --base-3: #5c607c;
+  --base-4: #2a3862;
+  --base-5: #1a1e3e;
+  --navy: #1a1e3e;
+}
