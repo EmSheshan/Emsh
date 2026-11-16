@@ -41,6 +41,8 @@
   --sans: "DM Sans", system-ui, sans-serif;
 
   --sheet-radius: 28px;
+  --frame: clamp(8px, 1.1vw, 16px);   /* paper margin around the hero window */
+  --window-radius: 20px;
   --gutter: clamp(20px, 4vw, 56px);
 }
 
@@ -82,7 +84,24 @@ body.andela2 .toggle-dark-mode {
   margin: 0 auto;
   border-radius: var(--sheet-radius) var(--sheet-radius) 0 0;
   color: var(--cream);
-  background: var(--forest);
+  background: var(--paper);          /* the sheet; the photo is a window cut in it */
+}
+
+/* The paper's edge casting a shadow into the recessed window -- strongest
+   along the top, as if lit from above. Sits over the photo and the Pokémon,
+   under the nav and title. */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: var(--frame) var(--frame) 0;
+  z-index: 1;
+  border-radius: var(--window-radius);
+  pointer-events: none;
+  box-shadow:
+    inset 0 16px 28px -8px rgba(0, 0, 0, 0.55),
+    inset 14px 0 26px -16px rgba(0, 0, 0, 0.45),
+    inset -14px 0 26px -16px rgba(0, 0, 0, 0.45),
+    inset 0 -12px 24px -12px rgba(0, 0, 0, 0.4);
 }
 
 /* The stage holds one slide per shown Pokémon: its habitat photo (shaded for
@@ -97,6 +116,10 @@ body.andela2 .toggle-dark-mode {
 }
 .hero-stage {
   z-index: 0;
+  inset: var(--frame) var(--frame) 0;
+  overflow: hidden;
+  border-radius: var(--window-radius);
+  background: var(--forest);
 }
 .hero-slide {
   opacity: 0;
@@ -106,6 +129,8 @@ body.andela2 .toggle-dark-mode {
   opacity: 1;
 }
 .hero-photo {
+  inset: -30px;                      /* bleed past the window so the blur has no soft edge */
+  filter: blur(12px);
   transform: scale(1.06);
   transition: transform 3s cubic-bezier(0.2, 0.7, 0.2, 1);
   background:
@@ -512,10 +537,36 @@ body.andela2 .pokemon-art {
   align-items: flex-end;
   justify-content: center;
   overflow: hidden;
+  isolation: isolate;
   border-radius: 14px 14px 14px 76px;
+  background: var(--forest);
+}
+/* The habitat, softly blurred, recessed into the paper like the hero window. */
+body.andela2 .pokemon-art::before,
+body.andela2 .pokemon-art::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  border-radius: inherit;
+}
+body.andela2 .pokemon-art::before {
+  inset: -12px;
+  z-index: 0;
+  filter: blur(4px);
   background:
     linear-gradient(180deg, rgba(10, 18, 13, 0.25) 0%, rgba(10, 18, 13, 0) 35%, rgba(10, 18, 13, 0.18) 100%),
     var(--scene, linear-gradient(160deg, var(--moss), var(--forest))) center / cover no-repeat;
+}
+body.andela2 .pokemon-art::after {
+  inset: 0;
+  z-index: 1;
+  box-shadow:
+    inset 0 10px 16px -6px rgba(0, 0, 0, 0.5),
+    inset 8px 0 14px -10px rgba(0, 0, 0, 0.35),
+    inset 0 -6px 12px -8px rgba(0, 0, 0, 0.25);
+}
+body.andela2 .pokemon-art .dex-num {
+  z-index: 3;
 }
 body.andela2 .pokemon-image {
   width: 86%;

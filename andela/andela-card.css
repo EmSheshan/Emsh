@@ -1,0 +1,675 @@
+/* andela-card.css — the Andela 2.0 Pokémon page, on top of andela.css (which
+ * supplies the tokens, the recessed hero window, the paper sheet and the A–Z
+ * index). Markup comes from card.js.
+ */
+
+/* ---------------------------------------------------------------- band */
+
+.band {
+  min-height: min(76vh, 720px);
+}
+.band-chrome {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+.band-chrome a,
+.band-chrome button {
+  pointer-events: auto;
+}
+.band-nav {
+  padding: calc(var(--frame) + clamp(14px, 2.4vw, 30px)) calc(var(--frame) + var(--gutter)) 0;
+  gap: 24px;
+}
+.band-back {
+  margin-right: auto;
+  margin-left: clamp(16px, 3vw, 40px);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cream);
+  text-decoration: none;
+  opacity: 0.85;
+}
+.band-back::before {
+  content: "\2190";
+  margin-right: 0.7em;
+  letter-spacing: 0;
+}
+.band-back:hover {
+  opacity: 1;
+}
+
+/* Prev / next: tracked caps over a hairline arrow, like the homepage nav. */
+.band-steps {
+  display: flex;
+  gap: clamp(18px, 3vw, 44px);
+}
+.band-step {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--cream);
+  text-decoration: none;
+  white-space: pre;
+}
+.band-step--next {
+  align-items: flex-end;
+}
+.band-step.is-empty {
+  width: 1px;
+}
+.band-step .hero-link-rule {
+  width: 7rem;
+}
+.band-step:hover .hero-link-rule {
+  width: 8.5rem;
+}
+.band-step--prev .hero-link-rule::after {
+  right: auto;
+  left: 0;
+  border-right: 0;
+  border-left: 1px solid currentColor;
+  transform: rotate(-45deg);
+}
+
+/* Name block, bottom-right, as on the homepage. */
+.band-title {
+  position: absolute;
+  right: calc(var(--frame) + var(--gutter));
+  bottom: clamp(36px, 7vh, 72px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+  max-width: 64%;
+  text-align: right;
+}
+.band-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+.band-num {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+}
+.band-name {
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(12px, 1.8vw, 24px);
+}
+.band-name .hero-sub {
+  margin-bottom: 1.1em;
+}
+/* Longer names set smaller so they stay on one line. */
+.band .hero-word {
+  font-size: clamp(3.2rem, calc(70vw / var(--len)), 11rem);
+  white-space: nowrap;
+}
+
+/* Type chips: original type colours, quiet pill. */
+.t-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 11px 4px 5px;
+  border-radius: 99px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: color-mix(in oklab, var(--t) 70%, white);
+}
+.t-icon {
+  width: 18px;
+  height: 18px;
+  vertical-align: -4px;
+}
+
+.form-tabs {
+  display: inline-flex;
+  padding: 3px;
+  border-radius: 99px;
+  background: rgba(10, 18, 13, 0.45);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+.form-tabs button {
+  border: 0;
+  border-radius: 99px;
+  padding: 6px 14px;
+  background: none;
+  color: var(--cream);
+  font: 600 0.68rem var(--sans);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.form-tabs button[aria-selected="true"] {
+  background: var(--cream);
+  color: var(--ink);
+}
+
+.shiny-toggle {
+  position: absolute;
+  left: calc(var(--frame) + var(--gutter));
+  bottom: clamp(24px, 3vw, 36px);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid rgba(243, 239, 220, 0.4);
+  border-radius: 99px;
+  background: rgba(10, 18, 13, 0.35);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: var(--cream);
+  font: 600 0.66rem var(--sans);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.shiny-mark {
+  width: 11px;
+  height: 11px;
+  background: currentColor;
+  clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+}
+.shiny-toggle[aria-pressed="true"] {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--ink);
+}
+
+/* ---------------------------------------------------------------- sections */
+
+#cardContent {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+#cardContent.is-in {
+  opacity: 1;
+}
+#cardContent > section + section {
+  margin-top: clamp(56px, 7vw, 96px);
+}
+
+/* The current entry in the A–Z index. */
+.az-list a[aria-current] {
+  color: var(--moss);
+  font-weight: 700;
+}
+.az-list a[aria-current]::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 8px;
+  background: var(--gold);
+  transform: rotate(45deg) translateY(-1px);
+}
+
+/* About: heading on the left, the dex entry beside it. */
+.about {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(20px, 4vw, 56px);
+  align-items: start;
+}
+.about .section-title {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  line-height: 1.15;
+}
+.about-text p {
+  margin: 0 0 1em;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+/* Field notes: facts set loosely along a moss line, each on a soft paper
+   patch so the line passes behind them (the reference's "How to recognise it"). */
+.notes .section-title,
+.stats .section-title,
+.family .section-title {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+}
+.notes-field {
+  position: relative;
+  margin-top: 28px;
+}
+.notes-vine {
+  position: absolute;
+  inset: 4% -4% 0;
+  width: 108%;
+  height: 92%;
+  pointer-events: none;
+}
+.notes-vine path {
+  fill: none;
+  stroke: var(--moss);
+  stroke-width: 9;
+  stroke-linecap: round;
+  opacity: 0.85;
+  vector-effect: non-scaling-stroke;
+}
+.notes-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px 26px;
+}
+.note {
+  padding: 14px 16px 12px;
+  border-radius: 18px;
+  background: rgba(247, 247, 242, 0.82);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 22px 8px rgba(247, 247, 242, 0.75);
+}
+.note h3 {
+  position: static;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-transform: none;
+  letter-spacing: 0;
+  margin: 0 0 6px;
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.note p {
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.note-figure {
+  font-size: 1.4rem !important;
+  font-weight: 500;
+  color: var(--ink) !important;
+  font-variant-numeric: tabular-nums;
+}
+.note-figure--word {
+  text-transform: capitalize;
+}
+.note-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.note-tag {
+  margin-left: 8px;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+/* styles.css decorates every h3 with an accent rule; not here. */
+.note h3::before,
+.note h3::after {
+  display: none !important;
+}
+
+/* Andela-original abilities: a small gold diamond. */
+.orig {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  background: var(--gold);
+  transform: rotate(45deg) translateY(-2px);
+}
+.note--wide {
+  grid-column: span 2;
+}
+.move-name {
+  font-size: 1.05rem !important;
+  font-weight: 600;
+  color: var(--ink) !important;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.move-stats {
+  margin: 4px 0 6px !important;
+  font-size: 0.7rem !important;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* Base stats: label, number, slim bar in Andela's stat colours. */
+.stats-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.stats-total {
+  margin: 0;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.stats-total span {
+  font-family: var(--serif);
+  font-size: 2.4rem;
+  letter-spacing: 0;
+  color: var(--ink);
+  margin-right: 6px;
+}
+.stats-rows {
+  margin-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.stat {
+  display: grid;
+  grid-template-columns: 7.5rem 3rem minmax(0, 1fr);
+  align-items: center;
+  gap: 14px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+}
+.stat-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.stat-num {
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.stat-track {
+  height: 6px;
+  border-radius: 99px;
+  background: var(--mist);
+  overflow: hidden;
+}
+.stat-fill {
+  display: block;
+  height: 100%;
+  width: var(--w);
+  border-radius: inherit;
+  animation: grow 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+@keyframes grow {
+  from { width: 0; }
+}
+.stat-fill--hp { background: #ef5a52; }
+.stat-fill--atk { background: #f0a35a; }
+.stat-fill--def { background: #f2ce56; }
+.stat-fill--spa { background: #7fa8e6; }
+.stat-fill--spd { background: #8bcf7a; }
+.stat-fill--spe { background: #ef86a6; }
+
+/* Evolution: small recessed habitat tiles joined by method arrows. */
+.fam-tree {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+}
+.fam-branch {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.fam-kids {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.fam-step {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.fam-arrow {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 78px;
+  padding-top: 18px;
+}
+.fam-arrow::before {
+  content: "";
+  width: 100%;
+  height: 1px;
+  background: var(--ink);
+  opacity: 0.5;
+}
+.fam-arrow::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 15px;
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid var(--ink);
+  border-right: 1px solid var(--ink);
+  transform: rotate(45deg);
+  opacity: 0.5;
+}
+.fam-method {
+  position: absolute;
+  top: 0;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--muted);
+}
+.fam-node {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 150px;
+  color: var(--ink);
+  text-decoration: none;
+  transition: transform 0.25s ease;
+}
+a.fam-node:hover {
+  transform: translateY(-3px);
+}
+.fam-art {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 12px 12px 12px 54px;
+  background: var(--forest);
+}
+.fam-art::before,
+.fam-art::after {
+  content: "";
+  position: absolute;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.fam-art::before {
+  inset: -10px;
+  z-index: 0;
+  filter: blur(4px);
+  background: var(--scene, linear-gradient(160deg, var(--moss), var(--forest))) center / cover no-repeat;
+}
+.fam-art::after {
+  inset: 0;
+  z-index: 1;
+  box-shadow: inset 0 8px 14px -6px rgba(0, 0, 0, 0.5), inset 6px 0 12px -10px rgba(0, 0, 0, 0.35);
+}
+.fam-art img {
+  position: relative;
+  z-index: 2;
+  width: 86%;
+  margin-bottom: 5%;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.35));
+}
+.fam-node.is-canon .fam-art img {
+  opacity: 0.9;
+}
+/* The Pokémon you're looking at: outlined in moss, name marked with a diamond. */
+.fam-node.is-current .fam-art {
+  outline: 2px solid var(--moss);
+  outline-offset: 4px;
+}
+.fam-label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.fam-num {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.fam-name {
+  font-family: var(--head);
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-transform: uppercase;
+}
+.fam-node.is-current .fam-name::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 7px;
+  background: var(--gold);
+  transform: rotate(45deg) translateY(-2px);
+}
+.fam-note {
+  margin: 0 0 0 8px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* ---------------------------------------------------------------- small screens */
+
+@media (max-width: 900px) {
+  .notes-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .about {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .band {
+    min-height: 86svh;
+  }
+  .band-back {
+    display: none;
+  }
+  .band-step .hero-link-rule {
+    width: 3.5rem;
+  }
+  .band-step-name {
+    display: none;                 /* just the number on phones */
+  }
+  .band-steps {
+    gap: 18px;
+  }
+  .band .hero-mon {
+    bottom: 34%;
+    height: 38%;
+  }
+  .band-title {
+    left: calc(var(--frame) + var(--gutter));
+    max-width: none;
+    bottom: 76px;
+  }
+  .band-name {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+  }
+  .band-name .hero-sub {
+    margin: 0;
+  }
+  .band .hero-word {
+    font-size: clamp(2.6rem, calc(92vw / var(--len)), 6rem);
+  }
+  .shiny-toggle {
+    bottom: 22px;
+  }
+  .notes-grid {
+    grid-template-columns: 1fr;
+  }
+  .note--wide {
+    grid-column: auto;
+  }
+  .notes-vine {
+    display: none;
+  }
+  .stat {
+    grid-template-columns: 5.5rem 2.4rem minmax(0, 1fr);
+    gap: 10px;
+  }
+  .fam-node {
+    width: 104px;
+  }
+  /* A long family scrolls sideways inside its own strip, not the page. */
+  .fam-tree {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 6px 4px 10px;
+    margin-left: -4px;
+    margin-right: -4px;
+    scrollbar-width: thin;
+  }
+  .notes-grid {
+    gap: 6px;
+  }
+  .note {
+    padding: 10px 4px;
+    box-shadow: none;
+    background: none;
+    border-bottom: 1px solid var(--line);
+    border-radius: 0;
+  }
+  .fam-arrow {
+    min-width: 48px;
+  }
+  .fam-tree,
+  .fam-branch,
+  .fam-step {
+    gap: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stat-fill {
+    animation: none;
+  }
+  #cardContent,
+  .fam-node {
+    transition: none;
+  }
+}

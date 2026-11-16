@@ -589,6 +589,12 @@ header .search-toggle-btn {
   transform: rotate(45deg);
   z-index: 0;
 }
+/* No gold bar under the current node: it keeps its type colour like the rest
+   (Andela draws it in --accent2); the diamond already marks it. */
+.evo-node-current .evo-node-frame::after {
+  background: var(--evo-type) !important;
+  height: 0.4rem !important;
+}
 .evo-node-current .evo-node-name {
   color: var(--gold) !important;
 }
