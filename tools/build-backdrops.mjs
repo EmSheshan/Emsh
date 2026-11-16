@@ -82,7 +82,7 @@ for (const region of regions) {
         const sharp = createCanvas(W, H);
         const s = Math.max(W / src.width, H / src.height) * 1.08;  // overscan hides blurred edges
         sharp.getContext('2d').drawImage(src, (W - src.width * s) / 2, (H - src.height * s) / 2, src.width * s, src.height * s);
-        const img = blur(sharp, W, H, label.includes('(painted)') ? 4 : 16);
+        const img = blur(sharp, W, H, label.includes('(painted)') ? 4 : 8);
         fs.writeFileSync(path.join(out, `${mon.id}.jpg`), img.toBuffer('image/jpeg', { quality: 0.8 }));
         tally[label] = (tally[label] ?? 0) + 1;
     }
