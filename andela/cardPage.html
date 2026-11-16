@@ -48,22 +48,23 @@
     <link rel="preload" href="../shared/assets/fonts/rP2Hp2ywxg089UriCZOIHQ.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="../shared/assets/fonts/8vIH7w4qzmVxm2BL9A.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="../shared/assets/fonts/PlayfairDisplay-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <!-- Andela 2.0 Pokémon page: shared/styles.css only for its font faces and
-         type colours; the look is andela.css + andela-card.css, the page is
-         rendered by card.js. Lacadia and Misc keep shared/cardPage.js. -->
+    <!-- Field-guide Pokémon page: shared/styles.css only for its font faces and
+         type colours; the look is field.css + field-card.css in this region's
+         colours (data/region.css); rendered by field-card.js. -->
     <link rel="stylesheet" href="../shared/styles.css" />
-    <link rel="stylesheet" href="andela.css" />
-    <link rel="stylesheet" href="andela-card.css" />
-    <script src="andela.js" type="module"></script>
-    <script src="card.js" type="module"></script>
+    <link rel="stylesheet" href="../shared/field.css" />
+    <link rel="stylesheet" href="data/region.css" />
+    <link rel="stylesheet" href="../shared/field-card.css" />
+    <script src="../shared/field.js" type="module"></script>
+    <script src="../shared/field-card.js" type="module"></script>
     <link rel="modulepreload" href="../shared/pokeData.js" />
     <link rel="modulepreload" href="../shared/region.js" />
     <link rel="preload" href="data/pokedex.csv" as="fetch" crossorigin />
   </head>
-  <body class="andela2 andela-card">
+  <body class="field field-card">
     <a class="skip-link" href="#cardContent">Skip to the entry</a>
 
-    <!-- The Pokémon in its habitat: a window cut into the paper (andela.css). -->
+    <!-- The Pokémon in its habitat: a window cut into the paper (shared/field.css). -->
     <section class="hero band" aria-label="Pokémon">
       <div class="hero-stage" aria-hidden="true"></div>
       <div class="band-chrome"></div>

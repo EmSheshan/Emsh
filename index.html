@@ -6,66 +6,83 @@
     <title>emsh — Pokédex</title>
     <meta
       name="description"
-      content="Em's fan-made Pokémon: the Lacadia and Andela regional dexes, plus one-off designs."
+      content="Em's fan-made Pokémon: field guides to the Lacadia and Andela regions, plus one-off designs."
     />
     <link
       rel="icon"
-      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='22' y='22' width='56' height='56' fill='%23ffd200' transform='rotate(45 50 50)'/></svg>"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='22' y='22' width='56' height='56' fill='%23d8b95f' transform='rotate(45 50 50)'/></svg>"
     />
-    <link rel="stylesheet" href="shared/theme.css" />
-    <link rel="stylesheet" href="hub.css" />
+    <link rel="preload" href="shared/assets/fonts/PlayfairDisplay-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- The hub uses the same field-guide system as the region pages
+         (shared/field.css); each region card takes its region's colours. -->
+    <link rel="stylesheet" href="shared/styles.css" />
+    <link rel="stylesheet" href="shared/field.css" />
     <link rel="stylesheet" href="lacadia/data/region.css" />
     <link rel="stylesheet" href="andela/data/region.css" />
-    <link rel="stylesheet" href="misc/data/region.css" />
-    <script src="shared/theme.js" defer></script>
+    <link rel="stylesheet" href="hub.css" />
     <script src="hub.js" type="module"></script>
   </head>
-  <body class="hub">
-    <header class="hub-head">
-      <h1 class="banner">emsh<span class="dot">.</span> dex</h1>
-      <p class="hub-sub">Fan-made Pokémon, drawn by Em. Pick a region.</p>
-    </header>
+  <body class="field hub">
+    <!-- Hero: Pokémon from every region, each in its own habitat, cross-fading
+         every few seconds (hub.js). -->
+    <section class="hero" aria-label="emsh">
+      <nav class="hero-nav">
+        <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>emsh</a>
+        <a class="hero-link" href="#regions">
+          <span>The regions</span><span class="hero-link-rule" aria-hidden="true"></span>
+        </a>
+      </nav>
+      <div class="hero-stage" aria-hidden="true"></div>
+      <div class="hero-title">
+        <p class="hero-sub">Fan-made Pokémon,<br />drawn by Em</p>
+        <h1 class="hero-word">emsh<span class="hero-spark"></span></h1>
+      </div>
+      <a class="hero-scroll" href="#regions">Choose a region</a>
+      <a class="hero-caption" href="#"><span class="hero-caption-num"></span><span class="hero-caption-name"></span><span class="hero-caption-env"></span></a>
+    </section>
 
-    <main class="regions">
-      <!-- data-region names a folder with data/pokedex.csv; hub.js fills in the
-           count. data-hero is the Pokémon shown on the card. -->
-      <a class="region" href="lacadia/index.html" data-region="lacadia" data-hero="faestalk">
-        <span class="region-bg"></span>
-        <span class="banner region-name">Lacadia</span>
-        <img class="region-art" alt="" />
-        <span class="region-foot glass">
-          <span class="region-count">&nbsp;</span>
-          <span class="region-go">Enter dex</span>
-        </span>
-      </a>
+    <main class="paper hub-paper" id="regions">
+      <header class="section-head">
+        <p class="eyebrow">Field guides</p>
+        <h2 class="section-title">The regions</h2>
+        <svg class="vine" viewBox="0 0 1200 220" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M-20 200 C 260 40, 620 20, 1220 90" />
+        </svg>
+      </header>
 
-      <a class="region" href="andela/index.html" data-region="andela" data-hero="amistaphore">
-        <span class="region-bg"></span>
-        <span class="banner region-name">Andela</span>
-        <img class="region-art" alt="" />
-        <span class="region-foot glass">
-          <span class="region-count">&nbsp;</span>
-          <span class="region-go">Enter dex</span>
-        </span>
-      </a>
-
-      <a class="region" href="misc/index.html" data-region="misc">
-        <span class="region-bg"></span>
-        <span class="banner region-name">Misc</span>
-        <span class="region-empty">
-          <span class="diamonds" aria-hidden="true"><i></i><i></i><i></i></span>
-          Redesigns &amp; one-offs
-        </span>
-        <span class="region-foot glass">
-          <span class="region-count">&nbsp;</span>
-          <span class="region-go">Enter</span>
-        </span>
-      </a>
+      <!-- data-region names a folder with data/; hub.js adds the count, the
+           photo and a featured Pokémon. -->
+      <div class="regions">
+        <a class="region" href="lacadia/index.html" data-region="lacadia">
+          <span class="region-window"><span class="region-photo"></span><img class="region-art" alt="" /></span>
+          <span class="region-body">
+            <span class="region-name">Lacadia</span>
+            <span class="region-meta"><span class="region-count">&nbsp;</span><span class="region-go">Open the field guide</span></span>
+          </span>
+        </a>
+        <a class="region" href="andela/index.html" data-region="andela">
+          <span class="region-window"><span class="region-photo"></span><img class="region-art" alt="" /></span>
+          <span class="region-body">
+            <span class="region-name">Andela</span>
+            <span class="region-meta"><span class="region-count">&nbsp;</span><span class="region-go">Open the field guide</span></span>
+          </span>
+        </a>
+        <a class="region region--soon" href="misc/index.html" data-region="misc">
+          <span class="region-window"><span class="region-diamonds" aria-hidden="true"><i></i><i></i><i></i></span></span>
+          <span class="region-body">
+            <span class="region-name">Misc</span>
+            <span class="region-meta"><span class="region-count">Redesigns &amp; one-offs</span><span class="region-go">Coming soon</span></span>
+          </span>
+        </a>
+      </div>
     </main>
 
-    <footer class="hub-foot">
-      Fan-made project, not affiliated with or endorsed by Pokémon, Nintendo,
-      Game Freak, or The Pokémon Company. Art &copy; @EmSheshan.
+    <footer class="footer">
+      <p>
+        Fan-made project, not affiliated with or endorsed by Pokémon, Nintendo,
+        Game Freak, or The Pokémon Company. Art &copy; @EmSheshan. Habitat
+        photos from Unsplash.
+      </p>
     </footer>
   </body>
 </html>

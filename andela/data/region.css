@@ -1,17 +1,18 @@
-/* region.css — this dex's colour scheme. Andela: canopy greens and limestone, with the old site's temple gold.
-   Scoped to html[data-region] so the hub can load every region's file at once. */
-/* html[...] and its body both, so this beats Andela's dark-mode tokens
-   (html.dark-mode / body.dark-mode) carried over from the old site. */
+/* region.css — this region's colours for the field-guide pages
+   (shared/field.css). Andela: canopy forest and moss, temple gold.
+   Scoped to html[data-region] (and its body) so the hub can load every
+   region's file at once and each region card picks up its own colours. */
 html[data-region="andela"],
 html[data-region="andela"] body,
 [data-region="andela"] {
-  --parchment: #efe8d2;  /* name ribbon */
-  --ink: #1b3324;        /* ribbon text */
-  --gold: #e0a93a;       /* accent: dex numbers, highlights */
-  --base-1: #122019;     /* backdrop gradient, top -> bottom */
-  --base-2: #26392b;
-  --base-3: #4a5a43;
-  --base-4: #203527;
-  --base-5: #0f1a14;
-  --navy: #0f1a14;
+  --forest: #182820;   /* dark surfaces: tiles, the hero window */
+  --moss: #304b3b;     /* lines and accents */
+  --gold: #d8b95f;     /* highlights: dex numbers, diamonds */
+  --mist: #e8e8dd;     /* stat tracks */
+  --paper: #f7f7f2;    /* the sheet */
+  --cream: #f3efdc;    /* type on photos */
+  --ink: #1d2b23;      /* text */
+  --muted: #5c6b61;
+  --line: rgba(24, 40, 32, 0.13);
+  --night: #111a15;    /* the page behind the sheet */
 }

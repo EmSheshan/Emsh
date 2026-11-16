@@ -1,12 +1,26 @@
-/* andela-card.css — the Andela 2.0 Pokémon page, on top of andela.css (which
+/* field-card.css — the field-guide Pokémon page, on top of field.css (which
  * supplies the tokens, the recessed hero window, the paper sheet and the A–Z
- * index). Markup comes from card.js.
+ * index). Markup comes from field-card.js.
  */
 
 /* ---------------------------------------------------------------- band */
 
 .band {
-  min-height: min(76vh, 720px);
+  min-height: min(86vh, 840px);
+}
+
+/* Desktop: the Pokémon large in the left half of the window, standing on its
+   bottom edge, with its name set big in the right half -- side by side, never
+   overlapping. (Phones stack them; see the bottom of this file.) */
+.band {
+  --split: 50%;
+}
+.band .hero-mon {
+  left: calc(var(--frame) + var(--gutter));
+  bottom: 0;
+  width: calc(var(--split) - var(--frame) - var(--gutter) - 2.5vw);
+  height: min(86%, 740px);
+  object-position: center bottom;
 }
 .band-chrome {
   position: absolute;
@@ -82,14 +96,13 @@
 /* Name block, bottom-right, as on the homepage. */
 .band-title {
   position: absolute;
+  left: var(--split);
   right: calc(var(--frame) + var(--gutter));
-  bottom: clamp(36px, 7vh, 72px);
+  bottom: calc(var(--name-bottom) + var(--name-size) * 0.86 + 18px);
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  gap: 14px;
-  max-width: 64%;
-  text-align: right;
+  align-items: flex-start;
+  gap: 12px;
 }
 .band-meta {
   display: flex;
@@ -103,18 +116,41 @@
   letter-spacing: 0.3em;
   color: var(--gold);
 }
-.band-name {
-  display: flex;
-  align-items: flex-end;
-  gap: clamp(12px, 1.8vw, 24px);
+/* The big name, in the right half; longer names set smaller so they stay on
+   one line. The number, types, kind and form tabs sit just above it. It lives
+   in the slide so it cross-fades with the photo and the Pokémon. */
+.band {
+  --name-size: clamp(3rem, calc(78vw / var(--len, 8)), 9.5rem);
+  --name-bottom: clamp(40px, 8vh, 84px);
 }
-.band-name .hero-sub {
-  margin-bottom: 1.1em;
-}
-/* Longer names set smaller so they stay on one line. */
-.band .hero-word {
-  font-size: clamp(3.2rem, calc(70vw / var(--len)), 11rem);
+.band-word {
+  position: absolute;
+  z-index: 1;
+  left: var(--split);
+  right: calc(var(--frame) + var(--gutter));
+  bottom: var(--name-bottom);
+  margin: 0;
+  text-align: left;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: var(--name-size);
+  line-height: 0.8;
+  letter-spacing: -0.02em;
   white-space: nowrap;
+  color: var(--cream);
+  text-shadow: 0 4px 40px rgba(0, 0, 0, 0.35);
+}
+.band .hero-mon {
+  z-index: 2;
+}
+.band-kind {
+  margin: 0;
+  font-family: var(--sans);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1rem, 1.6vw, 1.4rem);
+  color: var(--cream);
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
 }
 
 /* Type chips: original type colours, quiet pill. */
@@ -323,7 +359,7 @@
   display: none !important;
 }
 
-/* Andela-original abilities: a small gold diamond. */
+/* Region-original abilities: a small gold diamond. */
 .orig {
   display: inline-block;
   width: 8px;
@@ -351,7 +387,7 @@
   text-transform: uppercase;
 }
 
-/* Base stats: label, number, slim bar in Andela's stat colours. */
+/* Base stats: label, number, slim bar in the original stat colours. */
 .stats-head {
   display: flex;
   align-items: baseline;
@@ -597,24 +633,27 @@ a.fam-node:hover {
     gap: 18px;
   }
   .band .hero-mon {
-    bottom: 34%;
-    height: 38%;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: calc(70px + var(--name-size) * 0.9);
+    width: 88%;
+    height: 46%;
+  }
+  /* Phones: art centred, name centred under it, details above. */
+  .band {
+    --name-size: clamp(2.6rem, calc(92vw / var(--len, 8)), 5.5rem);
+    --name-bottom: 70px;
   }
   .band-title {
     left: calc(var(--frame) + var(--gutter));
-    max-width: none;
-    bottom: 76px;
+    right: calc(var(--frame) + var(--gutter));
+    top: calc(var(--frame) + 64px);
+    bottom: auto;
   }
-  .band-name {
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 4px;
-  }
-  .band-name .hero-sub {
-    margin: 0;
-  }
-  .band .hero-word {
-    font-size: clamp(2.6rem, calc(92vw / var(--len)), 6rem);
+  .band-word {
+    left: var(--frame);
+    right: var(--frame);
+    text-align: center;
   }
   .shiny-toggle {
     bottom: 22px;

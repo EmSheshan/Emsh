@@ -1,9 +1,10 @@
-/* andela.css — Andela 2.0: an editorial field guide.
+/* field.css — the editorial field-guide look for region pages (first built
+ * for Andela, now shared by every region that opts in with body.field).
  *
- * Modern digital product + natural habitat + Andela's own identity. Layered
- * over shared/styles.css (which still owns behaviour: search, filters, tile
- * reveal) and loaded ONLY by andela/index.html, so Lacadia and Misc are
- * untouched.
+ * Modern digital product + natural habitat + each region's own identity.
+ * Layered over shared/styles.css (which still owns behaviour: search, filters,
+ * tile reveal). The colours below are defaults; each region sets its own in
+ * <region>/data/region.css.
  *
  *   hero    full-bleed habitat photograph, the region's name in a large
  *           high-contrast serif, a thin italic line beside it, one Pokémon
@@ -19,7 +20,7 @@
 
 @font-face {
   font-family: "Playfair Display";
-  src: url(../shared/assets/fonts/PlayfairDisplay-latin.woff2) format("woff2");
+  src: url(assets/fonts/PlayfairDisplay-latin.woff2) format("woff2");
   font-weight: 400 600;
   font-display: swap;
 }
@@ -48,7 +49,7 @@
 
 /* ---------------------------------------------------------------- page */
 
-body.andela2 {
+body.field {
   margin: 0;
   display: block;
   min-height: 100vh;
@@ -59,7 +60,7 @@ body.andela2 {
   font-family: var(--sans);
   -webkit-font-smoothing: antialiased;
 }
-body.andela2 .toggle-dark-mode {
+body.field .toggle-dark-mode {
   display: none;
 }
 
@@ -105,7 +106,7 @@ body.andela2 .toggle-dark-mode {
 }
 
 /* The stage holds one slide per shown Pokémon: its habitat photo (shaded for
-   legibility) and its art. andela.js adds a slide, then cross-fades it in by
+   legibility) and its art. field.js adds a slide, then cross-fades it in by
    making it .is-active; the photo settles from a slight zoom and the Pokémon
    rises into place. */
 .hero-stage,
@@ -418,8 +419,8 @@ body.andela2 .toggle-dark-mode {
 /* ---------------------------------------------------------------- search */
 
 /* Always open here, as a clean solid surface (styles.css collapses it). */
-body.andela2 .search-filter-bar,
-body.andela2 .search-filter-bar.open {
+body.field .search-filter-bar,
+body.field .search-filter-bar.open {
   position: relative;
   top: auto;
   z-index: 2;
@@ -435,16 +436,16 @@ body.andela2 .search-filter-bar.open {
   border-radius: 16px;
   box-shadow: none;
 }
-body.andela2 .search-wrapper {
+body.field .search-wrapper {
   display: flex;
   align-items: center;
   gap: 10px;
   width: 100%;
 }
-body.andela2 .search-icon {
+body.field .search-icon {
   color: var(--muted);
 }
-body.andela2 .search-input {
+body.field .search-input {
   flex: 1;
   border: 0;
   background: none;
@@ -455,10 +456,10 @@ body.andela2 .search-input {
   box-shadow: none;
   padding: 6px 0;
 }
-body.andela2 .search-input::placeholder {
+body.field .search-input::placeholder {
   color: var(--muted);
 }
-body.andela2 .result-count-badge {
+body.field .result-count-badge {
   background: none;
   clip-path: none;
   border: 0;
@@ -470,13 +471,13 @@ body.andela2 .result-count-badge {
   color: var(--muted);
   font-variant-numeric: tabular-nums;
 }
-body.andela2 .type-filter-container {
+body.field .type-filter-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   gap: 6px;
 }
-body.andela2 .type-filter-btn {
+body.field .type-filter-btn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -494,14 +495,14 @@ body.andela2 .type-filter-btn {
   clip-path: none;
   transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
-body.andela2 .type-filter-btn img {
+body.field .type-filter-btn img {
   width: 18px;
   height: 18px;
 }
-body.andela2 .type-filter-btn:hover {
+body.field .type-filter-btn:hover {
   border-color: var(--moss);
 }
-body.andela2 .type-filter-btn.active {
+body.field .type-filter-btn.active {
   background: var(--forest);
   border-color: var(--forest);
   color: var(--paper);
@@ -509,8 +510,8 @@ body.andela2 .type-filter-btn.active {
 
 /* ---------------------------------------------------------------- tiles */
 
-body.andela2 #pokedex,
-body.andela2 #megadex {
+body.field #pokedex,
+body.field #megadex {
   width: 100%;
   max-width: none;
   margin: 0;
@@ -520,18 +521,18 @@ body.andela2 #megadex {
   align-content: start;
 }
 
-body.andela2 .pokemon {
+body.field .pokemon {
   align-items: stretch;
   padding: 0;
   text-align: left;
   color: var(--ink);
 }
-body.andela2 .pokemon::before {
-  display: none;                     /* Andela's tile frame */
+body.field .pokemon::before {
+  display: none;                     /* styles.css's tile frame */
 }
 
 /* The art sits on a crisp photo of its habitat; one big rounded corner. */
-body.andela2 .pokemon-art {
+body.field .pokemon-art {
   aspect-ratio: 1 / 1;
   display: flex;
   align-items: flex-end;
@@ -542,14 +543,14 @@ body.andela2 .pokemon-art {
   background: var(--forest);
 }
 /* The habitat, softly blurred, recessed into the paper like the hero window. */
-body.andela2 .pokemon-art::before,
-body.andela2 .pokemon-art::after {
+body.field .pokemon-art::before,
+body.field .pokemon-art::after {
   content: "";
   position: absolute;
   pointer-events: none;
   border-radius: inherit;
 }
-body.andela2 .pokemon-art::before {
+body.field .pokemon-art::before {
   inset: -12px;
   z-index: 0;
   filter: blur(4px);
@@ -557,7 +558,7 @@ body.andela2 .pokemon-art::before {
     linear-gradient(180deg, rgba(10, 18, 13, 0.25) 0%, rgba(10, 18, 13, 0) 35%, rgba(10, 18, 13, 0.18) 100%),
     var(--scene, linear-gradient(160deg, var(--moss), var(--forest))) center / cover no-repeat;
 }
-body.andela2 .pokemon-art::after {
+body.field .pokemon-art::after {
   inset: 0;
   z-index: 1;
   box-shadow:
@@ -565,17 +566,17 @@ body.andela2 .pokemon-art::after {
     inset 8px 0 14px -10px rgba(0, 0, 0, 0.35),
     inset 0 -6px 12px -8px rgba(0, 0, 0, 0.25);
 }
-body.andela2 .pokemon-art .dex-num {
+body.field .pokemon-art .dex-num {
   z-index: 3;
 }
-body.andela2 .pokemon-image {
+body.field .pokemon-image {
   width: 86%;
   height: auto;
   margin-bottom: 4%;
   filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.35));
   transition: transform 0.35s ease;
 }
-body.andela2 .pokemon-art .dex-num {
+body.field .pokemon-art .dex-num {
   top: 12px;
   left: 14px;
   margin: 0;
@@ -588,14 +589,14 @@ body.andela2 .pokemon-art .dex-num {
   clip-path: none;
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
 }
-body.andela2 .name-row {
+body.field .name-row {
   margin-top: 12px;
   justify-content: space-between;
   flex-wrap: nowrap;
   gap: 8px;
   padding: 0 2px;
 }
-body.andela2 .name {
+body.field .name {
   font-family: var(--head);
   font-weight: 700;
   font-size: 1rem;
@@ -604,47 +605,47 @@ body.andela2 .name {
   color: var(--ink);
   text-align: left;
 }
-body.andela2 .type-image {
+body.field .type-image {
   max-height: 1.15rem;
 }
 
 /* Hover: a slight lift, no glow. */
-body.andela2 .pokemon.slide-in:hover,
-body.andela2 .pokemon.slide-in:focus-visible {
+body.field .pokemon.slide-in:hover,
+body.field .pokemon.slide-in:focus-visible {
   transform: translateY(-4px);
   box-shadow: none;
   outline: none;
 }
-body.andela2 .pokemon.slide-in:hover .pokemon-image {
+body.field .pokemon.slide-in:hover .pokemon-image {
   transform: scale(1.04);
 }
-body.andela2 .pokemon.slide-in:focus-visible .pokemon-art {
+body.field .pokemon.slide-in:focus-visible .pokemon-art {
   outline: 2px solid var(--moss);
   outline-offset: 3px;
 }
-body.andela2 .pokemon .pokemon-image.missing-art,
-body.andela2 .pokemon img[src=""] {
+body.field .pokemon .pokemon-image.missing-art,
+body.field .pokemon img[src=""] {
   visibility: hidden;
 }
 
-body.andela2 .no-results {
+body.field .no-results {
   grid-column: 1 / -1;
   background: none;
   border: 1px dashed var(--line);
   border-radius: 16px;
   color: var(--ink);
 }
-body.andela2 .no-results-title {
+body.field .no-results-title {
   font-family: var(--head);
   color: var(--ink);
 }
-body.andela2 .no-results-mark {
+body.field .no-results-mark {
   color: var(--gold);
 }
 
 /* ---------------------------------------------------------------- footer */
 
-body.andela2 .footer {
+body.field .footer {
   box-sizing: border-box;
   width: 100%;
   max-width: 900px;
@@ -660,7 +661,7 @@ body.andela2 .footer {
   text-transform: none;
 }
 
-body.andela2 .back-to-top {
+body.field .back-to-top {
   background: var(--forest);
   color: var(--paper);
   border: 0;
@@ -668,7 +669,7 @@ body.andela2 .back-to-top {
   clip-path: none;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
-body.andela2 .back-to-top::before {
+body.field .back-to-top::before {
   display: none;
 }
 
@@ -725,15 +726,15 @@ body.andela2 .back-to-top::before {
   .hero-word {
     font-size: 24vw;
   }
-  body.andela2 #pokedex,
-  body.andela2 #megadex {
+  body.field #pokedex,
+  body.field #megadex {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 26px 14px;
   }
-  body.andela2 .pokemon-art {
+  body.field .pokemon-art {
     border-radius: 12px 12px 12px 52px;
   }
-  body.andela2 .name {
+  body.field .name {
     font-size: 0.85rem;
   }
   .vine {
@@ -759,7 +760,7 @@ body.andela2 .back-to-top::before {
   .hero-mon,
   .hero-caption,
   .hero-link-rule,
-  body.andela2 .pokemon-image,
+  body.field .pokemon-image,
   .az-list a {
     transition: none;
   }

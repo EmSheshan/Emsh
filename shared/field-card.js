@@ -1,21 +1,25 @@
-// card.js — Andela 2.0 Pokémon page (andela/cardPage.html; styles in
-// andela-card.css on top of andela.css). Andela-only: Lacadia and Misc keep
-// shared/cardPage.js.
+// field-card.js — the field-guide Pokémon page (<region>/cardPage.html;
+// styles in field-card.css on top of field.css). Regions that haven't moved
+// to the field guide keep shared/cardPage.js.
 //
 // Layout, after the reference field guide:
 //   band    the Pokémon in its own habitat photo, its name in the display
 //           serif, kind beside it; prev / next and back-to-dex in the nav
-//   paper   the A–Z index (built by andela.js) beside: About, Field notes laid
+//   paper   the A–Z index (built by field.js) beside: About, Field notes laid
 //           along a moss line, Base stats, Evolution
 //
 // Moving between Pokémon (prev/next, evolution, index, arrow keys) re-renders
 // in place and cross-fades the band, like the homepage hero.
 
-import { loadDex } from "../shared/pokeData.js";
-import { abilities, moves, region } from "../shared/region.js";
+import { loadDex } from "./pokeData.js";
+import { abilities, moves, region } from "./region.js";
 
 const SHARED = "../shared/";
 const pad = (n) => String(n).padStart(3, "0");
+// url()s inside CSS variables resolve against the stylesheet that uses them
+// (shared/), not this page -- so hand them absolute URLs.
+const abs = (p) => new URL(p, document.baseURI).href;
+
 const baseName = (p) => p.name.split("-")[0];
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 const art = (id, shiny = false) => `data/pokemonArt/${id}${shiny ? "_shiny" : ""}.webp`;
@@ -86,15 +90,13 @@ function bandHTML(mon, list, formIndex) {
   return `
     <nav class="hero-nav band-nav">
       <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"></span>emsh</a>
-      <a class="band-back" href="index.html">Andela Pokédex</a>
+      <a class="band-back" href="index.html">${esc(region.name)} Pokédex</a>
       <div class="band-steps">${navTo(order[i - 1], "prev")}${navTo(order[i + 1], "next")}</div>
     </nav>
     <div class="band-title">
       <p class="band-meta">${mon.num != null ? `<span class="band-num">Nº ${pad(mon.num)}</span>` : `<span class="band-num">${mon.isMega ? "Xeno / Mega" : ""}</span>`}${mon.types.map(typeChip).join("")}</p>
-      <div class="band-name">
-        <p class="hero-sub">The ${esc(mon.kind)}<br />Pokémon</p>
-        <h1 class="hero-word" style="--len: ${baseName(mon).length}">${esc(baseName(mon))}</h1>
-      </div>
+      <p class="band-kind">The ${esc(mon.kind)} Pokémon</p>
+      <h1 class="visually-hidden">${esc(baseName(mon))}</h1>
       ${formTabs}
     </div>
     <button class="shiny-toggle" type="button" aria-pressed="false"><span class="shiny-mark" aria-hidden="true"></span>Shiny</button>`;
@@ -127,7 +129,7 @@ function notesHTML(mon) {
     mon.weightkg != null ? note("Weight", `<p class="note-figure">${mon.weightkg} kg</p>`) : "",
     env ? note("Habitat", `<p class="note-figure note-figure--word">${esc(env)}</p>`) : "",
     ...ab.map(([a, n]) => note(
-      `${isOriginal(a) ? '<span class="orig" title="Andela original"></span>' : ""}${esc(a)}${n ? `<span class="note-tag">${n}</span>` : ""}`,
+      `${isOriginal(a) ? '<span class="orig" title="${esc(region.name)} original"></span>' : ""}${esc(a)}${n ? `<span class="note-tag">${n}</span>` : ""}`,
       `<p>${esc(abDesc(a))}</p>`, isOriginal(a) ? "note--original" : "")),
     mv ? note(
       `Signature move`,
@@ -168,7 +170,7 @@ function nodeHTML(p, current) {
   const isCurrent = p.id === current || p.speciesId === current;
   const tile = tileFor(p.id);
   const inner = `
-    <span class="fam-art" ${tile ? `style="--scene: url('${tile}')"` : ""}><img src="${art(p.id)}" alt="" loading="lazy"></span>
+    <span class="fam-art" ${tile ? `style="--scene: url('${abs(tile)}')"` : ""}><img src="${art(p.id)}" alt="" loading="lazy"></span>
     <span class="fam-label">${p.num != null ? `<span class="fam-num">Nº ${pad(p.num)}</span>` : p.isExternal ? `<span class="fam-num">Canon</span>` : `<span class="fam-num">Xeno / Mega</span>`}
       <span class="fam-name">${esc(baseName(p))}</span></span>`;
   const cls = `fam-node${isCurrent ? " is-current" : ""}${p.isExternal ? " is-canon" : ""}`;
@@ -220,8 +222,9 @@ async function showSlide(mon) {
   await Promise.all([photo ? load(photo) : null, load(src)]);
   const slide = document.createElement("div");
   slide.className = "hero-slide";
-  slide.innerHTML = `<div class="hero-photo"></div><img class="hero-mon" alt="${esc(baseName(mon))}" src="${src}">`;
-  if (photo) slide.querySelector(".hero-photo").style.setProperty("--hero-photo", `url("${photo}")`);
+  // Photo, then the big name, then the Pokémon standing in front of its name.
+  slide.innerHTML = `<div class="hero-photo"></div><p class="band-word" aria-hidden="true">${esc(baseName(mon))}</p><img class="hero-mon" alt="" src="${src}">`;
+  if (photo) slide.querySelector(".hero-photo").style.setProperty("--hero-photo", `url("${abs(photo)}")`);
   slide.querySelector("img").addEventListener("error", (e) => (e.target.style.visibility = "hidden"));
   stage.append(slide);
   requestAnimationFrame(() => requestAnimationFrame(() => {
@@ -242,7 +245,8 @@ async function render(sid, formIndex = 0, { scroll = false } = {}) {
   if (!sameMon) state.shiny = false;
   state = { ...state, id: sid, form: formIndex };
 
-  document.title = `${mon.num != null ? `Nº ${pad(mon.num)} · ` : ""}${baseName(mon)} — Andela Pokédex`;
+  document.title = `${mon.num != null ? `Nº ${pad(mon.num)} · ` : ""}${baseName(mon)} — ${region.name} Pokédex`;
+  band.style.setProperty("--len", baseName(mon).length);   // sizes the big name
   document.documentElement.style.setProperty("--t1", `var(--type-${mon.types[0].toLowerCase()})`);
 
   band.querySelector(".band-chrome").innerHTML = bandHTML(mon, list, formIndex);
@@ -287,7 +291,7 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "ArrowRight" && order[i + 1]) go(order[i + 1]);
 });
 
-// The A–Z index is built by andela.js; mark the current entry once it exists.
+// The A–Z index is built by field.js; mark the current entry once it exists.
 const az = document.getElementById("azIndex");
 if (az) new MutationObserver(() => markIndex(state.id)).observe(az, { childList: true });
 

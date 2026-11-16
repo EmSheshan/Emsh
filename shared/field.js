@@ -1,16 +1,22 @@
-// andela.js — the Andela 2.0 homepage additions (see andela.css):
+// field.js — the field-guide region homepage additions (see field.css), also
+// loaded by the Pokémon page for its A–Z index:
 //   - the hero: a random Pokémon in its own habitat on every visit
 //   - the A–Z encyclopedia index
 //   - each grid tile's habitat photo (--scene)
 // The grid itself, search and filters are still built by shared/index.js.
 
-import { loadDex } from "../shared/pokeData.js";
+import { loadDex } from "./pokeData.js";
+import { region } from "./region.js";
 
 // This page has no light/dark toggle; drop the class the old site may have set.
 document.documentElement.classList.remove("dark-mode");
 document.addEventListener("DOMContentLoaded", () => document.body.classList.remove("dark-mode"));
 
 const pad = (n) => String(n).padStart(3, "0");
+// url()s inside CSS variables resolve against the stylesheet that uses them
+// (shared/), not this page -- so hand them absolute URLs.
+const abs = (p) => new URL(p, document.baseURI).href;
+
 const displayName = (p) => p.name.split("-")[0];
 
 // Which environment each Pokémon lives in (tools/build-backdrops.mjs). Photos
@@ -52,7 +58,7 @@ function startHero() {
     return cur.id;
   };
 
-  const load = (src) => new Promise((ok) => { const i = new Image(); i.onload = i.onerror = ok; i.src = src; });
+  const load = (src) => new Promise((ok) => { const i = new Image(); i.onload = () => ok(true); i.onerror = () => ok(false); i.src = src; });
   let current = null;
   const recent = [];
 
@@ -63,7 +69,7 @@ function startHero() {
     if (fresh.length) choices = fresh;
     if (!current) {
       let last = null;
-      try { last = sessionStorage.getItem("andelaHero"); } catch {}
+      try { last = sessionStorage.getItem(`${region.name}Hero`); } catch {}
       const notLast = choices.filter((p) => p.id !== last);
       if (notLast.length) choices = notLast;
     }
@@ -74,12 +80,13 @@ function startHero() {
     const env = photoOf(mon.id);
     const photoUrl = `data/scenes/hero-${env}.jpg`;
     const artUrl = `data/pokemonArt/${mon.id}.webp`;
-    await Promise.all([load(photoUrl), load(artUrl)]);   // never fade in half-loaded
+    const [, hasArt] = await Promise.all([load(photoUrl), load(artUrl)]);   // never fade in half-loaded
+    if (!hasArt) return false;                         // art not added yet: pick another
 
     const slide = document.createElement("div");
     slide.className = "hero-slide";
     slide.innerHTML = `<div class="hero-photo"></div><img class="hero-mon" alt="" src="${artUrl}">`;
-    slide.querySelector(".hero-photo").style.setProperty("--hero-photo", `url("${photoUrl}")`);
+    slide.querySelector(".hero-photo").style.setProperty("--hero-photo", `url("${abs(photoUrl)}")`);
     stage.append(slide);
 
     cap.classList.remove("is-shown");
@@ -101,7 +108,12 @@ function startHero() {
     current = mon;
     recent.push(mon.id);
     if (recent.length > Math.max(3, Math.floor(pool.length / 2))) recent.shift();
-    try { sessionStorage.setItem("andelaHero", mon.id); } catch {}
+    try { sessionStorage.setItem(`${region.name}Hero`, mon.id); } catch {}
+    return true;
+  };
+
+  const next = async () => {
+    for (let tries = 0; tries < 8; tries++) if (await show(pick())) return;
   };
 
   const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -109,11 +121,11 @@ function startHero() {
   const schedule = () => {
     clearTimeout(timer);
     if (still || document.hidden) return;              // pause while the tab is hidden
-    timer = setTimeout(async () => { await show(pick()); schedule(); }, HERO_HOLD_MS);
+    timer = setTimeout(async () => { await next(); schedule(); }, HERO_HOLD_MS);
   };
   document.addEventListener("visibilitychange", schedule);
 
-  show(pick()).then(schedule);
+  next().then(schedule);
 }
 startHero();
 
@@ -154,7 +166,7 @@ const decorate = (tile) => {
   const id = new URL(tile.href, location.href).searchParams.get("pokemon");
   const url = sceneFor(id);
   tile.dataset.scene = url ?? "none";
-  if (url) tile.querySelector(".pokemon-art")?.style.setProperty("--scene", `url("${url}")`);
+  if (url) tile.querySelector(".pokemon-art")?.style.setProperty("--scene", `url("${abs(url)}")`);
 };
 
 // Tiles are rendered by shared/index.js after its own data load; catch them as
