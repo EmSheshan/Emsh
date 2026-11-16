@@ -5,7 +5,7 @@
  *   - yellow slanted name banner with a halftone tail
  *   - liquid-glass panels: real backdrop blur, faint hairline rim
  *   - gold double frame with diamond studs around the viewport
- *   - art with a solid half-opacity white stroke (SVG filter from theme.js)
+ *   - art sits straight on the backdrop with a soft drop shadow (no stroke)
  *   - SmileySans for display type, diamond bullets, gold labels
  * Always dark: the carousel look has no light variant, so the toggle is hidden.
  */
