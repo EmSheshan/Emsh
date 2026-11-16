@@ -533,3 +533,12 @@ header .banner-main h1::after,
 .no-results-mark {
   color: var(--gold) !important;
 }
+
+/* Megas/Xenos: Andela clips a gradient into the title text; keep the yellow
+   banner and dark text like every other card instead. */
+body.mega-pokemon .title-type-container h2 {
+  background: linear-gradient(90deg, #ffb800, #ffdf1a) !important;
+  -webkit-background-clip: border-box !important;
+  background-clip: border-box !important;
+  color: #111 !important;
+}
