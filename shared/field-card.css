@@ -482,7 +482,11 @@
   overflow-x: auto;
   overflow-y: hidden;
   flex-wrap: nowrap;
-  padding: 6px 4px 12px;
+  /* Room for the current Pokémon's outline (2px + 4px offset), which the
+     scroll strip would otherwise clip; pulled back so tiles stay aligned. */
+  padding: 10px 10px 14px;
+  margin-left: -10px;
+  margin-right: -10px;
   scrollbar-width: thin;
   overscroll-behavior-x: contain;
   -webkit-overflow-scrolling: touch;
