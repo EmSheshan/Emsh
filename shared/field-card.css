@@ -235,7 +235,11 @@
 .band .hero-slide .hero-photo {
   transition: transform 3s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.35s ease;
 }
+.band .hero-slide .band-word {
+  transition: opacity 0.35s ease;
+}
 .band .hero-slide.is-swapping .hero-mon,
+.band .hero-slide.is-swapping .band-word,
 .band .hero-slide.is-swapping-photo .hero-photo {
   opacity: 0 !important;
   transition: opacity 0.26s ease !important;
