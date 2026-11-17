@@ -544,7 +544,7 @@ a.fam-node:hover {
 .fam-art::before {
   inset: -10px;
   z-index: 0;
-  filter: blur(4px);
+  filter: blur(2.5px);
   background: var(--scene, linear-gradient(160deg, var(--moss), var(--forest))) center / cover no-repeat;
 }
 .fam-art::after {
