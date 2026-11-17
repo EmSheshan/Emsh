@@ -16,42 +16,35 @@ colour until one is added. Credits for photos are in CREDITS.md.
 
 ## Backgrounds in use
 
-Every evolution line has its own background (Megalocyte shares Synthecyte's). Canon
+Every evolution line has its own background (Megalocyte shares Synthecyte's, and the
+four cryptids share red-mountains). Canon
 Pokémon in a family (canondex.csv) use their line's background too.
 (A) = Andela, the rest are Lacadia.
 
-### Still needed (21)
+### Still needed (11)
 
 Save each as `environments/<name>.jpg`. Until then the line shows on the plain colour.
 
 | file | look for | Pokémon |
 |---|---|---|
 | `abyss` | pitch-black deep ocean, faint glow | Lumajesty |
-| `agave-field` | blue agave rows, desert farm | Marazcal, Iguavadon |
 | `arctic-sea` | icy sea with floating ice, cold light | Selky |
-| `bell-tower` | old bell tower / temple bell | Sacrabell |
 | `crystal-cave` | cave full of glowing crystals | Larvos, Syrinsect, Stratoclysm |
-| `desert-night` | desert under a starry night sky | Tortarma, Tortality |
-| `foggy-bridge` | bridge in thick fog at night (mothman) | Azamoth |
 | `forge` | blacksmith forge, glowing metal | Smeltmor |
-| `glacier` | blue glacier ice | Cryocone, Cryoconda |
-| `haunted-house` | eerie abandoned house interior | Saskrypt |
-| `haunted-mine` | dark mine tunnel, eerie (cave ghosts) | Shardling, Crucigem |
 | `incense-shrine` | incense smoke in a shrine | Censerpent |
 | `lava-field` | flowing lava, black rock | Pyrant |
 | `mine` | mine tunnel with mineral veins | Shuckler |
-| `moonless-night` | dark night sky over silhouettes | Devile |
-| `moonlit-forest` | forest clearing under a full moon | Moosenge |
 | `museum` | museum hall with statues | Ceraphinx |
-| `power-plant` | power station / pylons | Battrey, Vladibolt |
 | `primeval-forest` | ancient, untouched old-growth forest | Albythos |
 | `rooftops` | city rooftops from above | Idagon, Libradon, Suprion |
 | `shallows` | sunlit shallow sea, clear water | Phalankton |
 
-### Done (53)
+### Done (60)
 
 | file | | Pokémon |
 |---|---|---|
+| `agave-field` | blue agave rows, desert farm | Marazcal, Iguavadon |
+| `altar` | candlelit altar | Scrithymn, Blazephemy |
 | `autumn-forest` |  | Tirakitsu, Asterbat |
 | `badlands` |  | Pumace (A), Pyroncho (A), Smoldero (A) |
 | `bamboo` |  | Fawnna (A), Fawliage (A), Dynastag (A) |
@@ -59,6 +52,7 @@ Save each as `environments/<name>.jpg`. Until then the line shows on the plain c
 | `bluebell-woods` | bluebell woods in sun | Springbun, Snapbun, Faestalk |
 | `canyon` |  | Furnawurm |
 | `carousel` | carousel at night | Grubblo, Tentrilo, Rocadocio |
+| `carved-tunnel` | carved stone tunnel | Shardling, Crucigem |
 | `cave` |  | Cobblin, Grumblock, Ragnarock |
 | `cave-painting` |  | Dodon, Dodonodon |
 | `cavern` |  | Aurago (A) |
@@ -67,8 +61,8 @@ Save each as `environments/<name>.jpg`. Until then the line shows on the plain c
 | `cyberpunk` |  | Ravenger |
 | `cyberspace` |  | Logomorph |
 | `dark-jungle` |  | Murkitty, Tammalkin, Velyger |
-| `darkness` |  | Paracabra |
 | `deep-sea` |  | Jellien, Encephid, Monolithid |
+| `desert-night` | desert dunes under stars | Tortarma, Tortality |
 | `desert-rain` | desert in rain, wet sand / blooms | Sedimental (A) |
 | `dewy-grass` | dewy grass at night | Possolo, Oposse |
 | `egypt` |  | Kheprini, Servankh, Pharomancy |
@@ -83,6 +77,7 @@ Save each as `environments/<name>.jpg`. Until then the line shows on the plain c
 | `heaven` |  | Xerasige |
 | `heaven-2` |  | Xophis |
 | `hell` |  | Jeneosis |
+| `ice-cave` | blue ice cave | Battrey, Vladibolt |
 | `jungle` |  | Lileef, Citradily |
 | `junkyard` |  | Bitbyte, Cathogen, Ramnant |
 | `lava-sea` | lava pouring into the sea | Basilly, Knaviper, Verkillion |
@@ -93,19 +88,22 @@ Save each as `environments/<name>.jpg`. Until then the line shows on the plain c
 | `moonlit-trees` | full moon behind trees | Mega Lokix (A) |
 | `mossy-pond` | mossy woodland pond | Ribbeat, Ventribbit |
 | `palms` |  | Tropius (A) |
+| `red-mountains` | red mountains at dusk | Paracabra, Saskrypt, Devile, Azamoth |
 | `river-buffalo` | river with water buffalo | Purluxe, Lyonite, Enkidros |
 | `rocky-plain` | rocky alpine plain | Polishell (A), Tarnishell (A), Lavisheen (A) |
 | `rocky-shore` |  | Pyukumuku (A) |
 | `ruined-house` | ruined house with snow | Filch |
 | `sea-lion-beach` |  | Sealor (A), Enseal (A), Brigantide (A) |
 | `snow` |  | Balite, Baleet, Balaast |
+| `snowy-shore` | snowy pebble shore | Cryocone, Cryoconda |
 | `space` |  | Synthecyte (A), Megalocyte (A) |
+| `standing-stones` | standing stones | Moosenge |
 | `stormy-sea` |  | Khamathos (A) |
 | `street` | empty street at night | Grismirk (A), Grimson (A) |
-| `temple` |  | Scrithymn, Blazephemy |
+| `temple` |  | Sacrabell |
 | `vegetable-garden` | vegetable garden | Roignon, Scallahad |
 | `wheat-field` | golden wheat field | Panacha (A), Marracacha (A) |
 
 ### Spare photos (not used by any line)
 
-`antique` · `circus` · `forest` · `ice` · `mountains` · `onion`
+`antique` · `circus` · `darkness` · `forest` · `ice` · `mountains` · `onion`
