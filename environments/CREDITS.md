@@ -28,4 +28,5 @@ Photos added by Em without a recorded source: `fireflies.jpg`, `rocky-plain.jpg`
 `carved-tunnel.jpg`, `snowy-shore.jpg`, `ice-cave.jpg`, `museum.jpg`, `incense-shrine.jpg`,
 `frosted-hills.jpg`, `cliff-face.jpg`, `pink-peak.jpg`, `sunlit-sea.jpg`, `jellyfish.jpg`,
 `shore-temple.jpg`, `jungle-pyramid.jpg`, `crystal-cave.jpg`, `river-ruins.jpg`,
-`aurora-lake.jpg`, `shallows.jpg`.
+`aurora-lake.jpg`, `shallows.jpg`, `autumn-trees.jpg`, `underground-station.jpg`,
+`misty-forest.jpg`, `sea-cave.jpg`.

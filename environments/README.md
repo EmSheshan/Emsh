@@ -17,27 +17,24 @@ colour until one is added. Credits for photos are in CREDITS.md.
 ## Backgrounds in use
 
 Every evolution line has its own background (Megalocyte shares Synthecyte's, and the
-four cryptids share red-mountains). Canon
+four cryptids share misty-forest). Canon
 Pokémon in a family (canondex.csv) use their line's background too.
 (A) = Andela, the rest are Lacadia.
 
-### Still needed (1)
+### Still needed
 
-| file | look for | Pokémon |
-|---|---|---|
-| `rooftops` | city rooftops from above | Idagon, Libradon, Suprion |
+None: every line has a photo.
 
-### Done (70)
+### Done (71)
 
 | file | | Pokémon |
 |---|---|---|
 | `agave-field` | blue agave rows, desert farm | Marazcal, Iguavadon |
 | `altar` | candlelit altar | Scrithymn, Blazephemy |
 | `aurora-lake` | aurora over a lake | Selky |
-| `autumn-forest` |  | Tirakitsu, Asterbat |
+| `autumn-trees` | autumn trees | Tirakitsu, Asterbat |
 | `badlands` |  | Pumace (A), Pyroncho (A), Smoldero (A) |
 | `bamboo` |  | Fawnna (A), Fawliage (A), Dynastag (A) |
-| `beach` | rocky beach | Krabuto, Krabutops |
 | `bluebell-woods` | bluebell woods in sun | Springbun, Snapbun, Faestalk |
 | `canyon` |  | Furnawurm |
 | `carousel` | carousel at night | Grubblo, Tentrilo, Rocadocio |
@@ -77,17 +74,18 @@ Pokémon in a family (canondex.csv) use their line's background too.
 | `lotus` |  | Patopod, Nymphlora |
 | `marsh` |  | Wittern, Aerin, Zephyrin |
 | `meadow` |  | Chumbi (A) |
+| `misty-forest` | misty forest at night | Paracabra, Saskrypt, Devile, Azamoth |
 | `moonlit-trees` | full moon behind trees | Mega Lokix (A) |
 | `mossy-pond` | mossy woodland pond | Ribbeat, Ventribbit |
 | `museum` | museum gallery of statues | Ceraphinx |
 | `palms` |  | Tropius (A) |
 | `pink-peak` | snowy peak at pink dusk | Smeltmor |
-| `red-mountains` | red mountains at dusk | Paracabra, Saskrypt, Devile, Azamoth |
 | `river-buffalo` | river with water buffalo | Purluxe, Lyonite, Enkidros |
 | `river-ruins` | river with ruined bridge | Nokoi, Yakoyza |
 | `rocky-plain` | rocky alpine plain | Polishell (A), Tarnishell (A), Lavisheen (A) |
 | `rocky-shore` |  | Pyukumuku (A) |
 | `ruined-house` | ruined house with snow | Filch |
+| `sea-cave` | sea cave arch | Krabuto, Krabutops |
 | `sea-lion-beach` |  | Sealor (A), Enseal (A), Brigantide (A) |
 | `shallows` | murky shallows with fish | Phalankton |
 | `shore-temple` | stone shore temple | Xerasige |
@@ -99,9 +97,10 @@ Pokémon in a family (canondex.csv) use their line's background too.
 | `street` | empty street at night | Grismirk (A), Grimson (A) |
 | `sunlit-sea` | sunlit underwater | Jellien, Encephid, Monolithid |
 | `temple` |  | Sacrabell |
+| `underground-station` | dark underground station | Idagon, Libradon, Suprion |
 | `vegetable-garden` | vegetable garden | Roignon, Scallahad |
 | `wheat-field` | golden wheat field | Panacha (A), Marracacha (A) |
 
 ### Spare photos (not used by any line)
 
-`antique` · `circus` · `darkness` · `deep-sea` · `forest` · `heaven` · `ice` · `lotus-pond` · `mountains` · `onion`
+`antique` · `autumn-forest` · `beach` · `circus` · `darkness` · `deep-sea` · `forest` · `heaven` · `ice` · `lotus-pond` · `mountains` · `onion` · `red-mountains`
