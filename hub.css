@@ -9,11 +9,19 @@
   grid-template-columns: 1fr;
 }
 
+/* Fixed-size tiles, not stretched to fill the row. */
 .regions {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 300px));
+  justify-content: start;
   gap: clamp(20px, 3vw, 36px);
   margin-top: 8px;
+}
+@media (max-width: 640px) {
+  .regions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
 }
 
 .region {
@@ -95,7 +103,7 @@
 }
 .region-name {
   font-family: var(--serif);
-  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
   line-height: 1;
   letter-spacing: -0.01em;
   color: var(--ink);
@@ -103,6 +111,7 @@
 .region-meta {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 12px;
   font-size: 0.66rem;
   font-weight: 600;

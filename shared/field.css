@@ -436,24 +436,7 @@ body.field .toggle-dark-mode {
 .section-head--sub {
   margin-top: clamp(56px, 7vw, 96px);
 }
-/* The organic moss line from the reference, sweeping behind the heading. */
-.vine {
-  position: absolute;
-  z-index: 0;
-  right: -3%;
-  top: 18px;
-  width: 46%;
-  height: 90px;
-  overflow: visible;
-  pointer-events: none;
-}
-.vine path {
-  fill: none;
-  stroke: var(--moss);
-  stroke-width: 7;
-  stroke-linecap: round;
-  opacity: 0.85;
-}
+
 
 /* ---------------------------------------------------------------- search */
 
@@ -734,9 +717,6 @@ body.field .back-to-top::before {
   .az-letter {
     break-after: avoid;
   }
-  .vine {
-    width: 90%;
-  }
 }
 
 @media (max-width: 640px) {
@@ -785,9 +765,6 @@ body.field .back-to-top::before {
     max-width: 100%;
     overflow-wrap: anywhere;
   }
-  .vine {
-    display: none;          /* no room beside the title; it would cross it */
-  }
 }
 
 @media (max-width: 640px) {
@@ -817,4 +794,21 @@ body.field .back-to-top::before {
 /* No habitat written yet: no separator either. */
 .hero-caption-env:empty::before {
   content: none;
+}
+
+/* ---------------------------------------------------------------- two cards
+
+   Every page: the photo hero and the cream sheet below are two separate
+   rounded cards with a small gap, the photo window inset on all four sides,
+   so no card has a flat seam on one edge and rounded corners on the other. */
+body.field .hero {
+  border-radius: var(--sheet-radius);
+}
+body.field .hero .hero-stage,
+body.field .hero::after {
+  bottom: var(--frame);
+}
+body.field .paper {
+  margin-top: clamp(8px, 1.1vw, 16px);
+  border-radius: var(--sheet-radius);
 }

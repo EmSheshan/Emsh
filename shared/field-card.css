@@ -718,20 +718,3 @@ a.fam-node:hover {
     transition: none;
   }
 }
-
-/* ---------------------------------------------------------------- two cards
-
-   The photo band and the cream details are two separate rounded cards with a
-   small gap, so the details' top edge is rounded like its bottom (they used
-   to share one sheet, leaving a flat seam under the photo). */
-body.field-card .band {
-  border-radius: var(--sheet-radius);
-}
-body.field-card .band .hero-stage,
-body.field-card .band::after {
-  bottom: var(--frame);              /* window inset on all four sides */
-}
-body.field-card .paper {
-  margin-top: clamp(8px, 1.1vw, 16px);
-  border-radius: var(--sheet-radius);
-}
