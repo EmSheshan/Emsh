@@ -291,9 +291,22 @@ async function render(sid, formIndex = 0, { scroll = false } = {}) {
 function swapInPlace(mon) {
   const slide = band.querySelector(".hero-slide.is-active");
   if (!slide) return false;
-  slide.querySelector(".hero-mon").src = art(mon.id, state.shiny);
+  // A soft fade: the art (and photo, if this forme lives elsewhere) fade out,
+  // swap, and fade back in -- no zoom or blur.
+  const img = slide.querySelector(".hero-mon");
+  const photoEl = slide.querySelector(".hero-photo");
   const photo = photoFor(mon.id);
-  if (photo) slide.querySelector(".hero-photo").style.setProperty("--hero-photo", `url("${abs(photo)}")`);
+  const newPhoto = photo ? `url("${abs(photo)}")` : "none";
+  const photoChanges = photoEl.style.getPropertyValue("--hero-photo") !== newPhoto;
+  const src = art(mon.id, state.shiny);
+  slide.classList.add("is-swapping");
+  if (photoChanges) slide.classList.add("is-swapping-photo");
+  setTimeout(async () => {
+    await load(src);
+    img.src = src;
+    if (photoChanges) photoEl.style.setProperty("--hero-photo", newPhoto);
+    requestAnimationFrame(() => slide.classList.remove("is-swapping", "is-swapping-photo"));
+  }, 260);
   const word = slide.querySelector(".band-word");
   word.textContent = baseName(mon);
   fitName(word);

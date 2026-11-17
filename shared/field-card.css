@@ -231,6 +231,25 @@
   color: var(--ink);
 }
 
+/* Changing forme: the art (and photo, if it changes) fade out and back in. */
+.band .hero-slide .hero-photo {
+  transition: transform 3s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.35s ease;
+}
+.band .hero-slide.is-swapping .hero-mon,
+.band .hero-slide.is-swapping-photo .hero-photo {
+  opacity: 0 !important;
+  transition: opacity 0.26s ease !important;
+}
+.band .hero-slide .hero-mon {
+  transition: opacity 0.35s ease, translate 1.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .band .hero-slide.is-swapping .hero-mon,
+  .band .hero-slide.is-swapping-photo .hero-photo {
+    transition: none !important;
+  }
+}
+
 /* ---------------------------------------------------------------- sections */
 
 #cardContent {
@@ -544,7 +563,7 @@ a.fam-node:hover {
 .fam-art::before {
   inset: -10px;
   z-index: 0;
-  filter: blur(2.5px);
+  filter: blur(2.5px) saturate(1.3) contrast(1.1);
   background: var(--scene, linear-gradient(160deg, var(--moss), var(--forest))) center / cover no-repeat;
 }
 .fam-art::after {

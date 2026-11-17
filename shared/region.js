@@ -1,5 +1,5 @@
 // region.js — loads the per-region modules for whichever region folder the
-// page lives in. Every region (andela/, lacadia/, misc/…) is just a folder with
+// page lives in. Every region (andela/, lacadia/…) is just a folder with
 // its own data/; the code in shared/ is the same for all of them.
 //
 // Module paths resolve against the PAGE (document.baseURI), not this file, so

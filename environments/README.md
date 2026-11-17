@@ -14,12 +14,12 @@ words, shown in the field notes, and can say anything.
 No photo yet means no background photo: the page shows the region's plain
 colour until one is added. Credits for photos are in CREDITS.md.
 
-## Environments in use
+## Backgrounds in use
 
-Every evolution line has its own background, so no two lines share a
-background. (A) = Andela, (M) = Misc, the rest are Lacadia.
+Every evolution line has its own background (Megalocyte shares Synthecyte's).
+(A) = Andela, the rest are Lacadia.
 
-### Still needed (42)
+### Still needed (35)
 
 Save each as `environments/<name>.jpg`. Until then the line shows on the plain colour.
 
@@ -39,19 +39,15 @@ Save each as `environments/<name>.jpg`. Until then the line shows on the plain c
 | `foggy-bridge` | bridge in thick fog at night (mothman) | Azamoth |
 | `forge` | blacksmith forge, glowing metal | Smeltmor |
 | `glacier` | blue glacier ice | Cryocone, Cryoconda |
-| `hall-of-mirrors` | hall of mirrors / reflections | Hyper Ditto (M) |
+| `grassland` | open grassland, long grass | Polishell (A), Tarnishell (A), Lavisheen (A) |
 | `haunted-house` | eerie abandoned house interior | Saskrypt |
 | `iceberg` | iceberg at sea | Balite, Baleet, Balaast |
 | `incense-shrine` | incense smoke in a shrine | Censerpent |
-| `kiln` | pottery kiln / porcelain workshop | Mega Tuskelain (M) |
-| `laboratory` | clinical lab, specimen tanks | Megalocyte (A) |
 | `lava-field` | flowing lava, black rock | Pyrant |
 | `mine` | mine tunnel with mineral veins | Shuckler |
 | `moonless-night` | dark night sky over silhouettes | Devile |
 | `moonlit-forest` | forest clearing under a full moon | Moosenge |
 | `museum` | museum hall with statues | Ceraphinx |
-| `night-harbor` | harbour at night, city lights on water | Hyper Inteleon (M) |
-| `overgrown-ruins` | ruins overgrown with giant plants | Hyper Torterra (M) |
 | `power-plant` | power station / pylons | Battrey, Vladibolt |
 | `primeval-forest` | ancient, untouched old-growth forest | Albythos |
 | `riverbank` | muddy riverbank | Patopod, Nymphlora |
@@ -59,20 +55,16 @@ Save each as `environments/<name>.jpg`. Until then the line shows on the plain c
 | `ruins` | crumbling ruins, dark sky | Xeno Tyranitar (A) |
 | `shallows` | sunlit shallow sea, clear water | Phalankton |
 | `starry-sky` | night sky full of stars / milky way | Tortality |
-| `swamp` | murky green swamp | Hyper Toxicroak (M) |
 | `tall-grass` | tall grass field, low angle | Mega Lokix (A) |
 | `thornbush` | dry hills with thorny scrub | Grismirk (A), Grimson (A) |
 | `toxic-spring` | acid-coloured hot spring / sulphur pools | Basilly, Knaviper, Verkillion |
-| `volcano` | erupting volcano | Hyper Typhlosion (M) |
 | `wheat-field` | golden wheat field | Panacha (A), Marracacha (A) |
-| `wildflowers` | wildflower meadow with bees | Chumbi (A) |
 | `ziggurat` | ancient Mesopotamian ziggurat | Purluxe, Lyonite, Enkidros |
 
-### Done (42)
+### Done (40)
 
 | file | | Pokémon |
 |---|---|---|
-| `antique` |  | Lockatoo (M) |
 | `autumn-forest` |  | Tirakitsu, Asterbat |
 | `badlands` |  | Pumace (A), Pyroncho (A), Smoldero (A) |
 | `bamboo` |  | Fawnna (A), Fawliage (A), Dynastag (A) |
@@ -88,7 +80,7 @@ Save each as `environments/<name>.jpg`. Until then the line shows on the plain c
 | `dark-jungle` |  | Murkitty, Tammalkin, Velyger |
 | `darkness` |  | Paracabra |
 | `deep-sea` |  | Jellien, Encephid, Monolithid |
-| `egypt` |  | Kheprini, Servankh, Pharomancy, Mega Pharomancy (M) |
+| `egypt` |  | Kheprini, Servankh, Pharomancy |
 | `farm` |  | Peppilla (A), Peppyre (A), Pepperisher (A) |
 | `forest` |  | Springbun, Snapbun, Faestalk |
 | `foundry` |  | Xeno Scizor (A) |
@@ -104,13 +96,12 @@ Save each as `environments/<name>.jpg`. Until then the line shows on the plain c
 | `lotus` |  | Amistaphore (A) |
 | `lotus-pond` |  | Nokoi, Yakoyza |
 | `marsh` |  | Ribbeat, Ventribbit |
-| `meadow` |  | Polishell (A), Tarnishell (A), Lavisheen (A) |
-| `mountains` |  | Phurbash (M), Phurbanish (M) |
+| `meadow` |  | Chumbi (A) |
 | `onion` |  | Roignon, Scallahad |
 | `palms` |  | Tropius (A) |
 | `rocky-shore` |  | Pyukumuku (A) |
 | `sea-lion-beach` |  | Sealor (A), Enseal (A), Brigantide (A) |
 | `snow` |  | Mochu, Snochu |
-| `space` |  | Synthecyte (A) |
+| `space` |  | Synthecyte (A), Megalocyte (A) |
 | `stormy-sea` |  | Khamathos (A) |
 | `temple` |  | Scrithymn, Blazephemy |

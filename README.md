@@ -1,7 +1,7 @@
 # emsh dex
 
 Em's fan-made Pokémon in one site: field guides to the **Lacadia** and
-**Andela** regions, plus **Misc** for redesigns and one-offs. Each Pokémon is
+**Andela** regions. Each Pokémon is
 shown in a photograph of its habitat, set into a paper encyclopedia page.
 
 Static site — plain HTML, CSS and vanilla JS, served by GitHub Pages. Node is
@@ -18,8 +18,7 @@ shared/                       code + styles used by every region
   field-card.css/.js          the field-guide Pokémon page
   index.js                    the dex grid (search, filters, tiles)
   styles.css                  Andela's original base styles (fonts, type colours)
-  theme.css, cardPage.js      the older dark look, still used by Misc
-andela/  lacadia/  misc/      one folder per region:
+andela/  lacadia/            one folder per region:
   index.html, cardPage.html   thin pages pointing at shared/
   data/pokedex.csv            the dex — edit in any spreadsheet (columns: see shared/pokeData.js)
   data/megadex.csv, canondex.csv, abilities.js, moves.js
@@ -28,6 +27,7 @@ andela/  lacadia/  misc/      one folder per region:
   data/pokemonArt/<id>.webp   art (and <id>_shiny.webp)
   data/backdrops/             blurred habitat per scene + index.json (who uses which)
   data/scenes/                crisp habitat photos for tiles and the hero
+extra-art/                    art (and data) for designs not on the site
 environments/                 background photos, one per environment name (forest.jpg, …)
 tools/                        art, backdrop and scene scripts
 ```
