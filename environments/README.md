@@ -18,32 +18,101 @@ photographer is appreciated but not required. Note credits in CREDITS.md if you 
 
 ## Environments in use
 
-(A) = Andela; the rest are Lacadia.
+Every evolution line has its own environment, so no two lines share a
+background. (A) = Andela, (M) = Misc, the rest are Lacadia.
 
-| environment | photo | Pokémon | who |
-|---|---|---|---|
-| `forest` | ✅ | 22 | Cackloon (A), Amistaphore (A), Mega Lokix (A), Snapbun, Asterbat, Decaffin, Espressurge, Grubblo, Tentrilo, Rocadocio, Tammalkin, Velyger, Lileef, Citradily, Roignon, Scallahad, Marazcal, Iguavadon, Shuckler, Nymphlora, Syrinsect, Azamoth |
-| `meadow` | ✅ | 10 | Panacha (A), Marracacha (A), Polishell (A), Tarnishell (A), Lavisheen (A), Chumbi (A), Possolo, Oposse, Filch, Logomorph |
-| `cave` | ✅ | 10 | Springbun, Dodon, Dodonodon, Tuatot, Tuatargon, Cobblin, Grumblock, Ragnarock, Shardling, Furnawurm |
-| `space` | ✅ | 9 | Synthecyte (A), Megalocyte (A), Moosenge, Gunraptor, Larvos, Stratoclysm, Albythos, Xerasige, Xophis |
-| `mountains` | ✅ | 9 | Peppilla (A), Peppyre (A), Pepperisher (A), Dwemaldos (A), Ribbeat, Ventribbit, Patopod, Idagon, Libradon |
-| `badlands` | ✅ | 5 | Pumace (A), Pyroncho (A), Smoldero (A), Grismirk (A), Grimson (A) |
-| `bamboo` | ✅ | 3 | Fawnna (A), Fawliage (A), Dynastag (A) |
-| `rocky-shore` | ✅ | 3 | Sealor (A), Enseal (A), Pyukumuku (A) |
-| `sea-lion-beach` | ✅ | 1 | Brigantide (A) |
-| `temple` | ✅ | 1 | Necrondor (A) |
-| `palms` | ✅ | 1 | Tropius (A) |
-| `stormy-sea` | ✅ | 1 | Khamathos (A) |
-| `cavern` | ✅ | 1 | Aurago (A) |
-| `foundry` | ✅ | 1 | Xeno Scizor (A) |
-| `ocean` | — grassy field for now | 14 | Purluxe, Lyonite, Enkidros, Aerin, Nokoi, Yakoyza, Krabuto, Krabutops, Balite, Jellien, Encephid, Monolithid, Selky, Lumajesty |
-| `city` | — grassy field for now | 8 | Battrey, Bitbyte, Cathogen, Ramnant, Ornidrone, Velostrike, Suprion, Ravenger |
-| `snow` | — grassy field for now | 7 | Wittern, Mochu, Snochu, Baleet, Balaast, Cryocone, Cryoconda |
-| `desert` | — grassy field for now | 6 | Sedimental (A), Ceraphinx, Tortarma, Kheprini, Servankh, Pharomancy |
-| `volcano` | — grassy field for now | 6 | Basilly, Knaviper, Verkillion, Tortality, Smeltmor, Pyrant |
-| `night` | — grassy field for now | 4 | Xeno Tyranitar (A), Murkitty, Paracabra, Sacrabell |
-| `blossom` | — grassy field for now | 4 | Tirakitsu, Scrithymn, Blazephemy, Jeneosis |
-| `sky` | — grassy field for now | 3 | Faestalk, Zephyrin, Devile |
-| `swamp` | — grassy field for now | 3 | Phalankton, Censerpent, Saskrypt |
-| `storm` | — grassy field for now | 1 | Vladibolt |
-| `graveyard` | — grassy field for now | 1 | Crucigem |
+### Still needed (42)
+
+Save each as `environments/<name>.jpg`. Until then the line shows on the grassy field.
+
+| file | look for | Pokémon |
+|---|---|---|
+| `abyss` | pitch-black deep ocean, faint glow | Lumajesty |
+| `agave-field` | blue agave rows, desert farm | Marazcal, Iguavadon |
+| `ancient-forest` | giant ferns, prehistoric woodland | Tuatot, Tuatargon |
+| `arctic-sea` | icy sea with floating ice, cold light | Selky |
+| `attic` | dusty old attic, floorboards | Filch |
+| `barn` | old wooden barn at dusk | Possolo, Oposse |
+| `beach` | sandy beach with surf | Krabuto, Krabutops |
+| `bell-tower` | old bell tower / temple bell | Sacrabell |
+| `crystal-cave` | cave full of glowing crystals | Larvos, Syrinsect, Stratoclysm |
+| `desert-rain` | desert in rain, wet sand / blooms | Sedimental (A) |
+| `dunes` | rolling sand dunes, hot sun | Tortarma |
+| `foggy-bridge` | bridge in thick fog at night (mothman) | Azamoth |
+| `forge` | blacksmith forge, glowing metal | Smeltmor |
+| `glacier` | blue glacier ice | Cryocone, Cryoconda |
+| `hall-of-mirrors` | hall of mirrors / reflections | Hyper Ditto (M) |
+| `haunted-house` | eerie abandoned house interior | Saskrypt |
+| `iceberg` | iceberg at sea | Balite, Baleet, Balaast |
+| `incense-shrine` | incense smoke in a shrine | Censerpent |
+| `kiln` | pottery kiln / porcelain workshop | Mega Tuskelain (M) |
+| `laboratory` | clinical lab, specimen tanks | Megalocyte (A) |
+| `lava-field` | flowing lava, black rock | Pyrant |
+| `mine` | mine tunnel with mineral veins | Shuckler |
+| `moonless-night` | dark night sky over silhouettes | Devile |
+| `moonlit-forest` | forest clearing under a full moon | Moosenge |
+| `museum` | museum hall with statues | Ceraphinx |
+| `night-harbor` | harbour at night, city lights on water | Hyper Inteleon (M) |
+| `overgrown-ruins` | ruins overgrown with giant plants | Hyper Torterra (M) |
+| `power-plant` | power station / pylons | Battrey, Vladibolt |
+| `primeval-forest` | ancient, untouched old-growth forest | Albythos |
+| `riverbank` | muddy riverbank | Patopod, Nymphlora |
+| `rooftops` | city rooftops from above | Ornidrone, Velostrike, Gunraptor |
+| `ruins` | crumbling ruins, dark sky | Xeno Tyranitar (A) |
+| `shallows` | sunlit shallow sea, clear water | Phalankton |
+| `starry-sky` | night sky full of stars / milky way | Tortality |
+| `swamp` | murky green swamp | Hyper Toxicroak (M) |
+| `tall-grass` | tall grass field, low angle | Mega Lokix (A) |
+| `thornbush` | dry hills with thorny scrub | Grismirk (A), Grimson (A) |
+| `toxic-spring` | acid-coloured hot spring / sulphur pools | Basilly, Knaviper, Verkillion |
+| `volcano` | erupting volcano | Hyper Typhlosion (M) |
+| `wheat-field` | golden wheat field | Panacha (A), Marracacha (A) |
+| `wildflowers` | wildflower meadow with bees | Chumbi (A) |
+| `ziggurat` | ancient Mesopotamian ziggurat | Purluxe, Lyonite, Enkidros |
+
+### Done (42)
+
+| file | | Pokémon |
+|---|---|---|
+| `antique` |  | Lockatoo (M) |
+| `autumn-forest` |  | Tirakitsu, Asterbat |
+| `badlands` |  | Pumace (A), Pyroncho (A), Smoldero (A) |
+| `bamboo` |  | Fawnna (A), Fawliage (A), Dynastag (A) |
+| `canyon` |  | Furnawurm |
+| `cave` |  | Cobblin, Grumblock, Ragnarock |
+| `cave-painting` |  | Dodon, Dodonodon |
+| `cavern` |  | Aurago (A) |
+| `circus` |  | Grubblo, Tentrilo, Rocadocio |
+| `city` |  | Idagon, Libradon, Suprion |
+| `coffee` |  | Decaffin, Espressurge |
+| `cyberpunk` |  | Ravenger |
+| `cyberspace` |  | Logomorph |
+| `dark-jungle` |  | Murkitty, Tammalkin, Velyger |
+| `darkness` |  | Paracabra |
+| `deep-sea` |  | Jellien, Encephid, Monolithid |
+| `egypt` |  | Kheprini, Servankh, Pharomancy, Mega Pharomancy (M) |
+| `farm` |  | Peppilla (A), Peppyre (A), Pepperisher (A) |
+| `forest` |  | Springbun, Snapbun, Faestalk |
+| `foundry` |  | Xeno Scizor (A) |
+| `graveyard` |  | Cackloon (A), Necrondor (A) |
+| `gray-forest` |  | Dwemaldos (A) |
+| `green-cave` |  | Shardling, Crucigem |
+| `heaven` |  | Xerasige |
+| `heaven-2` |  | Xophis |
+| `hell` |  | Jeneosis |
+| `ice` |  | Wittern, Aerin, Zephyrin |
+| `jungle` |  | Lileef, Citradily |
+| `junkyard` |  | Bitbyte, Cathogen, Ramnant |
+| `lotus` |  | Amistaphore (A) |
+| `lotus-pond` |  | Nokoi, Yakoyza |
+| `marsh` |  | Ribbeat, Ventribbit |
+| `meadow` |  | Polishell (A), Tarnishell (A), Lavisheen (A) |
+| `mountains` |  | Phurbash (M), Phurbanish (M) |
+| `onion` |  | Roignon, Scallahad |
+| `palms` |  | Tropius (A) |
+| `rocky-shore` |  | Pyukumuku (A) |
+| `sea-lion-beach` |  | Sealor (A), Enseal (A), Brigantide (A) |
+| `snow` |  | Mochu, Snochu |
+| `space` |  | Synthecyte (A) |
+| `stormy-sea` |  | Khamathos (A) |
+| `temple` |  | Scrithymn, Blazephemy |
