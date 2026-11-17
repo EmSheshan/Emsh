@@ -40,7 +40,7 @@ tools/                        art, backdrop and scene scripts
 2. Add the art: `python3 tools/optimize-art.py <folder of PNGs> <region>/data/pokemonArt [id …]`
 3. Build its backgrounds: `npm install` once, then `node tools/build-backdrops.mjs <region>`
    and `python3 tools/build-scenes.py <region>`. They use the photo
-   `environments/<environment>.jpg` (the grassy field until there is one).
+   `environments/<background>.jpg`; with no photo the page shows its plain colour.
 
 ## Adding a region
 
