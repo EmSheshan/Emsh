@@ -25,4 +25,7 @@ Photos added by Em without a recorded source: `fireflies.jpg`, `rocky-plain.jpg`
 `vegetable-garden.jpg`, `carousel.jpg`, `dewy-grass.jpg`, `river-buffalo.jpg`, `lava-sea.jpg`, `bluebell-woods.jpg`,
 `ruined-house.jpg`, `beach.jpg`, `frosted-forest.jpg`, `mossy-pond.jpg`,
 `red-mountains.jpg`, `desert-night.jpg`, `standing-stones.jpg`, `agave-field.jpg`, `altar.jpg`,
-`carved-tunnel.jpg`, `snowy-shore.jpg`, `ice-cave.jpg`.
+`carved-tunnel.jpg`, `snowy-shore.jpg`, `ice-cave.jpg`, `museum.jpg`, `incense-shrine.jpg`,
+`frosted-hills.jpg`, `cliff-face.jpg`, `pink-peak.jpg`, `sunlit-sea.jpg`, `jellyfish.jpg`,
+`shore-temple.jpg`, `jungle-pyramid.jpg`, `crystal-cave.jpg`, `river-ruins.jpg`,
+`aurora-lake.jpg`, `shallows.jpg`.
