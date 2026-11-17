@@ -743,9 +743,11 @@ body.field .back-to-top::before {
   .hero-mon {
     left: 50%;
     transform: translateX(-50%);
-    bottom: 26%;
-    height: 40%;
-    width: 86%;
+    /* Large, and above the title block so nothing overlaps. */
+    bottom: 40%;
+    height: calc(60% - 76px);
+    width: 100%;
+    object-position: center bottom;
     object-position: center bottom;
   }
   .hero-title {

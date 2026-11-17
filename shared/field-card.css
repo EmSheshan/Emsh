@@ -611,7 +611,7 @@ a.fam-node:hover {
 
 @media (max-width: 640px) {
   .band {
-    min-height: 82svh;
+    min-height: 90svh;
   }
   .band-back {
     display: none;
@@ -641,12 +641,15 @@ a.fam-node:hover {
     right: var(--frame);
     text-align: center;
   }
+  /* Fill everything between the details at the top and the name below. */
   .band .hero-mon {
     left: 50%;
     transform: translateX(-50%);
-    bottom: calc(70px + var(--name-size) * 0.9);
-    width: 88%;
-    height: 46%;
+    /* (an <img> keeps its own ratio with top+bottom, so give it a height) */
+    bottom: calc(76px + var(--name-size) * 0.95);
+    height: calc(100% - var(--frame) - 150px - 76px - var(--name-size) * 0.95);
+    width: 100%;
+    object-position: center bottom;
   }
   .shiny-toggle {
     bottom: 22px;
