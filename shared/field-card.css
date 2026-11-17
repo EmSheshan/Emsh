@@ -537,14 +537,20 @@
   transform: rotate(45deg);
   opacity: 0.5;
 }
+/* Sits above the arrow; long methods ("Trade with Durant") wrap upward
+   instead of running past the arrow's ends. */
 .fam-method {
   position: absolute;
-  top: 0;
+  left: 0;
+  right: 0;
+  bottom: calc(100% - 14px);
   font-size: 0.6rem;
   font-weight: 600;
+  line-height: 1.25;
   letter-spacing: 0.18em;
+  text-align: center;
   text-transform: uppercase;
-  white-space: nowrap;
+  white-space: normal;
   color: var(--muted);
 }
 .fam-node {

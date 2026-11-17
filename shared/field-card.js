@@ -161,7 +161,7 @@ function nodeHTML(p, current, viewing = null) {
   const shown = isCurrent && viewing ? viewing : p;
   const tile = tileFor(shown.id);
   const inner = `
-    <span class="fam-art" ${tile ? `style="--scene: url('${abs(tile)}')"` : ""}><img src="${art(shown.id)}" alt="" loading="lazy"></span>
+    <span class="fam-art" ${tile ? `style="--scene: url('${abs(tile)}')"` : ""}><img src="${art(shown.id)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'"></span>
     <span class="fam-label">${p.num != null ? `<span class="fam-num">Nº ${pad(p.num)}</span>` : p.isExternal ? `<span class="fam-num">Canon</span>` : ""}
       <span class="fam-name">${esc(baseName(p))}</span></span>`;
   const cls = `fam-node${isCurrent ? " is-current" : ""}${p.isExternal ? " is-canon" : ""}`;

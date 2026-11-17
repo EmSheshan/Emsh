@@ -20,7 +20,7 @@ Every evolution line has its own background (Megalocyte shares Synthecyte's). Ca
 Pokémon in a family (canondex.csv) use their line's background too.
 (A) = Andela, the rest are Lacadia.
 
-### Still needed (25)
+### Still needed (24)
 
 Save each as `environments/<name>.jpg`. Until then the line shows on the plain colour.
 
@@ -33,24 +33,23 @@ Save each as `environments/<name>.jpg`. Until then the line shows on the plain c
 | `beach` | sandy beach with surf | Krabuto, Krabutops |
 | `bell-tower` | old bell tower / temple bell | Sacrabell |
 | `crystal-cave` | cave full of glowing crystals | Larvos, Syrinsect, Stratoclysm |
-| `dunes` | rolling sand dunes, hot sun | Tortarma |
+| `desert-night` | desert under a starry night sky | Tortarma, Tortality |
 | `foggy-bridge` | bridge in thick fog at night (mothman) | Azamoth |
 | `forge` | blacksmith forge, glowing metal | Smeltmor |
 | `glacier` | blue glacier ice | Cryocone, Cryoconda |
 | `haunted-house` | eerie abandoned house interior | Saskrypt |
 | `haunted-mine` | dark mine tunnel, eerie (cave ghosts) | Shardling, Crucigem |
-| `iceberg` | iceberg at sea | Balite, Baleet, Balaast |
 | `incense-shrine` | incense smoke in a shrine | Censerpent |
 | `lava-field` | flowing lava, black rock | Pyrant |
 | `mine` | mine tunnel with mineral veins | Shuckler |
 | `moonless-night` | dark night sky over silhouettes | Devile |
 | `moonlit-forest` | forest clearing under a full moon | Moosenge |
+| `mountain-stream` | clear mountain stream | Ribbeat, Ventribbit |
 | `museum` | museum hall with statues | Ceraphinx |
 | `power-plant` | power station / pylons | Battrey, Vladibolt |
 | `primeval-forest` | ancient, untouched old-growth forest | Albythos |
 | `rooftops` | city rooftops from above | Idagon, Libradon, Suprion |
 | `shallows` | sunlit shallow sea, clear water | Phalankton |
-| `starry-sky` | night sky full of stars / milky way | Tortality |
 
 ### Done (50)
 
@@ -85,13 +84,13 @@ Save each as `environments/<name>.jpg`. Until then the line shows on the plain c
 | `heaven` |  | Xerasige |
 | `heaven-2` |  | Xophis |
 | `hell` |  | Jeneosis |
-| `ice` |  | Wittern, Aerin, Zephyrin |
+| `ice` |  | Mochu, Snochu |
 | `jungle` |  | Lileef, Citradily |
 | `junkyard` |  | Bitbyte, Cathogen, Ramnant |
 | `lava-sea` | lava pouring into the sea | Basilly, Knaviper, Verkillion |
 | `lotus` |  | Patopod, Nymphlora |
 | `lotus-pond` |  | Nokoi, Yakoyza |
-| `marsh` |  | Ribbeat, Ventribbit |
+| `marsh` |  | Wittern, Aerin, Zephyrin |
 | `meadow` |  | Chumbi (A) |
 | `moonlit-trees` | full moon behind trees | Mega Lokix (A) |
 | `palms` |  | Tropius (A) |
@@ -99,7 +98,7 @@ Save each as `environments/<name>.jpg`. Until then the line shows on the plain c
 | `rocky-plain` | rocky alpine plain | Polishell (A), Tarnishell (A), Lavisheen (A) |
 | `rocky-shore` |  | Pyukumuku (A) |
 | `sea-lion-beach` |  | Sealor (A), Enseal (A), Brigantide (A) |
-| `snow` |  | Mochu, Snochu |
+| `snow` |  | Balite, Baleet, Balaast |
 | `space` |  | Synthecyte (A), Megalocyte (A) |
 | `stormy-sea` |  | Khamathos (A) |
 | `street` | empty street at night | Grismirk (A), Grimson (A) |
