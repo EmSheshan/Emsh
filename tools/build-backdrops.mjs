@@ -58,7 +58,9 @@ for (const region of regions) {
     const index = {};
     const written = new Set();
     const read = (f) => fs.existsSync(path.join(dir, f)) ? parseCSV(fs.readFileSync(path.join(dir, f), 'utf8')) : [];
-    const mons = [...Object.values(buildDex(read('pokedex.csv'))), ...Object.values(buildDex(read('megadex.csv'), { mega: true }))];
+    // Canon Pokémon too: they appear as tiles in evolution families.
+    const mons = [...Object.values(buildDex(read('pokedex.csv'))), ...Object.values(buildDex(read('megadex.csv'), { mega: true })),
+        ...Object.values(buildDex(read('canondex.csv'), { external: true }))];
     const tally = {};
 
     for (const mon of mons) {

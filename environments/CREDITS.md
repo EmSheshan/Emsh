@@ -21,4 +21,4 @@ Unsplash License. Thank you to the photographers.
 | `temple.jpg` | Siddhesh Mangela | https://unsplash.com/photos/ZP039_CRf3M |
 
 Photos added by Em without a recorded source: `fireflies.jpg`, `rocky-plain.jpg`,
-`wheat-field.jpg`, `street.jpg`, `desert-rain.jpg`.
+`wheat-field.jpg`, `street.jpg`, `desert-rain.jpg`, `hazy-city.jpg`, `moonlit-trees.jpg`.

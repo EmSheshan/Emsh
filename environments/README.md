@@ -16,10 +16,11 @@ colour until one is added. Credits for photos are in CREDITS.md.
 
 ## Backgrounds in use
 
-Every evolution line has its own background (Megalocyte shares Synthecyte's).
+Every evolution line has its own background (Megalocyte shares Synthecyte's). Canon
+Pokémon in a family (canondex.csv) use their line's background too.
 (A) = Andela, the rest are Lacadia.
 
-### Still needed (30)
+### Still needed (28)
 
 Save each as `environments/<name>.jpg`. Until then the line shows on the plain colour.
 
@@ -49,14 +50,12 @@ Save each as `environments/<name>.jpg`. Until then the line shows on the plain c
 | `power-plant` | power station / pylons | Battrey, Vladibolt |
 | `primeval-forest` | ancient, untouched old-growth forest | Albythos |
 | `rooftops` | city rooftops from above | Ornidrone, Velostrike, Gunraptor |
-| `ruins` | crumbling ruins, dark sky | Xeno Tyranitar (A) |
 | `shallows` | sunlit shallow sea, clear water | Phalankton |
 | `starry-sky` | night sky full of stars / milky way | Tortality |
-| `tall-grass` | tall grass field, low angle | Mega Lokix (A) |
 | `toxic-spring` | acid-coloured hot spring / sulphur pools | Basilly, Knaviper, Verkillion |
 | `ziggurat` | ancient Mesopotamian ziggurat | Purluxe, Lyonite, Enkidros |
 
-### Done (45)
+### Done (47)
 
 | file | | Pokémon |
 |---|---|---|
@@ -84,6 +83,7 @@ Save each as `environments/<name>.jpg`. Until then the line shows on the plain c
 | `graveyard` |  | Cackloon (A), Necrondor (A) |
 | `gray-forest` |  | Dwemaldos (A) |
 | `green-cave` |  | Shardling, Crucigem |
+| `hazy-city` | hazy city skyline with pyramids | Xeno Tyranitar (A) |
 | `heaven` |  | Xerasige |
 | `heaven-2` |  | Xophis |
 | `hell` |  | Jeneosis |
@@ -94,6 +94,7 @@ Save each as `environments/<name>.jpg`. Until then the line shows on the plain c
 | `lotus-pond` |  | Nokoi, Yakoyza |
 | `marsh` |  | Ribbeat, Ventribbit |
 | `meadow` |  | Chumbi (A) |
+| `moonlit-trees` | full moon behind trees | Mega Lokix (A) |
 | `onion` |  | Roignon, Scallahad |
 | `palms` |  | Tropius (A) |
 | `rocky-plain` | rocky alpine plain | Polishell (A), Tarnishell (A), Lavisheen (A) |
