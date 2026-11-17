@@ -19,7 +19,7 @@ colour until one is added. Credits for photos are in CREDITS.md.
 Every evolution line has its own background (Megalocyte shares Synthecyte's).
 (A) = Andela, the rest are Lacadia.
 
-### Still needed (35)
+### Still needed (30)
 
 Save each as `environments/<name>.jpg`. Until then the line shows on the plain colour.
 
@@ -34,12 +34,10 @@ Save each as `environments/<name>.jpg`. Until then the line shows on the plain c
 | `beach` | sandy beach with surf | Krabuto, Krabutops |
 | `bell-tower` | old bell tower / temple bell | Sacrabell |
 | `crystal-cave` | cave full of glowing crystals | Larvos, Syrinsect, Stratoclysm |
-| `desert-rain` | desert in rain, wet sand / blooms | Sedimental (A) |
 | `dunes` | rolling sand dunes, hot sun | Tortarma |
 | `foggy-bridge` | bridge in thick fog at night (mothman) | Azamoth |
 | `forge` | blacksmith forge, glowing metal | Smeltmor |
 | `glacier` | blue glacier ice | Cryocone, Cryoconda |
-| `grassland` | open grassland, long grass | Polishell (A), Tarnishell (A), Lavisheen (A) |
 | `haunted-house` | eerie abandoned house interior | Saskrypt |
 | `iceberg` | iceberg at sea | Balite, Baleet, Balaast |
 | `incense-shrine` | incense smoke in a shrine | Censerpent |
@@ -50,18 +48,15 @@ Save each as `environments/<name>.jpg`. Until then the line shows on the plain c
 | `museum` | museum hall with statues | Ceraphinx |
 | `power-plant` | power station / pylons | Battrey, Vladibolt |
 | `primeval-forest` | ancient, untouched old-growth forest | Albythos |
-| `riverbank` | muddy riverbank | Patopod, Nymphlora |
 | `rooftops` | city rooftops from above | Ornidrone, Velostrike, Gunraptor |
 | `ruins` | crumbling ruins, dark sky | Xeno Tyranitar (A) |
 | `shallows` | sunlit shallow sea, clear water | Phalankton |
 | `starry-sky` | night sky full of stars / milky way | Tortality |
 | `tall-grass` | tall grass field, low angle | Mega Lokix (A) |
-| `thornbush` | dry hills with thorny scrub | Grismirk (A), Grimson (A) |
 | `toxic-spring` | acid-coloured hot spring / sulphur pools | Basilly, Knaviper, Verkillion |
-| `wheat-field` | golden wheat field | Panacha (A), Marracacha (A) |
 | `ziggurat` | ancient Mesopotamian ziggurat | Purluxe, Lyonite, Enkidros |
 
-### Done (40)
+### Done (45)
 
 | file | | Pokémon |
 |---|---|---|
@@ -80,8 +75,10 @@ Save each as `environments/<name>.jpg`. Until then the line shows on the plain c
 | `dark-jungle` |  | Murkitty, Tammalkin, Velyger |
 | `darkness` |  | Paracabra |
 | `deep-sea` |  | Jellien, Encephid, Monolithid |
+| `desert-rain` | desert in rain, wet sand / blooms | Sedimental (A) |
 | `egypt` |  | Kheprini, Servankh, Pharomancy |
 | `farm` |  | Peppilla (A), Peppyre (A), Pepperisher (A) |
+| `fireflies` | fireflies at dusk | Amistaphore (A) |
 | `forest` |  | Springbun, Snapbun, Faestalk |
 | `foundry` |  | Xeno Scizor (A) |
 | `graveyard` |  | Cackloon (A), Necrondor (A) |
@@ -93,15 +90,18 @@ Save each as `environments/<name>.jpg`. Until then the line shows on the plain c
 | `ice` |  | Wittern, Aerin, Zephyrin |
 | `jungle` |  | Lileef, Citradily |
 | `junkyard` |  | Bitbyte, Cathogen, Ramnant |
-| `lotus` |  | Amistaphore (A) |
+| `lotus` |  | Patopod, Nymphlora |
 | `lotus-pond` |  | Nokoi, Yakoyza |
 | `marsh` |  | Ribbeat, Ventribbit |
 | `meadow` |  | Chumbi (A) |
 | `onion` |  | Roignon, Scallahad |
 | `palms` |  | Tropius (A) |
+| `rocky-plain` | rocky alpine plain | Polishell (A), Tarnishell (A), Lavisheen (A) |
 | `rocky-shore` |  | Pyukumuku (A) |
 | `sea-lion-beach` |  | Sealor (A), Enseal (A), Brigantide (A) |
 | `snow` |  | Mochu, Snochu |
 | `space` |  | Synthecyte (A), Megalocyte (A) |
 | `stormy-sea` |  | Khamathos (A) |
+| `street` | empty street at night | Grismirk (A), Grimson (A) |
 | `temple` |  | Scrithymn, Blazephemy |
+| `wheat-field` | golden wheat field | Panacha (A), Marracacha (A) |
