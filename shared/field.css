@@ -808,3 +808,8 @@ body.field .back-to-top::before {
     transition: none;
   }
 }
+
+/* No habitat written yet: no separator either. */
+.hero-caption-env:empty::before {
+  content: none;
+}

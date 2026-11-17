@@ -64,10 +64,6 @@ const tileFor = (id) => {
   if (!file) return null;
   return file.startsWith("painted-") ? `data/backdrops/${file}` : `data/scenes/${file}`;
 };
-const envName = (id) => {
-  const file = index[id];
-  return file && !file.startsWith("painted-") ? file.replace(/\.jpg$/, "").replace(/-/g, " ") : null;
-};
 
 const typeIcon = (t) => `<img src="${SHARED}typeIcons/${t}.png" alt="" class="t-icon">`;
 const typeChip = (t) => `<span class="t-chip" style="--t: var(--type-${t.toLowerCase()})">${typeIcon(t)}${t}</span>`;
@@ -120,7 +116,7 @@ function notesHTML(mon) {
   };
   const abDesc = (a) => (typeof abilities[a] === "object" ? abilities[a].description : abilities[a]) || "";
   const mv = mon.signatureMove && moves[mon.signatureMove];
-  const env = envName(mon.id);
+  const env = mon.environment;
 
   const note = (label, body, cls = "") => `<div class="note ${cls}"><h3>${label}</h3>${body}</div>`;
   const items = [

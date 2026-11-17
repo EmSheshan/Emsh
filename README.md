@@ -34,8 +34,9 @@ tools/                        art, backdrop and scene scripts
 
 ## Adding a Pokémon
 
-1. Add a row to `<region>/data/pokedex.csv`. Its `environment` column (forest,
-   ocean, cave, space, …) picks the background — see `environments/README.md`.
+1. Add a row to `<region>/data/pokedex.csv`. `environment` is its habitat in
+   words (shown in the field notes); `background` names the photo behind it
+   (`forest` → `environments/forest.jpg`) — see `environments/README.md`.
 2. Add the art: `python3 tools/optimize-art.py <folder of PNGs> <region>/data/pokemonArt [id …]`
 3. Build its backgrounds: `npm install` once, then `node tools/build-backdrops.mjs <region>`
    and `python3 tools/build-scenes.py <region>`. They use the photo

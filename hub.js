@@ -45,7 +45,7 @@ const regions = await Promise.all(REGIONS.map(async (r) => {
     .filter((p) => !p.isForme && index[p.id] && !index[p.id].startsWith("painted-"))
     .map((p) => ({
       region: r, id: p.id, speciesId: p.speciesId ?? p.id, name: baseName(p.name), num: p.num,
-      env: index[p.id].replace(/\.jpg$/, ""), family: family(p),
+      env: index[p.id].replace(/\.jpg$/, ""), habitat: p.environment ?? "", family: family(p),
     }));
   return { ...r, count: Object.values(dex).filter((p) => !p.isForme).length, mons };
 }));
@@ -101,10 +101,10 @@ async function show(m) {
   cap.classList.remove("is-shown");
   setTimeout(() => {
     cap.href = `${m.region.key}/cardPage.html?pokemon=${m.speciesId}`;
-    cap.setAttribute("aria-label", `${m.name} of ${m.region.name}, in the ${m.env.replace(/-/g, " ")}`);
+    cap.setAttribute("aria-label", `${m.name} of ${m.region.name}${m.habitat ? `, ${m.habitat}` : ""}`);
     cap.querySelector(".hero-caption-num").textContent = `${m.region.name}${m.num != null ? ` · Nº ${pad(m.num)}` : ""}`;
     cap.querySelector(".hero-caption-name").textContent = m.name;
-    cap.querySelector(".hero-caption-env").textContent = m.env.replace(/-/g, " ");
+    cap.querySelector(".hero-caption-env").textContent = m.habitat;
     cap.classList.add("is-shown");
   }, current ? 500 : 0);
 

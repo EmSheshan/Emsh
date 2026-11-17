@@ -1,29 +1,27 @@
-# Environment photos
+# Background photos
 
-Backgrounds for the card pages. Each Pokémon's `environment` column (in
+The photo behind each Pokémon. A Pokémon's `background` column (in
 `<region>/data/pokedex.csv`) names a photo in this folder: `forest` ->
-`environments/forest.jpg`. One photo serves every region.
+`environments/forest.jpg`. Its `environment` column is separate: the habitat in
+words, shown in the field notes, and can say anything.
 
-1. Save a photo here as `<environment>.jpg` (or .png). Any size; it is
-   cropped to portrait and blurred heavily, so even 1600px wide is plenty.
-2. Run `node tools/build-backdrops.mjs` (after `npm install` once).
-3. Commit the photo and the regenerated `*/data/backdrops/`.
+1. Save a photo here as `<background>.jpg` (or .png). Any size; it is cropped
+   and blurred, so 1600px wide is plenty.
+2. Run `node tools/build-backdrops.mjs` and `python3 tools/build-scenes.py <region>`
+   (after `npm install` once).
+3. Commit the photo and the regenerated `*/data/backdrops/` and `*/data/scenes/`.
 
-Until an environment has its own photo, its Pokémon use the grassy field
-(`meadow.jpg`); they switch over as soon as the photo is added. You can invent new
-environment names (e.g. `bamboo`, `ruins`) — just add the matching photo.
-
-Photos from Unsplash are free to use under the Unsplash License; crediting the
-photographer is appreciated but not required. Note credits in CREDITS.md if you like.
+No photo yet means no background photo: the page shows the region's plain
+colour until one is added. Credits for photos are in CREDITS.md.
 
 ## Environments in use
 
-Every evolution line has its own environment, so no two lines share a
+Every evolution line has its own background, so no two lines share a
 background. (A) = Andela, (M) = Misc, the rest are Lacadia.
 
 ### Still needed (42)
 
-Save each as `environments/<name>.jpg`. Until then the line shows on the grassy field.
+Save each as `environments/<name>.jpg`. Until then the line shows on the plain colour.
 
 | file | look for | Pokémon |
 |---|---|---|

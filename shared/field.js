@@ -92,10 +92,10 @@ function startHero() {
     cap.classList.remove("is-shown");
     setTimeout(() => {
       cap.href = `cardPage.html?pokemon=${mon.speciesId ?? mon.id}`;
-      cap.setAttribute("aria-label", `${displayName(mon)}, shown in the ${env.replace(/-/g, " ")}`);
+      cap.setAttribute("aria-label", `${displayName(mon)}${mon.environment ? `, ${mon.environment}` : ""}`);
       cap.querySelector(".hero-caption-num").textContent = mon.num != null ? `Nº ${pad(mon.num)}` : "";
       cap.querySelector(".hero-caption-name").textContent = displayName(mon);
-      cap.querySelector(".hero-caption-env").textContent = env.replace(/-/g, " ");
+      cap.querySelector(".hero-caption-env").textContent = mon.environment ?? "";
       cap.classList.add("is-shown");
     }, current ? 500 : 0);
 
