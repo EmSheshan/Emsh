@@ -284,7 +284,7 @@ async function render(sid, formIndex = 0, { scroll = false } = {}) {
   if (scroll) window.scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
   // Same forme family or same photo: keep the background still and just fade
   // the Pokémon (and name). A new photo cross-fades in with its slide.
-  if ((formeOnly || samePhoto(mon)) && swapInPlace(mon)) return;
+  if ((formeOnly || samePhoto(mon)) && swapInPlace(mon, formeOnly)) return;
   await showSlide(mon);
 }
 
@@ -298,7 +298,7 @@ function samePhoto(mon) {
     || (!photo && !el.style.getPropertyValue("--hero-photo"));
 }
 
-function swapInPlace(mon) {
+function swapInPlace(mon, formeOnly = false) {
   const slide = band.querySelector(".hero-slide.is-active");
   if (!slide) return false;
   // A soft fade: the art (and photo, if this forme lives elsewhere) fade out,
@@ -310,8 +310,11 @@ function swapInPlace(mon) {
   const photoChanges = photoEl.style.getPropertyValue("--hero-photo") !== newPhoto;
   const src = art(mon.id, state.shiny);
   slide.classList.add("is-swapping");
+  // Same species, other forme: the name doesn't change, so it stays still.
+  slide.classList.toggle("is-swapping-forme", formeOnly);
   if (photoChanges) slide.classList.add("is-swapping-photo");
   const word = slide.querySelector(".band-word");
+  if (formeOnly) word.textContent = baseName(mon);   // same text; no fade
   setTimeout(async () => {
     await load(src);
     img.src = src;
@@ -319,7 +322,7 @@ function swapInPlace(mon) {
     if (photoChanges) photoEl.style.setProperty("--hero-photo", newPhoto);
     word.textContent = baseName(mon);
     fitName(word);
-    requestAnimationFrame(() => slide.classList.remove("is-swapping", "is-swapping-photo"));
+    requestAnimationFrame(() => slide.classList.remove("is-swapping", "is-swapping-photo", "is-swapping-forme"));
   }, 260);
   return true;
 }

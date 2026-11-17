@@ -28,7 +28,6 @@ Save each as `environments/<name>.jpg`. Until then the line shows on the plain c
 |---|---|---|
 | `abyss` | pitch-black deep ocean, faint glow | Lumajesty |
 | `agave-field` | blue agave rows, desert farm | Marazcal, Iguavadon |
-| `ancient-forest` | giant ferns, prehistoric woodland | Tuatot, Tuatargon |
 | `arctic-sea` | icy sea with floating ice, cold light | Selky |
 | `attic` | dusty old attic, floorboards | Filch |
 | `beach` | sandy beach with surf | Krabuto, Krabutops |
@@ -39,6 +38,7 @@ Save each as `environments/<name>.jpg`. Until then the line shows on the plain c
 | `forge` | blacksmith forge, glowing metal | Smeltmor |
 | `glacier` | blue glacier ice | Cryocone, Cryoconda |
 | `haunted-house` | eerie abandoned house interior | Saskrypt |
+| `haunted-mine` | dark mine tunnel, eerie (cave ghosts) | Shardling, Crucigem |
 | `iceberg` | iceberg at sea | Balite, Baleet, Balaast |
 | `incense-shrine` | incense smoke in a shrine | Censerpent |
 | `lava-field` | flowing lava, black rock | Pyrant |
@@ -48,7 +48,7 @@ Save each as `environments/<name>.jpg`. Until then the line shows on the plain c
 | `museum` | museum hall with statues | Ceraphinx |
 | `power-plant` | power station / pylons | Battrey, Vladibolt |
 | `primeval-forest` | ancient, untouched old-growth forest | Albythos |
-| `rooftops` | city rooftops from above | Ornidrone, Velostrike, Gunraptor |
+| `rooftops` | city rooftops from above | Idagon, Libradon, Suprion |
 | `shallows` | sunlit shallow sea, clear water | Phalankton |
 | `starry-sky` | night sky full of stars / milky way | Tortality |
 
@@ -65,7 +65,7 @@ Save each as `environments/<name>.jpg`. Until then the line shows on the plain c
 | `cave` |  | Cobblin, Grumblock, Ragnarock |
 | `cave-painting` |  | Dodon, Dodonodon |
 | `cavern` |  | Aurago (A) |
-| `city` |  | Idagon, Libradon, Suprion |
+| `city` |  | Ornidrone, Velostrike, Gunraptor |
 | `coffee` |  | Decaffin, Espressurge |
 | `cyberpunk` |  | Ravenger |
 | `cyberspace` |  | Logomorph |
@@ -80,7 +80,7 @@ Save each as `environments/<name>.jpg`. Until then the line shows on the plain c
 | `foundry` |  | Xeno Scizor (A) |
 | `graveyard` |  | Cackloon (A), Necrondor (A) |
 | `gray-forest` |  | Dwemaldos (A) |
-| `green-cave` |  | Shardling, Crucigem |
+| `green-cave` |  | Tuatot, Tuatargon |
 | `hazy-city` | hazy city skyline with pyramids | Xeno Tyranitar (A) |
 | `heaven` |  | Xerasige |
 | `heaven-2` |  | Xophis |

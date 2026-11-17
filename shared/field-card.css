@@ -239,7 +239,7 @@
   transition: opacity 0.35s ease;
 }
 .band .hero-slide.is-swapping .hero-mon,
-.band .hero-slide.is-swapping .band-word,
+.band .hero-slide.is-swapping:not(.is-swapping-forme) .band-word,
 .band .hero-slide.is-swapping-photo .hero-photo {
   opacity: 0 !important;
   transition: opacity 0.26s ease !important;
