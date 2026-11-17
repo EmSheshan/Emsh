@@ -184,9 +184,12 @@ body.field .toggle-dark-mode {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: clamp(20px, 3vw, 36px) var(--gutter);
+  /* Measured from inside the photo window (inset by --frame), the same as the
+     Pokémon pages, so the corner logo sits in the same spot everywhere. */
+  padding: calc(var(--frame) + clamp(14px, 2.4vw, 30px)) calc(var(--frame) + var(--gutter)) 0;
 }
 .brand {
+  align-self: flex-start;            /* pinned, not centred against the right-hand links */
   display: inline-flex;
   align-items: center;
   gap: 0.6em;
