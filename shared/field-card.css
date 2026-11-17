@@ -294,7 +294,7 @@
 .about { grid-area: about; }
 .stats { grid-area: stats; }
 .notes { grid-area: notes; }
-.family { grid-area: family; }
+.family { grid-area: family; min-width: 0; }
 
 /* Section labels: tracked small caps over a hairline, not big titles. */
 .entry-label {
@@ -475,10 +475,19 @@
 .stat-fill--spe { background: #ef86a6; }
 
 /* Evolution: small recessed habitat tiles joined by method arrows. */
+/* The family is its own strip: a long line scrolls sideways inside it
+   instead of widening the page. */
 .fam-tree {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  flex-wrap: nowrap;
+  padding: 6px 4px 12px;
+  scrollbar-width: thin;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
   margin-top: 6px;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   gap: 18px;
 }
@@ -627,7 +636,7 @@ a.fam-node:hover {
 
 @media (max-width: 900px) {
   .entry {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);   /* nothing inside may widen the card */
     grid-template-areas: "about" "stats" "notes" "family";
   }
 }
@@ -695,14 +704,8 @@ a.fam-node:hover {
   .fam-step {
     gap: 10px;
   }
-  /* A long family scrolls sideways inside its own strip, not the page. */
-  .fam-tree {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    padding: 6px 4px 10px;
-    margin-left: -4px;
-    margin-right: -4px;
-    scrollbar-width: thin;
+  .fam-node {
+    width: 104px;
   }
 }
 
@@ -714,4 +717,21 @@ a.fam-node:hover {
   .fam-node {
     transition: none;
   }
+}
+
+/* ---------------------------------------------------------------- two cards
+
+   The photo band and the cream details are two separate rounded cards with a
+   small gap, so the details' top edge is rounded like its bottom (they used
+   to share one sheet, leaving a flat seam under the photo). */
+body.field-card .band {
+  border-radius: var(--sheet-radius);
+}
+body.field-card .band .hero-stage,
+body.field-card .band::after {
+  bottom: var(--frame);              /* window inset on all four sides */
+}
+body.field-card .paper {
+  margin-top: clamp(8px, 1.1vw, 16px);
+  border-radius: var(--sheet-radius);
 }
