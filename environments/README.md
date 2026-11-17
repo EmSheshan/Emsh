@@ -43,7 +43,6 @@ None: every line has a photo.
 | `cave-painting` |  | Dodon, Dodonodon |
 | `cavern` |  | Aurago (A) |
 | `city` |  | Ornidrone, Velostrike, Gunraptor |
-| `cliff-face` | grey limestone cliff | Shuckler |
 | `coffee` |  | Decaffin, Espressurge |
 | `crystal-cave` | cave with blue pool | Larvos, Syrinsect, Stratoclysm |
 | `cyberpunk` |  | Ravenger |
@@ -79,6 +78,7 @@ None: every line has a photo.
 | `mossy-pond` | mossy woodland pond | Ribbeat, Ventribbit |
 | `museum` | museum gallery of statues | Ceraphinx |
 | `palms` |  | Tropius (A) |
+| `pine-path` | path through a pine forest | Shuckler |
 | `pink-peak` | snowy peak at pink dusk | Smeltmor |
 | `river-buffalo` | river with water buffalo | Purluxe, Lyonite, Enkidros |
 | `river-ruins` | river with ruined bridge | Nokoi, Yakoyza |
@@ -103,4 +103,4 @@ None: every line has a photo.
 
 ### Spare photos (not used by any line)
 
-`antique` · `autumn-forest` · `beach` · `circus` · `darkness` · `deep-sea` · `forest` · `heaven` · `ice` · `lotus-pond` · `mountains` · `onion` · `red-mountains`
+`antique` · `autumn-forest` · `beach` · `circus` · `cliff-face` · `darkness` · `deep-sea` · `forest` · `heaven` · `ice` · `lotus-pond` · `mountains` · `onion` · `red-mountains`
