@@ -20,7 +20,7 @@ Every evolution line has its own background (Megalocyte shares Synthecyte's). Ca
 Pokémon in a family (canondex.csv) use their line's background too.
 (A) = Andela, the rest are Lacadia.
 
-### Still needed (24)
+### Still needed (21)
 
 Save each as `environments/<name>.jpg`. Until then the line shows on the plain colour.
 
@@ -29,8 +29,6 @@ Save each as `environments/<name>.jpg`. Until then the line shows on the plain c
 | `abyss` | pitch-black deep ocean, faint glow | Lumajesty |
 | `agave-field` | blue agave rows, desert farm | Marazcal, Iguavadon |
 | `arctic-sea` | icy sea with floating ice, cold light | Selky |
-| `attic` | dusty old attic, floorboards | Filch |
-| `beach` | sandy beach with surf | Krabuto, Krabutops |
 | `bell-tower` | old bell tower / temple bell | Sacrabell |
 | `crystal-cave` | cave full of glowing crystals | Larvos, Syrinsect, Stratoclysm |
 | `desert-night` | desert under a starry night sky | Tortarma, Tortality |
@@ -44,20 +42,20 @@ Save each as `environments/<name>.jpg`. Until then the line shows on the plain c
 | `mine` | mine tunnel with mineral veins | Shuckler |
 | `moonless-night` | dark night sky over silhouettes | Devile |
 | `moonlit-forest` | forest clearing under a full moon | Moosenge |
-| `mountain-stream` | clear mountain stream | Ribbeat, Ventribbit |
 | `museum` | museum hall with statues | Ceraphinx |
 | `power-plant` | power station / pylons | Battrey, Vladibolt |
 | `primeval-forest` | ancient, untouched old-growth forest | Albythos |
 | `rooftops` | city rooftops from above | Idagon, Libradon, Suprion |
 | `shallows` | sunlit shallow sea, clear water | Phalankton |
 
-### Done (50)
+### Done (53)
 
 | file | | Pokémon |
 |---|---|---|
 | `autumn-forest` |  | Tirakitsu, Asterbat |
 | `badlands` |  | Pumace (A), Pyroncho (A), Smoldero (A) |
 | `bamboo` |  | Fawnna (A), Fawliage (A), Dynastag (A) |
+| `beach` | rocky beach | Krabuto, Krabutops |
 | `bluebell-woods` | bluebell woods in sun | Springbun, Snapbun, Faestalk |
 | `canyon` |  | Furnawurm |
 | `carousel` | carousel at night | Grubblo, Tentrilo, Rocadocio |
@@ -77,6 +75,7 @@ Save each as `environments/<name>.jpg`. Until then the line shows on the plain c
 | `farm` |  | Peppilla (A), Peppyre (A), Pepperisher (A) |
 | `fireflies` | fireflies at dusk | Amistaphore (A) |
 | `foundry` |  | Xeno Scizor (A) |
+| `frosted-forest` | frosted forest | Mochu, Snochu |
 | `graveyard` |  | Cackloon (A), Necrondor (A) |
 | `gray-forest` |  | Dwemaldos (A) |
 | `green-cave` |  | Tuatot, Tuatargon |
@@ -84,7 +83,6 @@ Save each as `environments/<name>.jpg`. Until then the line shows on the plain c
 | `heaven` |  | Xerasige |
 | `heaven-2` |  | Xophis |
 | `hell` |  | Jeneosis |
-| `ice` |  | Mochu, Snochu |
 | `jungle` |  | Lileef, Citradily |
 | `junkyard` |  | Bitbyte, Cathogen, Ramnant |
 | `lava-sea` | lava pouring into the sea | Basilly, Knaviper, Verkillion |
@@ -93,10 +91,12 @@ Save each as `environments/<name>.jpg`. Until then the line shows on the plain c
 | `marsh` |  | Wittern, Aerin, Zephyrin |
 | `meadow` |  | Chumbi (A) |
 | `moonlit-trees` | full moon behind trees | Mega Lokix (A) |
+| `mossy-pond` | mossy woodland pond | Ribbeat, Ventribbit |
 | `palms` |  | Tropius (A) |
 | `river-buffalo` | river with water buffalo | Purluxe, Lyonite, Enkidros |
 | `rocky-plain` | rocky alpine plain | Polishell (A), Tarnishell (A), Lavisheen (A) |
 | `rocky-shore` |  | Pyukumuku (A) |
+| `ruined-house` | ruined house with snow | Filch |
 | `sea-lion-beach` |  | Sealor (A), Enseal (A), Brigantide (A) |
 | `snow` |  | Balite, Baleet, Balaast |
 | `space` |  | Synthecyte (A), Megalocyte (A) |
@@ -108,4 +108,4 @@ Save each as `environments/<name>.jpg`. Until then the line shows on the plain c
 
 ### Spare photos (not used by any line)
 
-`antique` · `circus` · `forest` · `mountains` · `onion`
+`antique` · `circus` · `forest` · `ice` · `mountains` · `onion`

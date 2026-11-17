@@ -22,4 +22,5 @@ Unsplash License. Thank you to the photographers.
 
 Photos added by Em without a recorded source: `fireflies.jpg`, `rocky-plain.jpg`,
 `wheat-field.jpg`, `street.jpg`, `desert-rain.jpg`, `hazy-city.jpg`, `moonlit-trees.jpg`,
-`vegetable-garden.jpg`, `carousel.jpg`, `dewy-grass.jpg`, `river-buffalo.jpg`, `lava-sea.jpg`, `bluebell-woods.jpg`.
+`vegetable-garden.jpg`, `carousel.jpg`, `dewy-grass.jpg`, `river-buffalo.jpg`, `lava-sea.jpg`, `bluebell-woods.jpg`,
+`ruined-house.jpg`, `beach.jpg`, `frosted-forest.jpg`, `mossy-pond.jpg`.
