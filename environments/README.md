@@ -81,7 +81,7 @@ None: every line has a photo.
 | `pine-path` | path through a pine forest | Shuckler |
 | `pink-peak` | snowy peak at pink dusk | Smeltmor |
 | `hot-spring` | rainbow hot spring | Purluxe, Lyonite, Enkidros |
-| `river-ruins` | river with ruined bridge | Nokoi, Yakoyza |
+| `sakura-canal` | canal under cherry blossoms | Nokoi, Yakoyza |
 | `rocky-plain` | rocky alpine plain | Polishell (A), Tarnishell (A), Lavisheen (A) |
 | `rocky-shore` |  | Pyukumuku (A) |
 | `ruined-house` | ruined house with snow | Filch |
@@ -103,4 +103,4 @@ None: every line has a photo.
 
 ### Spare photos (not used by any line)
 
-`antique` · `autumn-forest` · `beach` · `circus` · `cliff-face` · `darkness` · `deep-sea` · `forest` · `heaven` · `ice` · `lotus-pond` · `mountains` · `museum` · `onion` · `red-mountains` · `river-buffalo` · `underground-station`
+`antique` · `autumn-forest` · `beach` · `circus` · `cliff-face` · `darkness` · `deep-sea` · `forest` · `heaven` · `ice` · `lotus-pond` · `mountains` · `museum` · `onion` · `red-mountains` · `river-ruins` · `river-buffalo` · `underground-station`

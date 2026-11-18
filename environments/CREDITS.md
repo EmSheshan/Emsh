@@ -30,4 +30,4 @@ Photos added by Em without a recorded source: `fireflies.jpg`, `rocky-plain.jpg`
 `shore-temple.jpg`, `jungle-pyramid.jpg`, `crystal-cave.jpg`, `river-ruins.jpg`,
 `aurora-lake.jpg`, `shallows.jpg`, `autumn-trees.jpg`, `underground-station.jpg`,
 `misty-forest.jpg`, `sea-cave.jpg`, `pine-path.jpg`, `tunnel.jpg`,
-`hot-spring.jpg`, `statue-gallery.jpg`.
+`hot-spring.jpg`, `statue-gallery.jpg`, `sakura-canal.jpg`.
