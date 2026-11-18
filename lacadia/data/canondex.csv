@@ -1,8 +1,8 @@
 id,name,forme,type1,type2,hp,atk,def,spa,spd,spe,ability0,ability1,abilityH,kind,heightm,weightkg,signatureMove,description1,description2,prevo,evo,evoMethod,environment,background
-seel,Seel,,Water,,,,,,,,,,,,,,,,,,dewgong,,,aurora-lake
-dewgong,Dewgong,,Water,Ice,,,,,,,,,,,,,,,,seel,selky,Level 34,,aurora-lake
-chinchou,Chinchou,,Water,Electric,,,,,,,,,,,,,,,,,lanturn,,,jellyfish
-lanturn,Lanturn,,Water,Electric,,,,,,,,,,,,,,,,chinchou,lumajesty,Level 27,,jellyfish
-shuckle,Shuckle,,Bug,Rock,,,,,,,,,,,,,,,,,shuckler,,,pine-path
-heatmor,Heatmor,,Fire,,,,,,,,,,,,,,,,,,smeltmor,,,pink-peak
-durant,Durant,,Bug,Steel,,,,,,,,,,,,,,,,,pyrant,,,frosted-hills
+seel,Seel,,Water,,,,,,,,,,,,,,,,,,dewgong,,Icy seas,aurora-lake
+dewgong,Dewgong,,Water,Ice,,,,,,,,,,,,,,,,seel,selky,Level 34,Icy seas,aurora-lake
+chinchou,Chinchou,,Water,Electric,,,,,,,,,,,,,,,,,lanturn,,Deep sea,jellyfish
+lanturn,Lanturn,,Water,Electric,,,,,,,,,,,,,,,,chinchou,lumajesty,Level 27,Deep sea,jellyfish
+shuckle,Shuckle,,Bug,Rock,,,,,,,,,,,,,,,,,shuckler,,Mountains,pine-path
+heatmor,Heatmor,,Fire,,,,,,,,,,,,,,,,,,smeltmor,,Mountains,pink-peak
+durant,Durant,,Bug,Steel,,,,,,,,,,,,,,,,,pyrant,,Mountains,frosted-hills

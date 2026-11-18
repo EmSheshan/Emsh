@@ -76,11 +76,11 @@ None: every line has a photo.
 | `misty-forest` | misty forest at night | Paracabra, Saskrypt, Devile, Azamoth |
 | `moonlit-trees` | full moon behind trees | Mega Lokix (A) |
 | `mossy-pond` | mossy woodland pond | Ribbeat, Ventribbit |
-| `museum` | museum gallery of statues | Ceraphinx |
+| `statue-gallery` | vaulted gallery of white statues | Ceraphinx |
 | `palms` |  | Tropius (A) |
 | `pine-path` | path through a pine forest | Shuckler |
 | `pink-peak` | snowy peak at pink dusk | Smeltmor |
-| `river-buffalo` | river with water buffalo | Purluxe, Lyonite, Enkidros |
+| `hot-spring` | rainbow hot spring | Purluxe, Lyonite, Enkidros |
 | `river-ruins` | river with ruined bridge | Nokoi, Yakoyza |
 | `rocky-plain` | rocky alpine plain | Polishell (A), Tarnishell (A), Lavisheen (A) |
 | `rocky-shore` |  | Pyukumuku (A) |
@@ -97,10 +97,10 @@ None: every line has a photo.
 | `street` | empty street at night | Grismirk (A), Grimson (A) |
 | `sunlit-sea` | sunlit underwater | Jellien, Encephid, Monolithid |
 | `temple` |  | Sacrabell |
-| `underground-station` | dark underground station | Idagon, Libradon, Suprion |
+| `tunnel` | curving subway tunnel | Idagon, Libradon, Suprion |
 | `vegetable-garden` | vegetable garden | Roignon, Scallahad |
 | `wheat-field` | golden wheat field | Panacha (A), Marracacha (A) |
 
 ### Spare photos (not used by any line)
 
-`antique` · `autumn-forest` · `beach` · `circus` · `cliff-face` · `darkness` · `deep-sea` · `forest` · `heaven` · `ice` · `lotus-pond` · `mountains` · `onion` · `red-mountains`
+`antique` · `autumn-forest` · `beach` · `circus` · `cliff-face` · `darkness` · `deep-sea` · `forest` · `heaven` · `ice` · `lotus-pond` · `mountains` · `museum` · `onion` · `red-mountains` · `river-buffalo` · `underground-station`
