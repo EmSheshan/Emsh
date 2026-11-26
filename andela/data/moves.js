@@ -378,4 +378,13 @@ export const moves = {
     description:
       "The user rakes the target with metal-hardened talons and strips away its held item.",
   },
+  "Devil's Fandango": {
+    type: Type.DARK,
+    category: Category.PHYSICAL,
+    accuracy: 100,
+    power: 90,
+    pp: 10,
+    description:
+      "The user stomps out a frenzied devil's dance, slashing in rhythm. This also raises the user's Speed by one stage. This is a dance move.",
+  },
 };

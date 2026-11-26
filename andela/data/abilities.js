@@ -919,4 +919,8 @@ export const abilities = {
     description: "The Pokémon creates a snowstorm when it's hit by an attack.",
     tag: "andela",
   },
+  "Devil's Tempo": {
+    description: "Each time the Pokémon uses a dance move, its Attack rises by one stage.",
+    tag: "andela",
+  },
 };

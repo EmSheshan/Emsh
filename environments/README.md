@@ -25,7 +25,7 @@ Pokémon in a family (canondex.csv) use their line's background too.
 
 None: every line has a photo.
 
-### Done (72)
+### Done (73)
 
 | file | | Pokémon |
 |---|---|---|
@@ -101,7 +101,8 @@ None: every line has a photo.
 | `vegetable-garden` | vegetable garden | Roignon, Scallahad |
 | `wheat-field` | golden wheat field | Panacha (A), Marracacha (A) |
 | `boulder-beach` | sandy beach strewn with boulders | Mistocrat |
+| `darkness` | full moon behind dark trees | Dioblob, Frogre, Fiendango |
 
 ### Spare photos (not used by any line)
 
-`antique` · `autumn-forest` · `beach` · `circus` · `cliff-face` · `darkness` · `deep-sea` · `forest` · `heaven` · `ice` · `lotus-pond` · `mountains` · `museum` · `onion` · `red-mountains` · `river-ruins` · `river-buffalo` · `underground-station`
+`antique` · `autumn-forest` · `beach` · `circus` · `cliff-face` · `deep-sea` · `forest` · `heaven` · `ice` · `lotus-pond` · `mountains` · `museum` · `onion` · `red-mountains` · `river-ruins` · `river-buffalo` · `underground-station`
