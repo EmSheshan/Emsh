@@ -19,6 +19,7 @@ Unsplash License. Thank you to the photographers.
 | `space.jpg` | Aldebaran S | https://unsplash.com/photos/qtRF_RxCAo0 |
 | `stormy-sea.jpg` | Redcharlie | https://unsplash.com/photos/ncJKXaCp-3A |
 | `temple.jpg` | Siddhesh Mangela | https://unsplash.com/photos/ZP039_CRf3M |
+| `bonfire.jpg` | Fadhil Abhimantra | https://unsplash.com/photos/5a_kZi9L_zQ |
 
 Photos added by Em without a recorded source: `fireflies.jpg`, `rocky-plain.jpg`,
 `wheat-field.jpg`, `street.jpg`, `desert-rain.jpg`, `hazy-city.jpg`, `moonlit-trees.jpg`,
