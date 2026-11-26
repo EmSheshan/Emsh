@@ -920,7 +920,7 @@ export const abilities = {
     tag: "andela",
   },
   "Devil's Tempo": {
-    description: "Each time the Pokémon uses a dance move, its Attack rises by one stage.",
+    description: "Each time the Pokémon uses a dance move, its Attack and Sp. Atk rise by one stage.",
     tag: "andela",
   },
 };
