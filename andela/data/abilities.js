@@ -915,7 +915,7 @@ export const abilities = {
       "Takes reduced damage from moves with a base power of 100 or higher.",
     tag: "andela",
   },
-  "Squall Plume": {
+  "Flurry Feathers": {
     description: "The Pokémon creates a snowstorm when it's hit by an attack.",
     tag: "andela",
   },
