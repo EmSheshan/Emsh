@@ -100,8 +100,8 @@ None: every line has a photo.
 | `tunnel` | curving subway tunnel | Idagon, Libradon, Suprion |
 | `vegetable-garden` | vegetable garden | Roignon, Scallahad |
 | `wheat-field` | golden wheat field | Panacha (A), Marracacha (A) |
-| `ice` | pack ice on a frozen sea | Mistocrat |
+| `boulder-beach` | sandy beach strewn with boulders | Mistocrat |
 
 ### Spare photos (not used by any line)
 
-`antique` · `autumn-forest` · `beach` · `circus` · `cliff-face` · `darkness` · `deep-sea` · `forest` · `heaven` · `lotus-pond` · `mountains` · `museum` · `onion` · `red-mountains` · `river-ruins` · `river-buffalo` · `underground-station`
+`antique` · `autumn-forest` · `beach` · `circus` · `cliff-face` · `darkness` · `deep-sea` · `forest` · `heaven` · `ice` · `lotus-pond` · `mountains` · `museum` · `onion` · `red-mountains` · `river-ruins` · `river-buffalo` · `underground-station`
